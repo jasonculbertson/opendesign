@@ -1,0 +1,43 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Card from '../../../../components/Card.astro';
+
+const resources = [
+  {
+    title: 'Product Spec',
+    description: 'Clearly outline product requirements and expectations',
+    href: '/docs/team/product/product-spec',
+    image: '📋'
+  },
+  {
+    title: 'Project Kickoff Meeting',
+    description: 'Ensure all stakeholders are aligned from the start',
+    href: '/docs/team/product/project-kickoff-meeting',
+    image: '🎉'
+  },
+  {
+    title: 'One-Pagers',
+    description: 'Summarize project goals and progress for quick reference',
+    href: '/docs/team/product/one-pagers',
+    image: '📄'
+  }
+];
+
+const title = "Product Team";
+---
+
+<Layout title={title}>
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <div class="mb-8">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-4">
+        {resources.map(resource => (
+          <Card {...resource} />
+        ))}
+      </div>
+    </article>
+  </main>
+</Layout>

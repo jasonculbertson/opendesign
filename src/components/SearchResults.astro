@@ -1,0 +1,114 @@
+---
+interface Props {
+  visible: boolean;
+}
+
+const { visible } = Astro.props;
+---
+
+<div 
+  id="search-results" 
+  class:list={[
+    'absolute top-full left-0 right-0 bg-white mt-1 rounded-md shadow-lg border border-gray-200 overflow-hidden max-h-[400px] overflow-y-auto z-50',
+    { hidden: !visible }
+  ]}
+>
+  <div class="p-4 text-sm text-gray-500" id="no-results" hidden>
+    No results found
+  </div>
+  <ul class="divide-y divide-gray-100" id="results-list"></ul>
+</div>
+
+<template id="result-template">
+  <li>
+    <a href="" class="block px-4 py-3 hover:bg-gray-50">
+      <div class="font-medium text-gray-900"></div>
+      <div class="text-sm text-gray-500 mt-1 line-clamp-2"></div>
+      <div class="flex items-center gap-2 mt-2">
+        <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full"></span>
+      </div>
+    </a>
+  </li>
+</template>
+
+<script>
+  let searchTimeout: number;
+  const input = document.querySelector('#search-input') as HTMLInputElement;
+  const results = document.querySelector('#search-results') as HTMLDivElement;
+  const noResults = document.querySelector('#no-results') as HTMLDivElement;
+  const resultsList = document.querySelector('#results-list') as HTMLUListElement;
+  const resultTemplate = document.querySelector('#result-template') as HTMLTemplateElement;
+
+  if (!input || !results || !noResults || !resultsList || !resultTemplate) {
+    console.error('Required search elements not found');
+    throw new Error('Search initialization failed');
+  }
+
+  async function performSearch(query: string) {
+    try {
+      const response = await fetch(`/api/search.json?q=${encodeURIComponent(query)}`);
+      if (!response.ok) throw new Error('Search failed');
+      
+      const data = await response.json();
+      
+      resultsList.innerHTML = '';
+      results.classList.remove('hidden');
+
+      if (!data.results || data.results.length === 0) {
+        noResults.hidden = false;
+        resultsList.hidden = true;
+        return;
+      }
+
+      noResults.hidden = true;
+      resultsList.hidden = false;
+
+      data.results.forEach((result: any) => {
+        const template = resultTemplate.content.cloneNode(true) as DocumentFragment;
+        const li = template.querySelector('li');
+        const link = li?.querySelector('a');
+        const title = li?.querySelector('.font-medium');
+        const description = li?.querySelector('.text-sm');
+        const category = li?.querySelector('.text-xs');
+
+        if (link) link.href = result.url;
+        if (title) title.textContent = result.title;
+        if (description) description.textContent = result.excerpt || result.description;
+        if (category) category.textContent = result.category;
+
+        resultsList.appendChild(template);
+      });
+    } catch (error) {
+      console.error('Search error:', error);
+      noResults.hidden = false;
+      resultsList.hidden = true;
+      noResults.textContent = 'Search failed. Please try again.';
+    }
+  }
+
+  input.addEventListener('input', (e) => {
+    clearTimeout(searchTimeout);
+    const query = (e.target as HTMLInputElement).value.trim();
+    
+    if (query.length < 2) {
+      results.classList.add('hidden');
+      return;
+    }
+
+    searchTimeout = window.setTimeout(() => performSearch(query), 300);
+  });
+
+  // Close search results when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!results.contains(e.target as Node) && e.target !== input) {
+      results.classList.add('hidden');
+    }
+  });
+
+  // Show results again when focusing on input if there's a query
+  input.addEventListener('focus', () => {
+    if (input.value.trim().length >= 2) {
+      results.classList.remove('hidden');
+    }
+  });
+</script>

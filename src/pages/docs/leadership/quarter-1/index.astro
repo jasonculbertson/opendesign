@@ -1,0 +1,37 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Card from '../../../../components/Card.astro';
+
+const resources = [
+  {
+    title: 'Self Evaluation',
+    description: 'Use the Level Competencies for self-assessment and growth planning',
+    href: '/docs/leadership/quarter-1/self-evaluation',
+    image: '📝'
+  },
+  {
+    title: 'Short-Term Growth Exercise',
+    description: 'Set and achieve quarterly goals for professional development',
+    href: '/docs/leadership/quarter-1/short-term-growth-exercise',
+    image: '🎯'
+  }
+];
+
+const title = "Quarter 1";
+---
+
+<Layout title={title}>
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <div class="mb-8">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-4">
+        {resources.map(resource => (
+          <Card {...resource} />
+        ))}
+      </div>
+    </article>
+  </main>
+</Layout>

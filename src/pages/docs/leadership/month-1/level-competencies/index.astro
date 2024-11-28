@@ -1,0 +1,89 @@
+---
+import Layout from '../../../../../layouts/Layout.astro';
+import { format } from 'date-fns';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('docs', 'leadership/month-1/level-competencies');
+const { Content } = await entry.render();
+
+const documents = [
+  {
+    title: 'Junior Designer (IC1)',
+    description: 'Competencies for entry-level designers',
+    href: '/docs/leadership/month-1/level-competencies/ic1',
+    date: new Date(),
+    category: 'IC Level'
+  },
+  {
+    title: 'Designer (IC2)',
+    description: 'Competencies for mid-level designers',
+    href: '/docs/leadership/month-1/level-competencies/ic2',
+    date: new Date(),
+    category: 'IC Level'
+  },
+  {
+    title: 'Senior Designer (IC3)',
+    description: 'Competencies for senior designers',
+    href: '/docs/leadership/month-1/level-competencies/ic3',
+    date: new Date(),
+    category: 'IC Level'
+  },
+  {
+    title: 'Staff Designer (IC4)',
+    description: 'Competencies for staff designers',
+    href: '/docs/leadership/month-1/level-competencies/ic4',
+    date: new Date(),
+    category: 'IC Level'
+  },
+  {
+    title: 'Principal Designer (IC5)',
+    description: 'Competencies for principal designers',
+    href: '/docs/leadership/month-1/level-competencies/ic5',
+    date: new Date(),
+    category: 'IC Level'
+  }
+];
+---
+
+<Layout title="Level Competencies" showBackButton={true}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto">
+      <div class="mb-8">
+        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
+          <a href="/docs/leadership/month-1" class="hover:text-gray-900">Month 1</a>
+          <span>/</span>
+          <span class="text-gray-900">Level Competencies</span>
+        </div>
+        <h1 class="text-[32px] font-medium text-gray-900 mb-4">
+          Level Competencies
+        </h1>
+        <p class="text-base text-gray-600">
+          Establish skill expectations and growth paths
+        </p>
+      </div>
+
+      <div class="doc-content mb-12">
+        <Content />
+      </div>
+      
+      <div class="grid gap-4">
+        {documents.map(doc => (
+          <a href={doc.href} class="block group">
+            <div class="doc-card">
+              <div class="doc-card-content">
+                <h3 class="doc-card-title">
+                  {doc.title}
+                </h3>
+                <p class="doc-card-description">{doc.description}</p>
+                <div class="doc-card-meta">
+                  <span class="doc-card-meta-item">{doc.category}</span>
+                  <span class="doc-card-meta-item">Updated {format(doc.date, 'MMM d, yyyy')}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

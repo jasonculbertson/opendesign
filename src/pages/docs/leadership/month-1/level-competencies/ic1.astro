@@ -1,0 +1,33 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../../../../../layouts/Layout.astro';
+
+const entry = await getEntry('docs', 'leadership/month-1/level-competencies/ic1');
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title} showBackButton={true}>
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-16">
+    <article class="mx-auto">
+      <div class="mb-8">
+        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
+          <a href="/docs/leadership/month-1" class="hover:text-gray-900">Month 1</a>
+          <span>/</span>
+          <a href="/docs/leadership/month-1/level-competencies" class="hover:text-gray-900">Level Competencies</a>
+          <span>/</span>
+          <span class="text-gray-900">{entry.data.title}</span>
+        </div>
+        <h1 class="text-[32px] font-medium text-gray-900 mb-4">
+          {entry.data.title}
+        </h1>
+        <p class="text-base text-gray-600">
+          {entry.data.description}
+        </p>
+      </div>
+
+      <div class="doc-content">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>

@@ -1,0 +1,125 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../../../../layouts/Layout.astro';
+import Card from '../../../../components/Card.astro';
+
+const entry = await getEntry('docs', 'leadership/month-1/level-competencies');
+const { Content } = await entry.render();
+
+const breadcrumbs = [
+  { text: 'Month 1', href: '/docs/leadership/month-1' },
+  { text: 'Level Competencies' }
+];
+
+const productRoles = [
+  {
+    title: "Product Designer Competencies",
+    description: "Skills and expectations for product designers at each level",
+    href: "/docs/leadership/month-1/level-competencies/product-designer",
+    image: "🎨"
+  },
+  {
+    title: "Content Designer Competencies",
+    description: "Skills and expectations for content designers at each level",
+    href: "/docs/leadership/month-1/level-competencies/content-designer",
+    image: "✍️"
+  },
+  {
+    title: "UX Researcher Competencies",
+    description: "Skills and expectations for researchers at each level",
+    href: "/docs/leadership/month-1/level-competencies/researcher",
+    image: "🔬"
+  },
+  {
+    title: "Design Ops Competencies",
+    description: "Skills and expectations for design operations at each level",
+    href: "/docs/leadership/month-1/level-competencies/design-ops",
+    image: "⚙️"
+  }
+];
+
+const creativeRoles = [
+  {
+    title: "Graphic Designer Competencies",
+    description: "Skills and expectations for graphic designers at each level",
+    href: "/docs/leadership/month-1/level-competencies/graphic-designer",
+    image: "🎨"
+  },
+  {
+    title: "Copywriter Competencies",
+    description: "Skills and expectations for copywriters at each level",
+    href: "/docs/leadership/month-1/level-competencies/copywriter",
+    image: "✍️"
+  }
+];
+
+const managerRoles = [
+  {
+    title: "UX Manager Competencies",
+    description: "Skills and expectations for design managers at each level",
+    href: "/docs/leadership/month-1/level-competencies/manager",
+    image: "👥"
+  }
+];
+---
+
+<Layout title={entry.data.title}>
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <nav class="flex mb-8" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2">
+          {breadcrumbs.map((crumb, index) => (
+            <li class="flex items-center">
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+              {crumb.href ? (
+                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                  {crumb.text}
+                </a>
+              ) : (
+                <span class="text-sm text-gray-900">{crumb.text}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="mb-12">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Level Competencies</h1>
+        <div class="bg-[#f6f8fa] border border-[#e5e7eb] rounded-lg p-6 my-8">
+          <p class="text-[17px] leading-7 text-[#1a1f36]">
+            The level competencies framework provides clear expectations and growth paths for designers at every level.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-12">
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Product Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {productRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Creative Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {creativeRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Manager Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {managerRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+</Layout>

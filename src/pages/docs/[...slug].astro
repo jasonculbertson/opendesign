@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs');
+  return docs.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title} showBackButton={true}>
+  <main class="py-8 px-10">
+    <article class="max-w-[680px]">
+      <div class="mb-8">
+        <h1 class="text-base font-medium text-gray-900">{entry.data.title}</h1>
+      </div>
+
+      <div class="prose prose-slate max-w-none">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>

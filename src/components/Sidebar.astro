@@ -1,0 +1,141 @@
+---
+import { 
+  BookOpen,
+  Clock, 
+  Users,
+  Calendar,
+  Target,
+  Rocket,
+  LogOut,
+  Palette,
+  Box,
+  UserPlus,
+  Play,
+  Video,
+  ChevronRight,
+  FileText,
+  User,
+  Film,
+  Menu
+} from 'lucide-react';
+
+const links = [
+  { 
+    name: 'Day 1', 
+    href: '/docs/leadership/day-1',
+    icon: Clock
+  },
+  {
+    name: 'Week 1-2',
+    href: '/docs/leadership/week-1-2',
+    icon: Users
+  },
+  {
+    name: 'Month 1',
+    href: '/docs/leadership/month-1',
+    icon: Calendar
+  },
+  {
+    name: 'Quarter 1',
+    href: '/docs/leadership/quarter-1',
+    icon: Target
+  },
+  {
+    name: 'Quarter 2',
+    href: '/docs/leadership/quarter-2',
+    icon: Rocket
+  },
+  {
+    name: 'Departure',
+    href: '/docs/leadership/departure',
+    icon: LogOut
+  },
+  {
+    name: 'Design Team',
+    href: '/docs/team/design',
+    icon: Palette
+  },
+  {
+    name: 'Product Team',
+    href: '/docs/team/product',
+    icon: Box
+  },
+  {
+    name: 'Recruiting',
+    href: '/docs/team/recruiting',
+    icon: UserPlus
+  }
+];
+
+const { currentPath } = Astro.props;
+---
+
+<button
+  id="mobile-menu-button"
+  class="lg:hidden fixed top-4 left-4 z-30 p-2 bg-white rounded-lg shadow-md"
+  aria-label="Toggle menu"
+>
+  <Menu className="w-6 h-6" />
+</button>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center">
+        <span class="sidebar-title">Open Design Docs</span>
+      </div>
+    </div>
+  </div>
+  
+  <nav class="sidebar-nav">
+    <div class="space-y-1">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class={`sidebar-link ${link.href === currentPath ? 'active' : ''}`}
+        >
+          <link.icon className={`sidebar-icon ${link.href === currentPath ? 'active' : ''}`} />
+          <span>{link.name}</span>
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <p class="sidebar-footer-text">
+      I have attempted to remove all confidential or personal information. If you have any concerns, please contact me.
+    </p>
+  </div>
+</aside>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const sidebar = document.getElementById('sidebar');
+  const body = document.body;
+
+  mobileMenuButton?.addEventListener('click', () => {
+    sidebar?.classList.toggle('open');
+    body.style.overflow = sidebar?.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth > 1024) return;
+    
+    const isClickInsideSidebar = sidebar?.contains(e.target as Node);
+    const isClickOnMenuButton = mobileMenuButton?.contains(e.target as Node);
+    
+    if (!isClickInsideSidebar && !isClickOnMenuButton && sidebar?.classList.contains('open')) {
+      sidebar?.classList.remove('open');
+      body.style.overflow = '';
+    }
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      sidebar?.classList.remove('open');
+      body.style.overflow = '';
+    }
+  });
+</script>
