@@ -101,15 +101,17 @@ const { currentPath } = Astro.props;
     <div class="space-y-4">
       {links.map((section, index) => (
         <div class={`space-y-1 ${index === 1 ? 'mt-8' : ''}`}>
-          <h3 class="px-3 text-sm font-semibold text-gray-400 tracking-wider">
+          <h3 class="px-4 py-2 text-[15px] text-gray-500 font-normal">
             {section.header}
           </h3>
           {section.items.map((link) => (
             <a
               href={link.href}
-              class={`sidebar-link ${link.href === currentPath ? 'active' : ''}`}
+              class={`flex items-center px-4 py-2 text-[15px] text-gray-600 hover:bg-gray-100 rounded-lg ${
+                link.href === currentPath ? 'bg-gray-100' : ''
+              }`}
             >
-              <link.icon className={`sidebar-icon ${link.href === currentPath ? 'active' : ''}`} />
+              <link.icon className="w-5 h-5 mr-3 text-gray-500" />
               <span>{link.name}</span>
             </a>
           ))}
