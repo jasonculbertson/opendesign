@@ -22,12 +22,12 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="bg-gray-100 text-[#425466] antialiased min-h-screen">
-    <header class="fixed top-0 left-0 right-0 h-14 bg-white border-b border-gray-200 z-50 flex items-center px-6">
-      <div class="flex items-center">
+    <header class="fixed top-0 left-0 right-0 h-14 bg-gray-100 z-50 flex items-center">
+      <div class="flex items-center pl-8">
         <Layers className="w-5 h-5 text-indigo-600 mr-2.5" />
         <span class="text-[15px] font-medium text-gray-900">Open Design Docs</span>
       </div>
-      <div class="ml-auto flex items-center space-x-4">
+      <div class="ml-auto pr-8">
         <a href="/about" class="text-[15px] text-gray-600 hover:text-gray-900">About</a>
       </div>
     </header>
