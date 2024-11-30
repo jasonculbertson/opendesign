@@ -94,7 +94,7 @@ const { currentPath } = Astro.props;
     <div class="space-y-4">
       {links.map((section, index) => (
         <div class={`space-y-1 ${index === 1 ? 'mt-8' : ''}`}>
-          <h3 class="px-2 py-2 text-[15px] text-gray-500 font-normal">
+          <h3 class="px-2 py-2 text-[15px] text-gray-600 font-normal">
             {section.header}
           </h3>
           {section.items.map((link) => (
@@ -102,8 +102,8 @@ const { currentPath } = Astro.props;
               href={link.href}
               class={`flex items-center px-2 py-2 text-[15px] rounded-lg transition-colors ${
                 link.href === currentPath 
-                  ? 'bg-white/90 backdrop-blur-sm text-indigo-600 shadow-sm font-medium' 
-                  : 'text-gray-600 hover:bg-white/50'
+                  ? 'bg-white/80 backdrop-blur-sm text-indigo-600 shadow-sm font-medium' 
+                  : 'text-gray-600 hover:bg-white/40'
               }`}
             >
               <link.icon className={`w-5 h-5 mr-2.5 ${
