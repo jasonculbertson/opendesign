@@ -20,10 +20,12 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-white text-[#425466] antialiased">
+  <body class="bg-gray-100 text-[#425466] antialiased min-h-screen">
     <Sidebar currentPath={Astro.url.pathname} />
-    <div class="lg:ml-[250px]">
-      <slot />
+    <div class="lg:ml-[250px] p-6">
+      <div class="bg-white rounded-lg shadow-sm p-8 min-h-[calc(100vh-3rem)]">
+        <slot />
+      </div>
     </div>
   </body>
 </html>
