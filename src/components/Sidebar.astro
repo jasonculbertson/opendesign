@@ -88,16 +88,14 @@ const { currentPath } = Astro.props;
   <Menu className="w-6 h-6" />
 </button>
 
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center">
-        <span class="sidebar-title">Open Design Docs</span>
-      </div>
+<aside id="sidebar" class="fixed top-0 left-0 z-40 w-[250px] h-screen transition-transform -translate-x-full lg:translate-x-0 bg-gray-100">
+  <nav class="h-full px-3 py-4">
+    <div class="flex items-center mb-6 px-4">
+      <button id="mobile-menu-button" class="lg:hidden text-gray-500 hover:text-gray-900">
+        <Menu className="w-6 h-6" />
+      </button>
     </div>
-  </div>
-  
-  <nav class="sidebar-nav">
+
     <div class="space-y-4">
       {links.map((section, index) => (
         <div class={`space-y-1 ${index === 1 ? 'mt-8' : ''}`}>
@@ -107,8 +105,8 @@ const { currentPath } = Astro.props;
           {section.items.map((link) => (
             <a
               href={link.href}
-              class={`flex items-center px-4 py-2 text-[15px] text-gray-600 hover:bg-gray-100 rounded-lg ${
-                link.href === currentPath ? 'bg-gray-100' : ''
+              class={`flex items-center px-4 py-2 text-[15px] text-gray-600 hover:bg-white/75 rounded-lg ${
+                link.href === currentPath ? 'bg-white' : ''
               }`}
             >
               <link.icon className="w-5 h-5 mr-3 text-gray-500" />
@@ -120,8 +118,8 @@ const { currentPath } = Astro.props;
     </div>
   </nav>
 
-  <div class="sidebar-footer">
-    <p class="sidebar-footer-text">
+  <div class="sidebar-footer px-4 py-3">
+    <p class="text-sm text-gray-500">
       I have attempted to remove all confidential or personal information. If you have any concerns, please contact me.
     </p>
   </div>
