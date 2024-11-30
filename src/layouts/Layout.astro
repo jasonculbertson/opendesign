@@ -22,18 +22,18 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-[#F5F1F9] bg-gradient-to-br from-[#F5F1F9] via-[#F3E7F0] to-[#FBE9E7]">
-    <header class="fixed top-0 left-0 right-0 h-11 z-50 flex items-center bg-transparent">
+    <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center bg-transparent">
       <div class="flex items-center pl-8">
         <Layers className="w-5 h-5 text-indigo-600 mr-2.5" />
-        <span class="text-[15px] font-medium text-gray-900 pl-2">Open Design Docs</span>
+        <span class="text-[15px] font-medium text-gray-900">Open Design Docs</span>
       </div>
-      <div class="ml-auto pr-3">
-        <a href="/about" class="text-[15px] text-gray-600 hover:text-gray-900 pl-3">About</a>
+      <div class="ml-auto pr-8">
+        <a href="/about" class="text-[15px] text-gray-600 hover:text-gray-900">About</a>
       </div>
     </header>
     <Sidebar currentPath={Astro.url.pathname} />
-    <div class="fixed inset-0 left-[220px] p-6 pt-16">
-      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm h-[calc(100vh-4rem)] relative">
+    <div class="fixed inset-0 left-[220px] p-6 pt-20">
+      <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-sm h-[calc(100vh-5rem)] relative">
         <div class="absolute inset-0 overflow-auto p-8">
           <slot />
         </div>
