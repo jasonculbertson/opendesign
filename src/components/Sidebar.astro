@@ -89,18 +89,8 @@ const { currentPath } = Astro.props;
   <Menu className="w-6 h-6" />
 </button>
 
-<aside id="sidebar" class="fixed top-0 left-0 z-40 w-[220px] h-screen transition-transform -translate-x-full lg:translate-x-0 bg-gray-100">
-  <nav class="h-full px-4 py-4">
-    <div class="flex items-center px-2 mb-8">
-      <div class="flex items-center flex-1">
-        <Layers className="w-5 h-5 text-indigo-600 mr-2.5" />
-        <span class="text-[15px] font-medium text-gray-900">Open Design Docs</span>
-      </div>
-      <button id="mobile-menu-button" class="lg:hidden text-gray-500 hover:text-gray-900">
-        <Menu className="w-6 h-6" />
-      </button>
-    </div>
-
+<aside id="sidebar" class="fixed top-14 left-0 z-40 w-[220px] h-[calc(100vh-3.5rem)] transition-transform -translate-x-full lg:translate-x-0 bg-gray-100">
+  <nav class="h-full pl-8 pr-4 py-4">
     <div class="space-y-4">
       {links.map((section, index) => (
         <div class={`space-y-1 ${index === 1 ? 'mt-8' : ''}`}>
@@ -110,11 +100,17 @@ const { currentPath } = Astro.props;
           {section.items.map((link) => (
             <a
               href={link.href}
-              class={`flex items-center px-2 py-2 text-[15px] text-gray-600 hover:bg-white/75 rounded-lg ${
-                link.href === currentPath ? 'bg-white' : ''
+              class={`flex items-center px-2 py-2 text-[15px] rounded-lg transition-colors ${
+                link.href === currentPath 
+                  ? 'bg-white text-indigo-600 shadow-sm font-medium' 
+                  : 'text-gray-600 hover:bg-white/75'
               }`}
             >
-              <link.icon className="w-5 h-5 mr-2.5 text-gray-500" />
+              <link.icon className={`w-5 h-5 mr-2.5 ${
+                link.href === currentPath 
+                  ? 'text-indigo-600' 
+                  : 'text-gray-500'
+              }`} />
               <span>{link.name}</span>
             </a>
           ))}
