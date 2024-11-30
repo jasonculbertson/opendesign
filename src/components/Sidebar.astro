@@ -16,7 +16,8 @@ import {
   FileText,
   User,
   Film,
-  Menu
+  Menu,
+  Layers
 } from 'lucide-react';
 
 const links = [
@@ -90,7 +91,11 @@ const { currentPath } = Astro.props;
 
 <aside id="sidebar" class="fixed top-0 left-0 z-40 w-[250px] h-screen transition-transform -translate-x-full lg:translate-x-0 bg-gray-100">
   <nav class="h-full px-3 py-4">
-    <div class="flex items-center mb-6 px-4">
+    <div class="flex items-center px-4 mb-8">
+      <div class="flex items-center flex-1">
+        <Layers className="w-6 h-6 text-indigo-600 mr-3" />
+        <span class="text-lg font-semibold text-gray-900">Open Design Docs</span>
+      </div>
       <button id="mobile-menu-button" class="lg:hidden text-gray-500 hover:text-gray-900">
         <Menu className="w-6 h-6" />
       </button>
