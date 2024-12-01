@@ -194,9 +194,9 @@ body {
   border-radius: 12px;
   background: linear-gradient(
     135deg,
-    rgba(236, 72, 153, 0.15),
-    rgba(219, 39, 119, 0.15),
-    rgba(147, 51, 234, 0.15)
+    rgba(236, 72, 153, 0.08),
+    rgba(219, 39, 119, 0.08),
+    rgba(147, 51, 234, 0.08)
   );
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
