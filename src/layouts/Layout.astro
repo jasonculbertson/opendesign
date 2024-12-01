@@ -40,13 +40,11 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       <div class="bg-white/75 backdrop-blur-md rounded-xl shadow-sm h-[calc(100vh-5rem)] relative ring-1 ring-white/50">
         <div class="absolute inset-0 overflow-auto p-8 rounded-xl">
           <div class="relative">
-            <div class="relative flex-1 px-8 py-8 overflow-y-auto">
-              <div class="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-white/90 to-transparent pointer-events-none"></div>
-              <slot />
-              <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white/90 to-transparent pointer-events-none"></div>
-            </div>
+            <slot />
           </div>
         </div>
+        <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent pointer-events-none rounded-t-xl"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/90 to-transparent pointer-events-none rounded-b-xl"></div>
       </div>
     </div>
   </body>
