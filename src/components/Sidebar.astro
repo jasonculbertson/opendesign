@@ -100,13 +100,13 @@ const { currentPath } = Astro.props;
           {section.items.map((link) => (
             <a
               href={link.href}
-              class={`flex items-center px-2 py-2 text-[15px] rounded-lg transition-colors ${
+              class={`flex items-center px-2 py-2 text-[15px] rounded-lg transition-all ${
                 link.href === currentPath 
-                  ? 'bg-white/80 backdrop-blur-sm text-indigo-600 shadow-sm font-medium' 
+                  ? 'bg-white shadow-[0_2px_4px_rgba(0,0,0,0.04)] text-indigo-600 font-medium ring-1 ring-black/[0.04]' 
                   : 'text-gray-600 hover:bg-white/40'
               }`}
             >
-              <link.icon className={`w-5 h-5 mr-2.5 ${
+              <link.icon className={`w-5 h-5 mr-2.5 transition-colors ${
                 link.href === currentPath 
                   ? 'text-indigo-600' 
                   : 'text-gray-500'
