@@ -5,18 +5,26 @@ import Layout from '../../../../layouts/Layout.astro';
 const entry = await getEntry('docs', 'leadership/quarter-2/long-term-goals');
 const { Content } = await entry.render();
 
-const breadcrumbs = [n  { text: 'Quarter 2', href: '/docs/leadership/quarter-2' }n];
+const breadcrumbs = [
+  { text: 'Leadership', href: '/docs/leadership' },
+  { text: 'Quarter 2', href: '/docs/leadership/quarter-2' }
+];
 
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2">
-          {breadcrumbs.map((crumb) => (
+          {breadcrumbs.map((crumb, index) => (
             <li class="flex items-center">
-              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                {crumb.text}
-              </a>
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+              {crumb.href ? (
+                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                  {crumb.text}
+                </a>
+              ) : (
+                <span class="text-sm text-gray-600">{crumb.text}</span>
+              )}
             </li>
           ))}
         </ol>
