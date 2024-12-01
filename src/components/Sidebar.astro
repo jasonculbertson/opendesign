@@ -94,7 +94,7 @@ const { currentPath } = Astro.props;
     <div class="space-y-4">
       {links.map((section, index) => (
         <div class={`space-y-1 ${index === 1 ? 'mt-8' : ''}`}>
-          <h3 class="px-2 py-2 text-[15px] text-gray-600 font-normal">
+          <h3 class="px-2 py-2 text-[15px] text-gray-400 font-light">
             {section.header}
           </h3>
           {section.items.map((link) => (
