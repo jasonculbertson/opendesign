@@ -6,6 +6,15 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class={`bg-white/30 backdrop-blur-[2px] rounded-xl p-8 my-8 border-2 border-[#6B4B83] ${className || ''}`}>
+<style>
+  .panel-outline {
+    border: 4px solid #6B4B83 !important;
+    box-shadow: 0 0 0 2px #6B4B83;
+    outline: 2px solid #6B4B83;
+    outline-offset: -2px;
+  }
+</style>
+
+<div class={`bg-white/30 backdrop-blur-[2px] rounded-xl p-8 my-8 panel-outline ${className || ''}`}>
   <slot />
 </div>
