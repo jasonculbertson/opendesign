@@ -183,20 +183,20 @@ body {
 
 /* Panel with gradient border */
 .gradient-panel {
-  @apply relative bg-white/80 backdrop-blur-sm rounded-lg p-6 my-8;
+  @apply relative bg-white/75 backdrop-blur-[2px] rounded-xl px-8 py-6 my-8 shadow-sm ring-1 ring-black/[0.04] transition-all;
 }
 
 .gradient-panel::before {
   content: '';
   position: absolute;
   inset: 0;
-  padding: 2px;
-  border-radius: 8px;
+  padding: 1.5px;
+  border-radius: 12px;
   background: linear-gradient(
     135deg,
-    rgba(124, 58, 237, 0.5),
-    rgba(99, 102, 241, 0.5),
-    rgba(59, 130, 246, 0.5)
+    rgba(124, 58, 237, 0.2),
+    rgba(99, 102, 241, 0.2),
+    rgba(59, 130, 246, 0.2)
   );
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
