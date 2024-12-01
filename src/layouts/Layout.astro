@@ -28,7 +28,7 @@ const { title, description = "Open Design Documentation" } = Astro.props;
           <div class="pl-2">
             <Layers className="w-5 h-5 text-indigo-600 mr-2.5" />
           </div>
-          <span class="text-[15px] font-medium text-gray-900 leading-none pl-2">Open Design Docs</span>
+          <span class="text-[15px] font-medium text-gray-900 leading-none">Open Design Docs</span>
         </div>
       </div>
       <div class="ml-auto pr-8">
@@ -37,14 +37,14 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     </header>
     <Sidebar currentPath={Astro.url.pathname} />
     <div class="fixed inset-0 left-[220px] px-6 pb-8 pt-14">
-      <div class="bg-white/75 backdrop-blur-md rounded-lg shadow-sm h-[calc(100vh-5.5rem)] relative">
+      <div class="bg-white/75 backdrop-blur-md rounded-xl shadow-sm h-[calc(100vh-5.5rem)] relative">
         <div class="absolute inset-0 overflow-auto p-8">
           <div class="relative">
             <slot />
           </div>
         </div>
-        <div class="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-white/90 to-transparent pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white/90 to-transparent pointer-events-none"></div>
+        <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/90 to-transparent pointer-events-none"></div>
       </div>
     </div>
   </body>
