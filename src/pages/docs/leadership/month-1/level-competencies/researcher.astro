@@ -11,6 +11,8 @@ const breadcrumbs = [
   { text: 'Level Competencies', href: '/docs/leadership/month-1/level-competencies' }
 ];
 
-<CompetencyLayout frontmatter={entry.data} breadcrumbs={breadcrumbs}>
+const frontmatter = entry.data;
+
+<CompetencyLayout frontmatter={frontmatter} breadcrumbs={breadcrumbs}>
   <Content />
 </CompetencyLayout>
