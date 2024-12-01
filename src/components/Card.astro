@@ -10,14 +10,16 @@ const { title, description, href, image } = Astro.props;
 ---
 
 <a href={href} class="block group">
-  <div class="bg-white/75 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm hover:bg-white/90 transition-all ring-1 ring-black/[0.04]">
+  <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-duration-200">
     <div class="flex items-center p-4">
-      <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mr-3 group-hover:bg-indigo-100 transition-colors">
-        <span class="text-xl">{image}</span>
+      <div class="flex-shrink-0 text-2xl mr-4">
+        {image}
       </div>
-      <div class="flex flex-col">
-        <span class="font-medium text-gray-900 leading-none mb-1">{title}</span>
-        <span class="text-[13px] text-gray-500 leading-none">{description}</span>
+      <div>
+        <h3 class="text-sm font-medium text-gray-900 mb-1">
+          {title}
+        </h3>
+        <p class="text-xs text-gray-600">{description}</p>
       </div>
     </div>
   </div>
