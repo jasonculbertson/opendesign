@@ -4,38 +4,38 @@ import Layout from '../../../../layouts/Layout.astro';
 
 const entry = await getEntry('docs', 'leadership/departure/transition-plan');
 const { Content } = await entry.render();
+const title = entry.data.title;
 
 const breadcrumbs = [
   { text: 'Leadership', href: '/docs/leadership' },
-  { text: 'Departure', href: '/docs/leadership/departure' },
-  { text: 'Transition Plan', href: '/docs/leadership/departure/transition-plan' }
+  { text: 'Departure', href: '/docs/leadership/departure' }
 ];
 
-const title = entry.data.title;
 ---
 
 <Layout title={title}>
-  <main class="py-8 px-4 sm:px-6 lg:px-8">
-    <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-2" aria-label="Breadcrumb">
+  <div class="py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[680px] mx-auto">
+      <nav class="mb-4" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2">
-          {breadcrumbs.map((crumb, index) => (
-            <li class="flex items-center">
-              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-              {crumb.href ? (
-                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+          {
+            breadcrumbs.map((crumb, index) => (
+              <li class="flex items-center">
+                {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+                <a
+                  href={crumb.href}
+                  class="text-sm text-gray-600 hover:text-gray-900"
+                >
                   {crumb.text}
                 </a>
-              ) : (
-                <span class="text-sm text-gray-600">{crumb.text}</span>
-              )}
-            </li>
-          ))}
+              </li>
+            ))
+          }
         </ol>
       </nav>
-      <div class="prose">
+      <div class="prose max-w-none">
         <Content />
       </div>
-    </article>
-  </main>
+    </div>
+  </div>
 </Layout>
