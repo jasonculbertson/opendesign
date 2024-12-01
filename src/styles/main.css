@@ -226,3 +226,12 @@ body {
   margin-bottom: 0.5rem;
   display: block;
 }
+
+.panel-border {
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white), 
+                    linear-gradient(to bottom right, #6B4B83, #835363, #856169, #887165, #8A716F);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  position: relative;
+}
