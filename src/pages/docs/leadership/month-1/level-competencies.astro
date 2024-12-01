@@ -6,9 +6,7 @@ import Card from '../../../../components/Card.astro';
 const entry = await getEntry('docs', 'leadership/month-1/level-competencies');
 const { Content } = await entry.render();
 
-const breadcrumbs = [
-  { text: 'leadership', href: '/docs/leadership' }
-];
+const breadcrumbs = [n  { text: 'Month 1', href: '/docs/leadership/month-1' }n];
 const productRoles = [
   {
     title: "Product Designer Competencies",
@@ -66,16 +64,11 @@ const managerRoles = [
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2">
-          {breadcrumbs.map((crumb, index) => (
+          {breadcrumbs.map((crumb) => (
             <li class="flex items-center">
-              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-              {crumb.href ? (
-                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                  {crumb.text}
-                </a>
-              ) : (
-                <span class="text-sm text-gray-900">{crumb.text}</span>
-              )}
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
             </li>
           ))}
         </ol>

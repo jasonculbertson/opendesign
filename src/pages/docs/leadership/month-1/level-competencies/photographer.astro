@@ -5,9 +5,7 @@ import CompetencyLayout from '../../../../../layouts/CompetencyLayout.astro';
 const entry = await getEntry('docs', 'leadership/month-1/level-competencies/photographer');
 const { Content } = await entry.render();
 
-const breadcrumbs = [
-  { text: 'month-1', href: '/docs/leadership/month-1' }
-];---
+const breadcrumbs = [n  { text: 'Level Competencies', href: '/docs/leadership/month-1/level-competencies' }n];
 
 <CompetencyLayout frontmatter={entry.data} breadcrumbs={breadcrumbs}>
   <Content />
