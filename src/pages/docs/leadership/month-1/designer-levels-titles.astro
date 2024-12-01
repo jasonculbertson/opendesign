@@ -5,7 +5,9 @@ import Layout from '../../../../layouts/Layout.astro';
 const entry = await getEntry('docs', 'leadership/month-1/designer-levels-titles');
 const { Content } = await entry.render();
 
-const breadcrumbs = [n  { text: 'Month 1', href: '/docs/leadership/month-1' }n];
+const breadcrumbs = [
+  { text: 'Month 1', href: '/docs/leadership/month-1' }
+];
 
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
@@ -26,4 +28,4 @@ const breadcrumbs = [n  { text: 'Month 1', href: '/docs/leadership/month-1' }n];
       </div>
     </article>
   </main>
-</Layout></content>
+</Layout>
