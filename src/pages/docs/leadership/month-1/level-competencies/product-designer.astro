@@ -6,11 +6,8 @@ const entry = await getEntry('docs', 'leadership/month-1/level-competencies/prod
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Month 1', href: '/docs/leadership/month-1' },
-  { text: 'Level Competencies', href: '/docs/leadership/month-1/level-competencies' },
-  { text: 'Product Designer Competencies' }
-];
----
+  { text: 'month-1', href: '/docs/leadership/month-1' }
+];---
 
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">

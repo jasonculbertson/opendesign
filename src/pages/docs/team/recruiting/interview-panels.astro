@@ -6,10 +6,8 @@ const entry = await getEntry('docs', 'team/recruiting/interview-panels');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Recruiting', href: '/docs/team/recruiting' },
-  { text: 'Interview Panels' }
-];
----
+  { text: 'team', href: '/docs/team' }
+];---
 
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">

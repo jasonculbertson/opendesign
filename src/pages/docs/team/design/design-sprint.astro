@@ -6,10 +6,8 @@ const entry = await getEntry('docs', 'team/design/design-sprint');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Design Team', href: '/docs/team/design' },
-  { text: 'Sprint Docs' }
-];
----
+  { text: 'team', href: '/docs/team' }
+];---
 
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">

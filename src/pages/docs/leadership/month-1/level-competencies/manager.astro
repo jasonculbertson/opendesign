@@ -6,11 +6,8 @@ const entry = await getEntry('docs', 'leadership/month-1/level-competencies/mana
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Month 1', href: '/docs/leadership/month-1' },
-  { text: 'Level Competencies', href: '/docs/leadership/month-1/level-competencies' },
-  { text: 'UX Manager Competencies' }
-];
----
+  { text: 'month-1', href: '/docs/leadership/month-1' }
+];---
 
 <CompetencyLayout frontmatter={entry.data} breadcrumbs={breadcrumbs}>
   <Content />
