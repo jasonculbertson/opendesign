@@ -9,9 +9,29 @@ tags: ["planning", "goals", "onboarding"]
 
 import Panel from '../../../../components/Panel.astro';
 
+<style>
+  .panel-border {
+    position: relative;
+  }
+  .panel-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    padding: 2px;
+    background: linear-gradient(to bottom right, #9B7BB3, #B393A9, #B59199, #B8A195, #BAA19F);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+</style>
+
 # 30/60/90 Day Plan
 
-<Panel>
+<Panel class="panel-border">
   <p class="text-[17px] leading-7 text-[#1a1f36]">
     It's important for every new team member to develop a 30/60/90 day plan, which they share with cross-functional peers and their manager for review and feedback. Below is an example plan:
   </p>

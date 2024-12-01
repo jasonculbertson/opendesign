@@ -6,6 +6,26 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class={`bg-white/30 backdrop-blur-[2px] rounded-xl p-8 my-8 ring-2 ring-[#D4BFE3] shadow-[0_0_0_1px_rgba(212,191,227,0.3)] ${className || ''}`}>
+<style>
+  .panel-border {
+    position: relative;
+  }
+  .panel-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    padding: 2px;
+    background: linear-gradient(to bottom right, #9B7BB3, #B393A9, #B59199, #B8A195, #BAA19F);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+</style>
+
+<div class={`bg-white/30 backdrop-blur-[2px] rounded-xl p-8 my-8 panel-border ${className || ''}`}>
   <slot />
 </div>
