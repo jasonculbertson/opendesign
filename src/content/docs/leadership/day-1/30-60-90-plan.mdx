@@ -7,30 +7,15 @@ category: "Planning"
 tags: ["planning", "goals", "onboarding"]
 ---
 
-<style>
-  .intro-panel {
-    background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(2px);
-    border-radius: 0.75rem;
-    padding: 2rem;
-    margin: 2rem 0;
-    border: 4px solid #6B4B83;
-    box-shadow: 0 0 0 2px #6B4B83;
-  }
-  .intro-text {
-    font-size: 17px;
-    line-height: 1.75;
-    color: #1a1f36;
-  }
-</style>
+import IntroPanel from '../../../../../components/IntroPanel.astro';
 
 # 30/60/90 Day Plan
 
-<div class="intro-panel">
-  <p class="intro-text">
+<IntroPanel>
+  <p class="text-[17px] leading-7 text-[#1a1f36]">
     It's important for every new team member to develop a 30/60/90 day plan, which they share with cross-functional peers and their manager for review and feedback. Below is an example plan:
   </p>
-</div>
+</IntroPanel>
 
 ## First 30 Days - Getting Context
 
