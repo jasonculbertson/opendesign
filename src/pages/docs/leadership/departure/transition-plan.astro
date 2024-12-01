@@ -10,7 +10,9 @@ const breadcrumbs = [
   { text: 'Departure', href: '/docs/leadership/departure' }
 ];
 
-<Layout title={entry.data.title}>
+const title = entry.data.title;
+
+<Layout title={title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
