@@ -181,6 +181,33 @@ body {
   border-bottom: none;
 }
 
+/* Panel with gradient border */
+.gradient-panel {
+  @apply relative bg-white/80 backdrop-blur-sm rounded-lg p-6 my-8;
+}
+
+.gradient-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.5),
+    rgba(99, 102, 241, 0.5),
+    rgba(59, 130, 246, 0.5)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .prose {
