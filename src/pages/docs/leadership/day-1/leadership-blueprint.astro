@@ -6,24 +6,21 @@ const entry = await getEntry('docs', 'leadership/day-1/leadership-blueprint');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'leadership', href: '/docs/leadership' }
-];---
+  { text: 'Day 1', href: '/docs/leadership/day-1' }
+];
+
+---
 
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2">
-          {breadcrumbs.map((crumb, index) => (
+          {breadcrumbs.map((crumb) => (
             <li class="flex items-center">
-              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-              {crumb.href ? (
-                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                  {crumb.text}
-                </a>
-              ) : (
-                <span class="text-sm text-gray-900">{crumb.text}</span>
-              )}
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
             </li>
           ))}
         </ol>
