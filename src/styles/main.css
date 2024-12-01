@@ -210,7 +210,19 @@ body {
 
 /* Card with gradient border */
 .gradient-card {
-  @apply relative bg-white/60 backdrop-blur-[2px] rounded-xl px-8 py-6 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02] transition-all hover:bg-white/70;
+  @apply relative bg-white/60 backdrop-blur-[2px] rounded-xl px-8 py-6 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02] transition-all;
+  transform: translateY(0);
+  transition: all 0.2s ease-in-out;
+}
+
+.gradient-card:hover {
+  @apply bg-white/70 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.1)];
+  transform: translateY(-2px);
+}
+
+.gradient-card:active {
+  @apply bg-white/75 shadow-[0_2px_4px_-2px_rgba(0,0,0,0.05)];
+  transform: translateY(0);
 }
 
 .gradient-card::before {
@@ -233,6 +245,16 @@ body {
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.gradient-card:hover::before {
+  opacity: 1;
+}
+
+.gradient-card:active::before {
+  opacity: 0.8;
 }
 
 /* Mobile responsiveness */
