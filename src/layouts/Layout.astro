@@ -21,7 +21,7 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-[#F5F1F9] via-[#F3E7F0] via-[#EDE5F4] via-[#F9EBE5] to-[#FBE9E7]">
+  <body class="min-h-screen bg-gradient-to-br from-[#F5F1F9] via-[#F3E7F0] via-[#F4E5E9] via-[#F9EBE5] to-[#FBE9E7]">
     <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center bg-transparent">
       <div class="flex items-center pl-8">
         <div class="flex items-center">
@@ -35,18 +35,16 @@ const { title, description = "Open Design Documentation" } = Astro.props;
         <a href="/about" class="text-[15px] text-gray-600 hover:text-gray-900 leading-none">About</a>
       </div>
     </header>
-    <div class="lg:pl-[220px]">
-      <Sidebar currentPath={Astro.url.pathname} />
-      <div class="min-h-screen p-4">
-        <div class="bg-white/75 backdrop-blur-md rounded-xl shadow-sm h-[calc(100vh-5rem)] relative ring-1 ring-white/50">
-          <div class="absolute inset-0 overflow-auto p-8 rounded-xl">
-            <div class="relative">
-              <slot />
-            </div>
+    <Sidebar currentPath={Astro.url.pathname} />
+    <div class="fixed inset-0 left-[220px] p-6 pt-14">
+      <div class="bg-white/75 backdrop-blur-md rounded-xl shadow-sm h-[calc(100vh-5rem)] relative ring-1 ring-white/50">
+        <div class="absolute inset-0 overflow-auto p-8 rounded-xl">
+          <div class="relative">
+            <slot />
           </div>
-          <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent pointer-events-none rounded-t-xl"></div>
-          <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/90 to-transparent pointer-events-none rounded-b-xl"></div>
         </div>
+        <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent pointer-events-none rounded-t-xl"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/90 to-transparent pointer-events-none rounded-b-xl"></div>
       </div>
     </div>
   </body>
