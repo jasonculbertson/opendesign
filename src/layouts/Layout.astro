@@ -20,6 +20,25 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <style>
+      .gradient-border {
+        position: relative;
+      }
+      .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 0.75rem;
+        padding: 2px;
+        background: linear-gradient(to bottom right, #D4BFE3, #E4C7D8, #E6C5D1, #E9D1CB, #EBD1CF);
+        -webkit-mask: 
+          linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body class="min-h-screen bg-gradient-to-br from-[#F5F1F9] via-[#F3E7F0] via-[#F4E5E9] via-[#F9EBE5] to-[#FBE9E7]">
     <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center bg-transparent">
@@ -37,7 +56,7 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     </header>
     <Sidebar currentPath={Astro.url.pathname} />
     <div class="fixed inset-0 left-[220px] p-6 pt-14">
-      <div class="bg-white/75 backdrop-blur-md rounded-xl h-[calc(100vh-5rem)] relative ring-2 ring-[#F3E7F0]/50 shadow-[0_0_0_1px_rgba(243,231,240,0.2)]">
+      <div class="bg-white/75 backdrop-blur-md rounded-xl h-[calc(100vh-5rem)] relative gradient-border">
         <div class="absolute inset-0 overflow-auto p-8 rounded-xl">
           <div class="relative">
             <slot />
