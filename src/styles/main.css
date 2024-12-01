@@ -186,6 +186,10 @@ body {
   @apply relative bg-white/60 backdrop-blur-[2px] rounded-xl px-8 py-6 my-8 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02] transition-all;
 }
 
+.gradient-panel p {
+  @apply text-[17px] leading-7 text-[#4a5468] italic;
+}
+
 .gradient-panel::before {
   content: '';
   position: absolute;
