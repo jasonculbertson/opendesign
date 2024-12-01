@@ -1,7 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
-import Card from '../../../../components/Card.astro';
+import Panel from '../../../../components/Panel.astro';
 
 const entry = await getEntry('docs', 'leadership/month-1/level-competencies');
 const { Content } = await entry.render();
@@ -85,11 +85,11 @@ const managerRoles = [
 
       <div class="mb-12">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Level Competencies</h1>
-        <div class="bg-white/60 backdrop-blur-[2px] rounded-xl p-8 my-8 ring-1 ring-white/50">
+        <Panel>
           <p class="text-[17px] leading-7 text-[#1a1f36]">
             The level competencies framework provides clear expectations and growth paths for designers at every level.
           </p>
-        </div>
+        </Panel>
       </div>
 
       <div class="space-y-12">
