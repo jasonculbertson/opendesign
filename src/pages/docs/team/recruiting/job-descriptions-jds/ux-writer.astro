@@ -1,49 +1,56 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '../../../../../layouts/Layout.astro';
+import Card from '../../../../../components/Card.astro';
 
 const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-writer');
 
+const title = "UX Writer";
 const breadcrumbs = [
   { text: 'Recruiting Team', href: '/docs/team/recruiting' },
   { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' }
 ];
-
 const writerLevels = [
   { 
-    title: 'Writer I',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-1',
-    description: 'Entry-level position'
+    title: "Writer I",
+    description: "Skills and expectations for entry-level writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-1",
+    image: "🌱"
   },
   { 
-    title: 'Writer II',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-2',
-    description: 'Mid-level position'
+    title: "Writer II",
+    description: "Skills and expectations for mid-level writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-2",
+    image: "⚡"
   },
   { 
-    title: 'Sr. Writer',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/senior-writer',
-    description: 'Senior-level position'
+    title: "Sr. Writer",
+    description: "Skills and expectations for senior writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/senior-writer",
+    image: "🚀"
   },
   { 
-    title: 'Lead Writer',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/lead-writer',
-    description: 'Team lead position'
+    title: "Lead Writer",
+    description: "Skills and expectations for lead writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/lead-writer",
+    image: "👥"
   },
   { 
-    title: 'Staff Writer',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/staff-writer',
-    description: 'Staff-level position'
+    title: "Staff Writer",
+    description: "Skills and expectations for staff writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/staff-writer",
+    image: "⭐"
   },
   { 
-    title: 'Principal Writer',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/principal-writer',
-    description: 'Principal-level position'
+    title: "Principal Writer",
+    description: "Skills and expectations for principal writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/principal-writer",
+    image: "🎯"
   }
 ];
 ---
 
-<Layout title="UX Writer">
+<Layout title={title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
@@ -60,24 +67,13 @@ const writerLevels = [
           ))}
         </ol>
       </nav>
-      <div class="prose max-w-none">
-        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6">UX Writer</h1>
-        <div class="grid grid-cols-1 gap-4">
-          {writerLevels.map(level => (
-            <a href={level.href} class="block group">
-              <div class="relative bg-white/60 backdrop-blur-[2px] rounded-xl px-6 py-4 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02] transition-all">
-                <div class="flex items-center">
-                  <div>
-                    <h3 class="text-[14px] font-medium text-gray-900 leading-tight mb-0.5">
-                      {level.title}
-                    </h3>
-                    <p class="text-[12px] text-gray-500 leading-tight">{level.description}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
+      <div class="mb-8">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
+      </div>
+      <div class="grid grid-cols-1 gap-4">
+        {writerLevels.map(level => (
+          <Card {...level} />
+        ))}
       </div>
     </article>
   </main>
