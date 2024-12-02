@@ -4,10 +4,6 @@ import Card from '../../../../components/Card.astro';
 
 const title = "Product Team";
 
-const breadcrumbs = [
-  { text: 'Product Team', href: '/docs/team/product' }
-];
-
 const resources = [
   {
     title: 'One Pagers',
@@ -33,17 +29,6 @@ const resources = [
 <Layout title={title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-2" aria-label="Breadcrumb">
-        <ol class="flex items-center">
-          {breadcrumbs.map((crumb) => (
-            <li>
-              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                {crumb.text}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
       <div class="mb-8">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
       </div>
