@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '../../../../../layouts/Layout.astro';
+import Card from '../../../../../components/Card.astro';
 
 const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-designer');
 
@@ -13,32 +14,38 @@ const designerLevels = [
   { 
     title: 'Designer I',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1',
-    description: 'Entry-level position'
+    description: 'Entry-level position',
+    image: ''
   },
   { 
     title: 'Designer II',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2',
-    description: 'Mid-level position'
+    description: 'Mid-level position',
+    image: ''
   },
   { 
     title: 'Sr. Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer',
-    description: 'Senior-level position'
+    description: 'Senior-level position',
+    image: ''
   },
   { 
     title: 'Lead Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer',
-    description: 'Team lead position'
+    description: 'Team lead position',
+    image: ''
   },
   { 
     title: 'Staff Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer',
-    description: 'Staff-level position'
+    description: 'Staff-level position',
+    image: ''
   },
   { 
     title: 'Principal Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer',
-    description: 'Principal-level position'
+    description: 'Principal-level position',
+    image: ''
   }
 ];
 ---
@@ -64,18 +71,7 @@ const designerLevels = [
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6">UX Designer</h1>
         <div class="grid grid-cols-1 gap-4">
           {designerLevels.map(level => (
-            <a href={level.href} class="block group">
-              <div class="gradient-card">
-                <div class="flex items-center">
-                  <div>
-                    <h3 class="text-[15px] font-medium text-gray-900 leading-none mb-1.5">
-                      {level.title}
-                    </h3>
-                    <p class="text-[13px] text-gray-600 leading-none">{level.description}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
+            <Card {...level} />
           ))}
         </div>
       </div>
