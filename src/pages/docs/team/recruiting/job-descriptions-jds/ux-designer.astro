@@ -10,12 +10,42 @@ const breadcrumbs = [
 ];
 
 const designerLevels = [
-  { title: 'Designer I', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1' },
-  { title: 'Designer II', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2' },
-  { title: 'Sr. Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer' },
-  { title: 'Lead Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer' },
-  { title: 'Staff Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer' },
-  { title: 'Principal Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer' }
+  { 
+    title: 'Designer I',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1',
+    description: 'Entry-level position for individuals passionate about design, eager to learn, and ready to contribute to our dynamic team.',
+    emoji: '🌱'
+  },
+  { 
+    title: 'Designer II',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2',
+    description: 'Mid-level role ideal for someone with 2-5 years experience ready to take on more complex design challenges.',
+    emoji: '⚡'
+  },
+  { 
+    title: 'Sr. Designer',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer',
+    description: 'Lead the design of comprehensive product areas and implement user-centric design strategies.',
+    emoji: '🚀'
+  },
+  { 
+    title: 'Lead Designer',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer',
+    description: 'Guide design vision and strategy across major product areas while leading and mentoring a team.',
+    emoji: '👥'
+  },
+  { 
+    title: 'Staff Designer',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer',
+    description: 'Lead and contribute to the design of complex and high-impact product areas.',
+    emoji: '⭐'
+  },
+  { 
+    title: 'Principal Designer',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer',
+    description: 'Shape design vision and strategy across entire user experiences while driving innovation.',
+    emoji: '🎯'
+  }
 ];
 ---
 
@@ -41,12 +71,16 @@ const designerLevels = [
         <div class="grid grid-cols-1 gap-4">
           {designerLevels.map(level => (
             <a href={level.href} class="block group">
-              <div class="gradient-card">
-                <div class="flex items-center">
+              <div class="gradient-card min-h-[88px] flex items-center p-4">
+                <div class="flex items-start flex-1">
+                  <div class="text-2xl mr-4">{level.emoji}</div>
                   <div>
-                    <h3 class="text-[15px] font-medium text-gray-900 leading-none">
+                    <h3 class="text-[15px] font-medium text-gray-900 leading-none mb-1">
                       {level.title}
                     </h3>
+                    <p class="text-[13px] text-gray-600 leading-tight">
+                      {level.description}
+                    </p>
                   </div>
                 </div>
               </div>
