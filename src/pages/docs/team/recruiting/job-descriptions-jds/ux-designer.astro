@@ -1,0 +1,34 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../../../../../layouts/Layout.astro';
+
+const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-designer');
+const { Content } = await entry.render();
+
+const breadcrumbs = [
+  { text: 'Recruiting Team', href: '/docs/team/recruiting' },
+  { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' }
+];
+
+---
+
+<Layout title={entry.data.title}>
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb) => (
+            <li>
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+      <div class="prose max-w-none">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Layout>
