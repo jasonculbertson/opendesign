@@ -1,57 +1,69 @@
 ---
-import Layout from '../../../../../../layouts/CompetencyLayout.astro';
-import Card from '../../../../../../components/Card.astro';
+import Layout from '../../../../../../layouts/Layout.astro';
 
-const title = "Writer II";
 const breadcrumbs = [
-  { text: 'Home', href: '/' },
-  { text: 'Team', href: '/docs/team' },
-  { text: 'Recruiting', href: '/docs/team/recruiting' },
+  { text: 'Recruiting Team', href: '/docs/team/recruiting' },
   { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' },
   { text: 'UX Writer', href: '/docs/team/recruiting/job-descriptions-jds/ux-writer' },
   { text: 'Writer II', href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-2' }
 ];
+
 ---
 
-<Layout title={title} breadcrumbs={breadcrumbs}>
-  <Card emoji="⚡" title="Writer II" level="L4">
-    <div class="prose dark:prose-invert max-w-none">
-      <h2>About [Company Name]</h2>
-      <p>Add a bit about your company here.</p>
+<Layout title="Writer II">
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb, index) => (
+            <li class="flex items-center">
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+      <h1 class="text-3xl font-bold mb-4">Writer II</h1>
+      <div class="prose dark:prose-invert max-w-none">
+        <h2>About [Company Name]</h2>
+        <p>Add a bit about your company here.</p>
 
-      <h2>Role Overview</h2>
-      <p>As a UX Writer II at [Company Name], you will deepen your craft and contribute to the development of user-centric content across our digital experiences. With your growing expertise, you will handle broader feature-level content responsibilities and actively contribute to content strategy discussions. This role is ideal for someone with 2-5 years of experience who is ready to take on more complex content challenges and collaborate with cross-functional teams.</p>
+        <h2>Role Overview</h2>
+        <p>As a UX Writer II at [Company Name], you will deepen your craft and contribute to the development of user-centric content across our digital experiences. With your growing expertise, you will handle broader feature-level content responsibilities and actively contribute to content strategy discussions. This role is ideal for someone with 2-5 years of experience who is ready to take on more complex content challenges and collaborate with cross-functional teams.</p>
 
-      <h2>What You'll Do</h2>
-      <ul>
-        <li>Create and implement content strategies for product features and workflows</li>
-        <li>Write clear, consistent UI copy that aligns with our brand voice</li>
-        <li>Collaborate with designers and developers to ensure content meets user needs</li>
-        <li>Conduct content audits and make recommendations for improvements</li>
-        <li>Help maintain and evolve content style guides and documentation</li>
-        <li>Participate in user research to inform content decisions</li>
-      </ul>
+        <h2>What You'll Do</h2>
+        <ul>
+          <li>Create and implement content strategies for product features and workflows</li>
+          <li>Write clear, consistent UI copy that aligns with our brand voice</li>
+          <li>Collaborate with designers and developers to ensure content meets user needs</li>
+          <li>Conduct content audits and make recommendations for improvements</li>
+          <li>Help maintain and evolve content style guides and documentation</li>
+          <li>Participate in user research to inform content decisions</li>
+        </ul>
 
-      <h2>What We're Looking For</h2>
-      <ul>
-        <li>Bachelor's degree in English, Communications, or related field, or equivalent practical experience</li>
-        <li>2-5 years of experience in UX writing or content design</li>
-        <li>Strong portfolio showcasing content strategy and UX writing work</li>
-        <li>Excellent writing and editing skills with meticulous attention to detail</li>
-        <li>Understanding of UX principles and content design best practices</li>
-        <li>Experience with content management systems and collaboration tools</li>
-        <li>Strong communication and presentation skills</li>
-      </ul>
+        <h2>What We're Looking For</h2>
+        <ul>
+          <li>Bachelor's degree in English, Communications, or related field, or equivalent practical experience</li>
+          <li>2-5 years of experience in UX writing or content design</li>
+          <li>Strong portfolio showcasing content strategy and UX writing work</li>
+          <li>Excellent writing and editing skills with meticulous attention to detail</li>
+          <li>Understanding of UX principles and content design best practices</li>
+          <li>Experience with content management systems and collaboration tools</li>
+          <li>Strong communication and presentation skills</li>
+        </ul>
 
-      <h2>Why Join [Company Name]</h2>
-      <ul>
-        <li>Be part of a rapidly growing company that's shaping the future of how people connect online</li>
-        <li>Contribute to a product that impacts millions of users worldwide</li>
-        <li>Enjoy a collaborative, inclusive, and creative work environment</li>
-        <li>Benefit from competitive compensation and flexible work arrangements</li>
-      </ul>
+        <h2>Why Join [Company Name]</h2>
+        <ul>
+          <li>Be part of a rapidly growing company that's shaping the future of how people connect online</li>
+          <li>Contribute to a product that impacts millions of users worldwide</li>
+          <li>Enjoy a collaborative, inclusive, and creative work environment</li>
+          <li>Benefit from competitive compensation and flexible work arrangements</li>
+        </ul>
 
-      <p>[Company Name] is committed to providing a competitive compensation package. Our cash compensation amount for this role is targeted at $X-$X in X area. Final offer amounts are determined by multiple factors, including candidate expertise, the scope of role and level, and may vary from the amounts listed above.</p>
-    </div>
-  </Card>
+        <p>[Company Name] is committed to providing a competitive compensation package. Our cash compensation amount for this role is targeted at $X-$X in X area. Final offer amounts are determined by multiple factors, including candidate expertise, the scope of role and level, and may vary from the amounts listed above.</p>
+      </div>
+    </article>
+  </main>
 </Layout>
