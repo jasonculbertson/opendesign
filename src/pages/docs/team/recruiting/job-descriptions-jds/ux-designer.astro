@@ -5,75 +5,77 @@ import Card from '../../../../../components/Card.astro';
 
 const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-designer');
 
+const title = "UX Designer";
 const breadcrumbs = [
   { text: 'Recruiting Team', href: '/docs/team/recruiting' },
   { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' }
 ];
-
 const designerLevels = [
   { 
-    title: 'Designer I',
-    description: 'Skills and expectations for entry-level designers',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1',
-    image: '🌱'
+    title: "Designer I",
+    description: "Skills and expectations for entry-level designers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1",
+    image: "🌱"
   },
   { 
-    title: 'Designer II',
-    description: 'Skills and expectations for mid-level designers',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2',
-    image: '⚡'
+    title: "Designer II",
+    description: "Skills and expectations for mid-level designers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2",
+    image: "⚡"
   },
   { 
-    title: 'Sr. Designer',
-    description: 'Skills and expectations for senior designers',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer',
-    image: '🚀'
+    title: "Sr. Designer",
+    description: "Skills and expectations for senior designers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer",
+    image: "🚀"
   },
   { 
-    title: 'Lead Designer',
-    description: 'Skills and expectations for lead designers',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer',
-    image: '👥'
+    title: "Lead Designer",
+    description: "Skills and expectations for lead designers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer",
+    image: "👥"
   },
   { 
-    title: 'Staff Designer',
-    description: 'Skills and expectations for staff designers',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer',
-    image: '⭐'
+    title: "Staff Designer",
+    description: "Skills and expectations for staff designers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer",
+    image: "⭐"
   },
   { 
-    title: 'Principal Designer',
-    description: 'Skills and expectations for principal designers',
-    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer',
-    image: '🎯'
+    title: "Principal Designer",
+    description: "Skills and expectations for principal designers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer",
+    image: "🎯"
   }
 ];
 ---
 
-<Layout title="UX Designer">
+<Layout title={title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
-        <ol class="flex items-center">
+        <ol class="flex items-center space-x-2">
           {breadcrumbs.map((crumb, index) => (
             <li class="flex items-center">
-              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                {crumb.text}
-              </a>
-              {index < breadcrumbs.length - 1 && (
-                <span class="mx-2 text-gray-400">/</span>
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+              {crumb.href ? (
+                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                  {crumb.text}
+                </a>
+              ) : (
+                <span class="text-sm text-gray-600">{crumb.text}</span>
               )}
             </li>
           ))}
         </ol>
       </nav>
-      <div class="prose max-w-none">
-        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6">UX Designer</h1>
-        <div class="grid grid-cols-1 gap-4">
-          {designerLevels.map(level => (
-            <Card {...level} />
-          ))}
-        </div>
+      <div class="mb-8">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
+      </div>
+      <div class="grid grid-cols-1 gap-4">
+        {designerLevels.map(level => (
+          <Card {...level} />
+        ))}
       </div>
     </article>
   </main>
