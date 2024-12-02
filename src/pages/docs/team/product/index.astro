@@ -4,48 +4,36 @@ import Card from '../../../../components/Card.astro';
 
 const resources = [
   {
+    title: 'One Pagers',
+    description: 'Learn how to write effective one pagers',
+    href: '/docs/team/product/one-pagers',
+    image: '📄'
+  },
+  {
     title: 'Product Spec',
-    description: 'Clearly outline product requirements and expectations',
+    description: 'How to write a product spec',
     href: '/docs/team/product/product-spec',
     image: '📋'
   },
   {
     title: 'Project Kickoff Meeting',
-    description: 'Ensure all stakeholders are aligned from the start',
+    description: 'How to run a project kickoff meeting',
     href: '/docs/team/product/project-kickoff-meeting',
-    image: '🎉'
-  },
-  {
-    title: 'One-Pagers',
-    description: 'Summarize project goals and progress for quick reference',
-    href: '/docs/team/product/one-pagers',
-    image: '📄'
+    image: '🚀'
   }
 ];
-
-const breadcrumbs = [
-  { text: 'Team', href: '/docs/team' },
-  { text: 'Product', href: '/docs/team/product' }
-];
-
-const title = "Product Team";
 ---
 
 <Layout title={title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-2">
-          {breadcrumbs.map((crumb, index) => (
-            <li class="flex items-center">
-              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-              {crumb.href ? (
-                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                  {crumb.text}
-                </a>
-              ) : (
-                <span class="text-sm text-gray-600">{crumb.text}</span>
-              )}
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb) => (
+            <li>
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
             </li>
           ))}
         </ol>
