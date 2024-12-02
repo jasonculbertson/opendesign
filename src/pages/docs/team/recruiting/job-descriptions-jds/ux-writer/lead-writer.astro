@@ -1,5 +1,5 @@
 ---
-import Layout from '../../../../../../layouts/Layout.astro';
+import Layout from '../../../../../../layouts/CompetencyLayout.astro';
 
 const breadcrumbs = [
   { text: 'Recruiting Team', href: '/docs/team/recruiting' },
@@ -7,9 +7,10 @@ const breadcrumbs = [
   { text: 'UX Writer', href: '/docs/team/recruiting/job-descriptions-jds/ux-writer' }
 ];
 
+const title = "Lead Writer";
 ---
 
-<Layout title="Lead Writer">
+<Layout title={title} breadcrumbs={breadcrumbs}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
