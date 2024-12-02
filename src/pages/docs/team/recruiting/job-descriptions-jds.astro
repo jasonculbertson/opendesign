@@ -10,26 +10,44 @@ const breadcrumbs = [
   { text: 'Recruiting Team', href: '/docs/team/recruiting' }
 ];
 
-const productRoles = [
+const uxRoles = [
   {
-    title: 'Product Design',
+    title: 'UX Designer',
     description: 'UX Designer job description template',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer',
     icon: '🎨'
+  },
+  {
+    title: 'UX Writer',
+    description: 'UX Writer job description template',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer',
+    icon: '✍️'
+  },
+  {
+    title: 'UX Researcher',
+    description: 'UX Researcher job description template',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-researcher',
+    icon: '🔍'
+  },
+  {
+    title: 'Design Ops',
+    description: 'Design Operations job description template',
+    href: '/docs/team/recruiting/job-descriptions-jds/design-ops',
+    icon: '⚙️'
   }
 ];
 
 const creativeRoles = [
   {
     title: "Graphic Designer",
-    description: "Design stunning visuals and branding materials.",
-    href: "/job-descriptions-jds/graphic-designer",
+    description: "Graphic Designer job description template",
+    href: "/docs/team/recruiting/job-descriptions-jds/graphic-designer",
     icon: "🎨"
   },
   {
     title: "Copywriter",
-    description: "Write compelling content to captivate and engage your audience.",
-    href: "/job-descriptions-jds/copywriter",
+    description: "Copywriter job description template",
+    href: "/docs/team/recruiting/job-descriptions-jds/copywriter",
     icon: "✍️"
   }
 ];
@@ -63,9 +81,9 @@ const title = entry.data.title;
 
       <div class="space-y-12">
         <section>
-          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Product Role JDs</h2>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">UX Role JDs</h2>
           <div class="grid grid-cols-1 gap-4">
-            {productRoles.map(role => (
+            {uxRoles.map(role => (
               <JobCard {...role} />
             ))}
           </div>
