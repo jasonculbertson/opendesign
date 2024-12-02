@@ -65,10 +65,10 @@ const designerLevels = [
         <div class="grid grid-cols-1 gap-4">
           {designerLevels.map(level => (
             <a href={level.href} class="block group">
-              <div class="gradient-card min-h-[72px]">
-                <div class="flex items-center h-full">
+              <div class="gradient-card">
+                <div class="flex items-center">
                   <div>
-                    <h3 class="text-[15px] font-medium text-gray-900 leading-none mb-1">
+                    <h3 class="text-[15px] font-medium text-gray-900 leading-none mb-1.5">
                       {level.title}
                     </h3>
                     <p class="text-[13px] text-gray-600 leading-none">{level.description}</p>
