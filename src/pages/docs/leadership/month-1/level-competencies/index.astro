@@ -2,102 +2,92 @@
 import Layout from '../../../../../layouts/Layout.astro';
 import Card from '../../../../../components/Card.astro';
 
+const title = "Level Competencies";
+
+const breadcrumbs = [
+  { text: 'Month 1', href: '/docs/month-1' }
+];
+
 const resources = [
   {
-    title: 'Junior Designer (IC1)',
-    description: 'Competencies for entry-level designers',
-    href: '/docs/leadership/month-1/level-competencies/ic1',
-    image: '👶'
-  },
-  {
-    title: 'Designer (IC2)',
-    description: 'Competencies for mid-level designers',
-    href: '/docs/leadership/month-1/level-competencies/ic2',
+    title: 'IC1',
+    description: 'Level competencies for IC1 designers',
+    href: '/docs/month-1/level-competencies/ic1',
     image: '👩‍💻'
   },
   {
-    title: 'Senior Designer (IC3)',
-    description: 'Competencies for senior designers',
-    href: '/docs/leadership/month-1/level-competencies/ic3',
-    image: '👨‍💼'
-  },
-  {
-    title: 'Staff Designer (IC4)',
-    description: 'Competencies for staff designers',
-    href: '/docs/leadership/month-1/level-competencies/ic4',
-    image: '🎨'
-  },
-  {
-    title: 'Principal Designer (IC5)',
-    description: 'Competencies for principal designers',
-    href: '/docs/leadership/month-1/level-competencies/ic5',
-    image: '🎯'
-  },
-  {
     title: 'Content Designer',
-    description: 'Competencies for content designers',
-    href: '/docs/leadership/month-1/level-competencies/content-designer',
+    description: 'Level competencies for content designers',
+    href: '/docs/month-1/level-competencies/content-designer',
     image: '📝'
   },
   {
-    title: 'Copywriter',
-    description: 'Competencies for copywriters',
-    href: '/docs/leadership/month-1/level-competencies/copywriter',
-    image: '✍️'
-  },
-  {
-    title: 'Design Ops',
-    description: 'Competencies for design operations',
-    href: '/docs/leadership/month-1/level-competencies/design-ops',
-    image: '⚙️'
-  },
-  {
     title: 'Graphic Designer',
-    description: 'Competencies for graphic designers',
-    href: '/docs/leadership/month-1/level-competencies/graphic-designer',
+    description: 'Level competencies for graphic designers',
+    href: '/docs/month-1/level-competencies/graphic-designer',
     image: '🎨'
   },
   {
-    title: 'Manager',
-    description: 'Competencies for design managers',
-    href: '/docs/leadership/month-1/level-competencies/manager',
-    image: '👔'
-  },
-  {
-    title: 'Photographer',
-    description: 'Competencies for photographers',
-    href: '/docs/leadership/month-1/level-competencies/photographer',
-    image: '📸'
-  },
-  {
     title: 'Product Designer',
-    description: 'Competencies for product designers',
-    href: '/docs/leadership/month-1/level-competencies/product-designer',
+    description: 'Level competencies for product designers',
+    href: '/docs/month-1/level-competencies/product-designer',
     image: '💡'
   },
   {
+    title: 'Design Ops',
+    description: 'Level competencies for design operations',
+    href: '/docs/month-1/level-competencies/design-ops',
+    image: '⚙️'
+  },
+  {
+    title: 'Manager',
+    description: 'Level competencies for design managers',
+    href: '/docs/month-1/level-competencies/manager',
+    image: '👥'
+  },
+  {
+    title: 'Photographer',
+    description: 'Level competencies for photographers',
+    href: '/docs/month-1/level-competencies/photographer',
+    image: '📸'
+  },
+  {
     title: 'Researcher',
-    description: 'Competencies for user researchers',
-    href: '/docs/leadership/month-1/level-competencies/researcher',
+    description: 'Level competencies for design researchers',
+    href: '/docs/month-1/level-competencies/researcher',
     image: '🔍'
+  },
+  {
+    title: 'Copywriter',
+    description: 'Level competencies for copywriters',
+    href: '/docs/month-1/level-competencies/copywriter',
+    image: '✍️'
   }
 ];
-
-const title = "Level Competencies";
 ---
 
-<Layout title={title} showBackButton={true}>
-  <div class="py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-[680px] mx-auto">
+<Layout title={title}>
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb) => (
+            <li>
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
       <div class="mb-8">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
       </div>
-      
       <div class="grid grid-cols-1 gap-4">
         {resources.map(resource => (
           <Card {...resource} />
         ))}
       </div>
-    </div>
-  </div>
+    </article>
+  </main>
 </Layout>
