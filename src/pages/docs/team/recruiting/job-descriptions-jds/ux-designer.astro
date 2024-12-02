@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '../../../../../layouts/Layout.astro';
+import Card from '../../../../../components/Card.astro';
 
 const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-designer');
 
@@ -12,39 +13,39 @@ const breadcrumbs = [
 const designerLevels = [
   { 
     title: 'Designer I',
+    description: 'Skills and expectations for entry-level designers',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1',
-    description: 'Entry-level position',
-    image: ''
+    image: '🌱'
   },
   { 
     title: 'Designer II',
+    description: 'Skills and expectations for mid-level designers',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2',
-    description: 'Mid-level position',
-    image: ''
+    image: '⚡'
   },
   { 
     title: 'Sr. Designer',
+    description: 'Skills and expectations for senior designers',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer',
-    description: 'Senior-level position',
-    image: ''
+    image: '🚀'
   },
   { 
     title: 'Lead Designer',
+    description: 'Skills and expectations for lead designers',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer',
-    description: 'Team lead position',
-    image: ''
+    image: '👥'
   },
   { 
     title: 'Staff Designer',
+    description: 'Skills and expectations for staff designers',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer',
-    description: 'Staff-level position',
-    image: ''
+    image: '⭐'
   },
   { 
     title: 'Principal Designer',
+    description: 'Skills and expectations for principal designers',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer',
-    description: 'Principal-level position',
-    image: ''
+    image: '🎯'
   }
 ];
 ---
@@ -70,18 +71,7 @@ const designerLevels = [
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6">UX Designer</h1>
         <div class="grid grid-cols-1 gap-4">
           {designerLevels.map(level => (
-            <a href={level.href} class="block group">
-              <div class="relative bg-white/60 backdrop-blur-[2px] rounded-xl px-6 py-4 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02] transition-all">
-                <div class="flex items-center">
-                  <div>
-                    <h3 class="text-[14px] font-medium text-gray-900 leading-tight mb-0.5">
-                      {level.title}
-                    </h3>
-                    <p class="text-[12px] text-gray-500 leading-tight">{level.description}</p>
-                  </div>
-                </div>
-              </div>
-            </a>
+            <Card {...level} />
           ))}
         </div>
       </div>
