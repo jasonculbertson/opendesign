@@ -2,11 +2,11 @@
 import { getEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
 
-const entry = await getEntry('docs', 'day-1/leadership-blueprint');
+const entry = await getEntry('docs', 'leadership/day-1/leadership-blueprint');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Day 1', href: '/docs/day-1' }
+  { text: 'Day 1', href: '/docs/leadership/day-1' }
 ];
 
 ---
