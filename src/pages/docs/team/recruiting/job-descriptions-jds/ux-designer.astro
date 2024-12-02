@@ -9,9 +9,18 @@ const breadcrumbs = [
   { text: 'Recruiting Team', href: '/docs/team/recruiting' },
   { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' }
 ];
+
+const designerLevels = [
+  { title: 'Designer I', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1' },
+  { title: 'Designer II', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2' },
+  { title: 'Sr. Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer' },
+  { title: 'Lead Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer' },
+  { title: 'Staff Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer' },
+  { title: 'Principal Designer', href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer' }
+];
 ---
 
-<Layout title={entry.data.title}>
+<Layout title="UX Designer">
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
@@ -29,6 +38,16 @@ const breadcrumbs = [
         </ol>
       </nav>
       <div class="prose max-w-none">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6">UX Designer</h1>
+        <ul class="list-none p-0">
+          {designerLevels.map(level => (
+            <li class="mb-3">
+              <a href={level.href} class="text-blue-600 hover:text-blue-800 text-lg">
+                {level.title}
+              </a>
+            </li>
+          ))}
+        </ul>
         <Content />
       </div>
     </article>
