@@ -6,36 +6,28 @@ const entry = await getEntry('docs', 'leadership/month-1/designer-levels-titles'
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Leadership', href: '/docs/leadership' },
   { text: 'Month 1', href: '/docs/leadership/month-1' }
 ];
 
-const title = entry.data.title;
 ---
 
-<Layout title={title}>
-  <div class="py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-[680px] mx-auto">
-      <nav class="mb-4" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-2">
-          {
-            breadcrumbs.map((crumb, index) => (
-              <li class="flex items-center">
-                {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-                <a
-                  href={crumb.href}
-                  class="text-sm text-gray-600 hover:text-gray-900"
-                >
-                  {crumb.text}
-                </a>
-              </li>
-            ))
-          }
+<Layout title={entry.data.title}>
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb) => (
+            <li>
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
+            </li>
+          ))}
         </ol>
       </nav>
       <div class="prose max-w-none">
         <Content />
       </div>
-    </div>
-  </div>
+    </article>
+  </main>
 </Layout>
