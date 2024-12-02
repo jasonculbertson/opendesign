@@ -6,7 +6,6 @@ const entry = await getEntry('docs', 'leadership/day-1/30-60-90-plan');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Leadership', href: '/docs/leadership' },
   { text: 'Day 1', href: '/docs/leadership/day-1' }
 ];
 
@@ -31,7 +30,7 @@ const breadcrumbs = [
           ))}
         </ol>
       </nav>
-      <div class="prose">
+      <div class="prose max-w-none">
         <Content />
       </div>
     </article>
