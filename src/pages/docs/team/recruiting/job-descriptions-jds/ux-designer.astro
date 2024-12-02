@@ -13,37 +13,37 @@ const designerLevels = [
   { 
     title: 'Designer I',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1',
-    description: 'Entry-level position for individuals passionate about design, eager to learn, and ready to contribute to our dynamic team.',
+    description: 'Entry-level position for passionate designers',
     emoji: '🌱'
   },
   { 
     title: 'Designer II',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2',
-    description: 'Mid-level role ideal for someone with 2-5 years experience ready to take on more complex design challenges.',
+    description: 'Mid-level role for experienced designers',
     emoji: '⚡'
   },
   { 
     title: 'Sr. Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer',
-    description: 'Lead the design of comprehensive product areas and implement user-centric design strategies.',
+    description: 'Lead design of comprehensive product areas',
     emoji: '🚀'
   },
   { 
     title: 'Lead Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer',
-    description: 'Guide design vision and strategy across major product areas while leading and mentoring a team.',
+    description: 'Guide design vision and mentor teams',
     emoji: '👥'
   },
   { 
     title: 'Staff Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer',
-    description: 'Lead and contribute to the design of complex and high-impact product areas.',
+    description: 'Lead high-impact product design areas',
     emoji: '⭐'
   },
   { 
     title: 'Principal Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer',
-    description: 'Shape design vision and strategy across entire user experiences while driving innovation.',
+    description: 'Shape design vision and drive innovation',
     emoji: '🎯'
   }
 ];
@@ -71,8 +71,8 @@ const designerLevels = [
         <div class="grid grid-cols-1 gap-4">
           {designerLevels.map(level => (
             <a href={level.href} class="block group">
-              <div class="gradient-card">
-                <div class="flex items-center">
+              <div class="gradient-card min-h-[88px]">
+                <div class="flex items-center h-full">
                   <div class="flex-shrink-0 text-2xl mr-4 text-gray-700">
                     {level.emoji}
                   </div>
