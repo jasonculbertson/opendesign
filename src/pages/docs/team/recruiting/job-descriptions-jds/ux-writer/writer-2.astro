@@ -8,9 +8,11 @@ const breadcrumbs = [
   { text: 'Writer II', href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-2' }
 ];
 
+const page_title = "Writer II";
+
 ---
 
-<Layout title="Writer II">
+<Layout title={page_title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
       <nav class="flex mb-2" aria-label="Breadcrumb">
@@ -25,7 +27,7 @@ const breadcrumbs = [
           ))}
         </ol>
       </nav>
-      <h1 class="text-3xl font-bold mb-4">Writer II</h1>
+      <h1 class="text-3xl font-bold mb-4">{page_title}</h1>
       <div class="prose dark:prose-invert max-w-none">
         <h2>About [Company Name]</h2>
         <p>Add a bit about your company here.</p>
