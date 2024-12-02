@@ -13,38 +13,32 @@ const designerLevels = [
   { 
     title: 'Designer I',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-1',
-    description: 'Entry-level position for passionate designers',
-    emoji: '🌱'
+    description: 'Entry-level position'
   },
   { 
     title: 'Designer II',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/designer-2',
-    description: 'Mid-level role for experienced designers',
-    emoji: '⚡'
+    description: 'Mid-level position'
   },
   { 
     title: 'Sr. Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/senior-designer',
-    description: 'Lead design of comprehensive product areas',
-    emoji: '🚀'
+    description: 'Senior-level position'
   },
   { 
     title: 'Lead Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/lead-designer',
-    description: 'Guide design vision and mentor teams',
-    emoji: '👥'
+    description: 'Team lead position'
   },
   { 
     title: 'Staff Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/staff-designer',
-    description: 'Lead high-impact product design areas',
-    emoji: '⭐'
+    description: 'Staff-level position'
   },
   { 
     title: 'Principal Designer',
     href: '/docs/team/recruiting/job-descriptions-jds/ux-designer/principal-designer',
-    description: 'Shape design vision and drive innovation',
-    emoji: '🎯'
+    description: 'Principal-level position'
   }
 ];
 ---
@@ -71,13 +65,10 @@ const designerLevels = [
         <div class="grid grid-cols-1 gap-4">
           {designerLevels.map(level => (
             <a href={level.href} class="block group">
-              <div class="gradient-card min-h-[88px]">
+              <div class="gradient-card min-h-[72px]">
                 <div class="flex items-center h-full">
-                  <div class="flex-shrink-0 text-2xl mr-4 text-gray-700">
-                    {level.emoji}
-                  </div>
                   <div>
-                    <h3 class="text-[15px] font-medium text-gray-900 leading-none mb-1.5">
+                    <h3 class="text-[15px] font-medium text-gray-900 leading-none mb-1">
                       {level.title}
                     </h3>
                     <p class="text-[13px] text-gray-600 leading-none">{level.description}</p>
