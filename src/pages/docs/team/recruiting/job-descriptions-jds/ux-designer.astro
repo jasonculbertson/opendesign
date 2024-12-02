@@ -3,7 +3,6 @@ import { getEntry } from 'astro:content';
 import Layout from '../../../../../layouts/Layout.astro';
 
 const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-designer');
-const { Content } = await entry.render();
 
 const breadcrumbs = [
   { text: 'Recruiting Team', href: '/docs/team/recruiting' },
@@ -39,16 +38,21 @@ const designerLevels = [
       </nav>
       <div class="prose max-w-none">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6">UX Designer</h1>
-        <ul class="list-none p-0">
+        <div class="grid grid-cols-1 gap-4">
           {designerLevels.map(level => (
-            <li class="mb-3">
-              <a href={level.href} class="text-blue-600 hover:text-blue-800 text-lg">
-                {level.title}
-              </a>
-            </li>
+            <a href={level.href} class="block group">
+              <div class="gradient-card">
+                <div class="flex items-center">
+                  <div>
+                    <h3 class="text-[15px] font-medium text-gray-900 leading-none">
+                      {level.title}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </a>
           ))}
-        </ul>
-        <Content />
+        </div>
       </div>
     </article>
   </main>
