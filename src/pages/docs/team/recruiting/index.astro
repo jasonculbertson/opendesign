@@ -1,10 +1,6 @@
 ---
-import { getEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
 import Card from '../../../../components/Card.astro';
-
-const entry = await getEntry('docs', 'team/recruiting/index');
-const { Content } = await entry.render();
 
 const resources = [
   {
@@ -26,7 +22,7 @@ const breadcrumbs = [
   { text: 'Recruiting', href: '/docs/team/recruiting' }
 ];
 
-const title = "Recruiting";
+const title = "Recruiting Team";
 ---
 
 <Layout title={title}>
