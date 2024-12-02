@@ -3,48 +3,48 @@ import { getEntry } from 'astro:content';
 import Layout from '../../../../../layouts/Layout.astro';
 import Card from '../../../../../components/Card.astro';
 
-const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-researcher');
+const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-writer');
 
-const title = "UX Researcher";
+const title = "UX Writer";
 const breadcrumbs = [
   { text: 'Recruiting Team', href: '/docs/team/recruiting' },
   { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' }
 ];
-const researcherLevels = [
+const uxWriterLevels = [
   { 
-    title: "Researcher I",
-    description: "Skills and expectations for entry-level researchers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-researcher/researcher-1",
+    title: "Writer I",
+    description: "Skills and expectations for entry-level writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-1",
     image: "🌱"
   },
   { 
-    title: "Researcher II",
-    description: "Skills and expectations for mid-level researchers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-researcher/researcher-2",
+    title: "Writer II",
+    description: "Skills and expectations for mid-level writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-2",
     image: "⚡"
   },
   { 
-    title: "Sr. Researcher",
-    description: "Skills and expectations for senior researchers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-researcher/senior-researcher",
+    title: "Sr. Writer",
+    description: "Skills and expectations for senior writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/senior-writer",
     image: "🚀"
   },
   { 
-    title: "Lead Researcher",
-    description: "Skills and expectations for lead researchers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-researcher/lead-researcher",
+    title: "Lead Writer",
+    description: "Skills and expectations for lead writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/lead-writer",
     image: "👥"
   },
   { 
-    title: "Staff Researcher",
-    description: "Skills and expectations for staff researchers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-researcher/staff-researcher",
+    title: "Staff Writer",
+    description: "Skills and expectations for staff writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/staff-writer",
     image: "⭐"
   },
   { 
-    title: "Principal Researcher",
-    description: "Skills and expectations for principal researchers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-researcher/principal-researcher",
+    title: "Principal Writer",
+    description: "Skills and expectations for principal writers",
+    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/principal-writer",
     image: "🎯"
   }
 ];
@@ -69,7 +69,7 @@ const researcherLevels = [
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
       </div>
       <div class="grid grid-cols-1 gap-4">
-        {researcherLevels.map(level => (
+        {writerLevels.map(level => (
           <Card {...level} />
         ))}
       </div>
