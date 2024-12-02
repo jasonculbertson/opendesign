@@ -57,12 +57,10 @@ const writerLevels = [
         <ol class="flex items-center">
           {breadcrumbs.map((crumb, index) => (
             <li class="flex items-center">
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
               <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
                 {crumb.text}
               </a>
-              {index < breadcrumbs.length - 1 && (
-                <span class="mx-2 text-gray-400">/</span>
-              )}
             </li>
           ))}
         </ol>
