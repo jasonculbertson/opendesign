@@ -1,78 +1,50 @@
 ---
-import { getEntry } from 'astro:content';
-import Layout from '../../../../../layouts/Layout.astro';
-import Card from '../../../../../components/Card.astro';
+import Layout from '../../../../../../layouts/CompetencyLayout.astro';
+import Card from '../../../../../../components/Card.astro';
 
-const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds/ux-writer');
-
-const title = "UX Writer";
 const breadcrumbs = [
-  { text: 'Recruiting Team', href: '/docs/team/recruiting' },
-  { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' }
-];
-const writerLevels = [
-  { 
-    title: "Writer I",
-    description: "Skills and expectations for entry-level writers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-1",
-    image: "🌱"
-  },
-  { 
-    title: "Writer II",
-    description: "Skills and expectations for mid-level writers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-2",
-    image: "⚡"
-  },
-  { 
-    title: "Sr. Writer",
-    description: "Skills and expectations for senior writers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/senior-writer",
-    image: "🚀"
-  },
-  { 
-    title: "Lead Writer",
-    description: "Skills and expectations for lead writers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/lead-writer",
-    image: "👥"
-  },
-  { 
-    title: "Staff Writer",
-    description: "Skills and expectations for staff writers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/staff-writer",
-    image: "⭐"
-  },
-  { 
-    title: "Principal Writer",
-    description: "Skills and expectations for principal writers",
-    href: "/docs/team/recruiting/job-descriptions-jds/ux-writer/principal-writer",
-    image: "🎯"
-  }
+  { text: 'Home', href: '/' },
+  { text: 'Team', href: '/docs/team' },
+  { text: 'Recruiting', href: '/docs/team/recruiting' },
+  { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' },
+  { text: 'UX Writer', href: '/docs/team/recruiting/job-descriptions-jds/ux-writer' }
 ];
 ---
 
-<Layout title={title}>
-  <main class="py-8 px-4 sm:px-6 lg:px-8">
-    <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-2" aria-label="Breadcrumb">
-        <ol class="flex items-center">
-          {breadcrumbs.map((crumb, index) => (
-            <li class="flex items-center">
-              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                {crumb.text}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
-      <div class="mb-8">
-        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
-      </div>
-      <div class="grid grid-cols-1 gap-4">
-        {writerLevels.map(level => (
-          <Card {...level} />
-        ))}
-      </div>
-    </article>
-  </main>
+<Layout title="UX Writer" breadcrumbs={breadcrumbs}>
+  <div class="space-y-8">
+    <div class="prose dark:prose-invert">
+      <h1>UX Writer</h1>
+      <p>
+        UX Writers at [Company Name] craft clear, concise, and engaging content that guides users through our digital experiences. 
+        They work closely with designers, researchers, and product teams to create content that is both user-friendly and aligned with our brand voice.
+      </p>
+    </div>
+
+    <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <Card emoji="🌱" title="Writer I" href="/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-1" level="L3">
+        Entry-level position focused on crafting clear UI copy and collaborating with design teams.
+      </Card>
+
+      <Card emoji="⚡" title="Writer II" href="/docs/team/recruiting/job-descriptions-jds/ux-writer/writer-2" level="L4">
+        Mid-level role handling broader content responsibilities and contributing to content strategy.
+      </Card>
+
+      <Card emoji="🚀" title="Senior Writer" href="/docs/team/recruiting/job-descriptions-jds/ux-writer/senior-writer" level="L5">
+        Leads content strategy for product areas and mentors junior writers.
+      </Card>
+
+      <Card emoji="👥" title="Lead Writer" href="/docs/team/recruiting/job-descriptions-jds/ux-writer/lead-writer" level="L6">
+        Guides content vision across major product areas and leads writer teams.
+      </Card>
+
+      <Card emoji="⭐" title="Staff Writer" href="/docs/team/recruiting/job-descriptions-jds/ux-writer/staff-writer" level="L7">
+        Drives content strategy for complex product areas and innovations.
+      </Card>
+
+      <Card emoji="🎯" title="Principal Writer" href="/docs/team/recruiting/job-descriptions-jds/ux-writer/principal-writer" level="L8">
+        Shapes content vision and strategy across the entire organization.
+      </Card>
+    </div>
+  </div>
 </Layout>

@@ -1,0 +1,56 @@
+---
+import Layout from '../../../../../../../layouts/CompetencyLayout.astro';
+import Card from '../../../../../../../components/Card.astro';
+
+const breadcrumbs = [
+  { text: 'Home', href: '/' },
+  { text: 'Team', href: '/docs/team' },
+  { text: 'Recruiting', href: '/docs/team/recruiting' },
+  { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' },
+  { text: 'UX Writer', href: '/docs/team/recruiting/job-descriptions-jds/ux-writer' },
+  { text: 'Senior Writer', href: '/docs/team/recruiting/job-descriptions-jds/ux-writer/senior-writer' }
+];
+---
+
+<Layout title="Senior Writer" breadcrumbs={breadcrumbs}>
+  <Card emoji="🚀" title="Senior Writer" level="L5">
+    <div class="prose dark:prose-invert max-w-none">
+      <h2>About [Company Name]</h2>
+      <p>Add a bit about your company here.</p>
+
+      <h2>Role Overview</h2>
+      <p>As a Senior UX Writer at [Company Name], you will play a pivotal role in leading content strategy and creation across comprehensive product areas. You will develop and implement user-centric content strategies that align with [Company Name]'s business objectives. This role requires deep understanding of content design principles, strong leadership skills, and the ability to work collaboratively across teams to deliver effective content solutions.</p>
+
+      <h2>What You'll Do</h2>
+      <ul>
+        <li>Lead content strategy and creation for significant product areas</li>
+        <li>Mentor and guide junior writers, ensuring content quality and consistency</li>
+        <li>Develop and maintain content style guides and documentation</li>
+        <li>Conduct content audits and user research to inform content decisions</li>
+        <li>Collaborate with product managers, designers, and other stakeholders</li>
+        <li>Champion user-centered content design across the organization</li>
+      </ul>
+
+      <h2>What We're Looking For</h2>
+      <ul>
+        <li>Bachelor's degree in English, Communications, or related field, or equivalent practical experience</li>
+        <li>5-10 years of experience in UX writing or content design</li>
+        <li>Strong portfolio showcasing content strategy leadership and UX writing expertise</li>
+        <li>Excellent writing, editing, and storytelling skills</li>
+        <li>Deep understanding of UX principles and content design best practices</li>
+        <li>Experience with content management systems and collaboration tools</li>
+        <li>Strong leadership and mentoring abilities</li>
+      </ul>
+
+      <h2>Why Join [Company Name]</h2>
+      <ul>
+        <li>Be part of a rapidly growing company that's shaping the future of how people connect online</li>
+        <li>Contribute to a product that impacts millions of users worldwide</li>
+        <li>Enjoy a collaborative, inclusive, and creative work environment</li>
+        <li>Benefit from competitive compensation and flexible work arrangements</li>
+      </ul>
+
+      <p>[Company Name] is committed to providing a competitive compensation package. Our cash compensation amount for this role is targeted at $X-$X in X area. Final offer amounts are determined by multiple factors, including candidate expertise, the scope of role and level, and may vary from the amounts listed above.</p>
+    </div>
+  </Card>
+</Layout>
