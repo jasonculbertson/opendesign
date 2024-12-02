@@ -2,6 +2,7 @@
 import Layout from '../../../../../../layouts/CompetencyLayout.astro';
 import Card from '../../../../../../components/Card.astro';
 
+const title = "Senior Writer";
 const breadcrumbs = [
   { text: 'Home', href: '/' },
   { text: 'Team', href: '/docs/team' },
@@ -12,7 +13,7 @@ const breadcrumbs = [
 ];
 ---
 
-<Layout title="Senior Writer" breadcrumbs={breadcrumbs}>
+<Layout title={title} breadcrumbs={breadcrumbs}>
   <Card emoji="🚀" title="Senior Writer" level="L5">
     <div class="prose dark:prose-invert max-w-none">
       <h2>About [Company Name]</h2>
