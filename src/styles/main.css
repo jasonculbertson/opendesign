@@ -15,7 +15,8 @@ body {
 }
 
 .gradient-panel a {
-  @apply text-indigo-600 no-underline hover:text-indigo-700 cursor-pointer;
+  @apply text-indigo-600 no-underline hover:text-indigo-700 cursor-pointer relative;
+  pointer-events: auto;
 }
 
 /* Sidebar */
@@ -188,7 +189,22 @@ body {
 
 /* Panel with gradient border */
 .gradient-panel {
-  @apply relative bg-white/60 backdrop-blur-[2px] rounded-xl px-8 py-6 my-8 ring-1 ring-black/[0.02] transition-all;
+  @apply relative overflow-visible rounded-xl bg-gradient-to-br from-white/40 to-white/60 backdrop-blur-sm p-8 ring-1 ring-black/[0.04];
+}
+
+.gradient-panel p {
+  @apply relative;
+}
+
+.gradient-panel a {
+  @apply text-indigo-600 no-underline hover:text-indigo-700 cursor-pointer relative;
+  pointer-events: auto;
+}
+
+/* Make sure the panel content is above any gradients */
+.gradient-panel > * {
+  @apply relative;
+  pointer-events: auto;
 }
 
 .gradient-panel::before {
