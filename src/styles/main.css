@@ -72,7 +72,7 @@ body {
 
 .sidebar-link.active,
 .sidebar-link[aria-current="page"] {
-  @apply bg-[#635bff]/10 text-[#635bff] font-medium;
+  @apply bg-indigo-50 shadow-[0_2px_4px_rgba(0,0,0,0.04)] text-indigo-600 font-medium ring-1 ring-indigo-100;
 }
 
 .sidebar-icon {
