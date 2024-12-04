@@ -62,16 +62,12 @@ body {
   @apply p-2 flex-1;
 }
 
+/* Sidebar Links */
 .sidebar-link {
-  @apply flex items-center space-x-2 px-3 py-2 text-[13px] rounded-lg transition-colors duration-200;
+  @apply flex items-center px-2 py-2 text-[15px] rounded-lg transition-all text-gray-600 hover:bg-white/40;
 }
 
-.sidebar-link:not(.active) {
-  @apply text-[#425466] hover:bg-[#f0f0f5] hover:text-[#1a1f36];
-}
-
-.sidebar-link.active,
-.sidebar-link[aria-current="page"] {
+.sidebar-link.active {
   @apply bg-indigo-50 shadow-[0_2px_4px_rgba(0,0,0,0.04)] text-indigo-600 font-medium ring-1 ring-indigo-100;
 }
 

@@ -97,19 +97,20 @@ const { currentPath } = Astro.props;
           <h3 class="px-2 py-2 text-[15px] font-light" style="color: rgb(141,141,141)">
             {section.header}
           </h3>
-          {section.items.map((link) => (
-            <a
-              href={link.href}
-              class={`sidebar-link ${link.href === currentPath ? 'active' : ''}`}
-            >
-              <link.icon className={`w-5 h-5 mr-2.5 transition-colors ${
-                link.href === currentPath 
-                  ? 'text-indigo-600' 
-                  : 'text-gray-500'
-              }`} />
-              <span>{link.name}</span>
-            </a>
-          ))}
+          {section.items.map((link) => {
+            const isActive = link.href === currentPath;
+            return (
+              <a
+                href={link.href}
+                class={`sidebar-link ${isActive ? 'active' : ''}`}
+              >
+                <link.icon className={`w-5 h-5 mr-2.5 transition-colors ${
+                  isActive ? 'text-indigo-600' : 'text-gray-500'
+                }`} />
+                <span>{link.name}</span>
+              </a>
+            );
+          })}
         </div>
       ))}
     </div>
