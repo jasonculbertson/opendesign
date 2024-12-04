@@ -34,8 +34,8 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     </header>
     <Sidebar currentPath={Astro.url.pathname} />
     <div class="fixed inset-0 left-[220px] pl-6">
-      <div class="bg-white/75 backdrop-blur-md rounded-xl shadow-sm h-[calc(100vh-1rem)] relative ring-1 ring-white/50">
-        <div class="absolute inset-0 overflow-auto p-8 rounded-xl">
+      <div class="bg-white/75 backdrop-blur-md shadow-sm h-screen relative ring-1 ring-white/50">
+        <div class="absolute inset-0 overflow-auto p-8">
           <div class="relative">
             <slot />
           </div>
