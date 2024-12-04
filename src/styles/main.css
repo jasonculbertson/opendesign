@@ -89,7 +89,7 @@ body {
 }
 
 .sidebar-footer {
-  @apply p-3 border-t border-[#e5e5e5] mt-auto;
+  @apply p-3 mt-auto;
 }
 
 .sidebar-footer-text {
