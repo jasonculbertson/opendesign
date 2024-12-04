@@ -89,7 +89,7 @@ body {
 }
 
 .sidebar-footer {
-  @apply p-3 mt-auto;
+  @apply mt-auto;
 }
 
 .sidebar-footer-text {
