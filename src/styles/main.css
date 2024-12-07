@@ -94,19 +94,19 @@ body {
 
 /* Typography */
 .prose {
-  @apply max-w-full lg:max-w-[680px] mx-auto text-[15px] leading-7;
+  @apply max-w-[680px] mx-auto text-[15px] leading-7;
 }
 
 .prose h1 {
-  @apply text-[28px] lg:text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6;
+  @apply text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-6;
 }
 
 .prose h2 {
-  @apply text-[18px] lg:text-[20px] font-semibold text-[#1a1f36] tracking-[-0.2px] mt-8 lg:mt-12 mb-4;
+  @apply text-[20px] font-semibold text-[#1a1f36] tracking-[-0.2px] mt-12 mb-4;
 }
 
 .prose h3 {
-  @apply text-[16px] font-semibold text-[#1a1f36] mt-6 lg:mt-8 mb-3;
+  @apply text-[16px] font-semibold text-[#1a1f36] mt-8 mb-3;
 }
 
 .prose p {
@@ -133,20 +133,6 @@ body {
 
 .prose strong {
   @apply font-semibold text-[#1a1f36];
-}
-
-/* Tables */
-.prose table {
-  @apply w-full my-6 text-sm;
-  display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (min-width: 768px) {
-  .prose table {
-    display: table;
-  }
 }
 
 /* Custom styles for the leadership blueprint */
@@ -197,19 +183,9 @@ body {
   border-bottom: none;
 }
 
-/* Mobile menu button */
-#mobile-menu-button {
-  @apply fixed top-3 left-3 z-50 p-2 rounded-lg bg-white/80 shadow-sm backdrop-blur-sm lg:hidden;
-}
-
-/* Prevent body scroll when mobile menu is open */
-body.overflow-hidden {
-  @apply overflow-hidden;
-}
-
-/* Gradient panel mobile adjustments */
+/* Panel with gradient border */
 .gradient-panel {
-  @apply relative overflow-visible rounded-xl bg-gradient-to-br from-white/40 to-white/60 backdrop-blur-sm p-4 lg:p-8 ring-1 ring-black/[0.04];
+  @apply relative overflow-visible rounded-xl bg-gradient-to-br from-white/40 to-white/60 backdrop-blur-sm p-8 ring-1 ring-black/[0.04];
 }
 
 .gradient-panel p {
@@ -247,15 +223,6 @@ body.overflow-hidden {
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-}
-
-/* Competencies table mobile adjustments */
-.competencies-table {
-  @apply overflow-x-auto -mx-4 lg:mx-0;
-}
-
-.competencies-table table {
-  @apply min-w-[640px];
 }
 
 /* Card with gradient border */
