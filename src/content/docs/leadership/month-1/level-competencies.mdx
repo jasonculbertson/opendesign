@@ -8,40 +8,59 @@ tags: ["career-development", "skills", "growth"]
 ---
 
 <style>
-{
-  `.gradient-panel {
-    @apply relative overflow-visible rounded-xl bg-gradient-to-br from-white/40 to-white/60 backdrop-blur-sm p-8 ring-1 ring-black/[0.04];
+{`
+  .levels-container {
+    display: grid;
+    gap: 2.5rem;
+    padding: 0; /* Changed from 1rem 0 */
   }
 
-  .gradient-panel p {
-    @apply relative;
+  .role-section h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.5rem;
+    color: #111827;
   }
 
-  .gradient-panel > * {
-    @apply relative;
-    pointer-events: auto;
+  .role-table {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0; /* Changed from margin-top: 0 */
   }
 
-  .gradient-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1px;
-    border-radius: 12px;
-    background: linear-gradient(
-      135deg,
-      rgba(236, 72, 153, 0.08),
-      rgba(219, 39, 119, 0.08),
-      rgba(147, 51, 234, 0.08)
-    );
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+  }
+
+  thead tr {
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  th {
+    text-align: left;
+    padding: 1rem 1.5rem;
+    font-weight: 500;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  td {
+    padding: 0.875rem 1.5rem;
+    border-top: 1px solid #f3f4f6;
+  }
+
+  td:first-child {
+    color: #6b7280;
+    font-family: ui-monospace, monospace;
+    font-size: 0.875rem;
+  }
+
+  tr:hover td {
+    background: #f9fafb;
   }
 `}
 </style>
@@ -50,7 +69,7 @@ tags: ["career-development", "skills", "growth"]
 
 <div class="gradient-panel mb-8">
   <p class="text-[17px] leading-7 text-[#1a1f36]">
-The level competencies framework provides clear expectations and growth paths for designers at every level.
+    The level competencies framework provides clear expectations and growth paths for designers at every level.
   </p>
 </div>
 
