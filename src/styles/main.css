@@ -245,9 +245,35 @@ body {
   }
 }
 
-/* Panel with gradient border */
+/* Gradient panel styles */
 .gradient-panel {
-  @apply relative overflow-visible rounded-xl bg-gradient-to-br from-white/40 to-white/60 backdrop-blur-sm p-8 ring-1 ring-black/[0.04];
+  @apply relative overflow-visible rounded-xl bg-gradient-to-br from-white/40 to-white/60 backdrop-blur-sm p-4 lg:p-8;
+}
+
+.gradient-panel.outline {
+  @apply relative;
+}
+
+.gradient-panel.outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 255, 255) 0%,
+    rgba(255, 255, 255, 0.6) 20%,
+    rgba(255, 255, 255, 0.3) 40%,
+    rgba(255, 255, 255, 0.2) 60%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border-radius: 0.75rem;
+  pointer-events: none;
 }
 
 .gradient-panel p {
