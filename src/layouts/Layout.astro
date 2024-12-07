@@ -68,17 +68,19 @@ const { title, description = "Open Design Documentation" } = Astro.props;
 
     <div id="mobile-overlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden"></div>
     
-    <Sidebar currentPath={Astro.url.pathname} />
-    
-    <main class="min-h-screen lg:pl-[250px]">
-      <div class="gradient-panel min-h-screen bg-white/75 backdrop-blur-md relative ring-1 ring-white/50">
-        <div class="pt-16 px-4 pb-4 lg:pt-20 lg:p-8">
-          <div class="max-w-[900px] mx-auto">
-            <slot />
+    <div class="flex min-h-screen">
+      <Sidebar currentPath={Astro.url.pathname} />
+      
+      <main class="flex-1 lg:pl-[250px]">
+        <div class="gradient-panel h-full min-h-screen">
+          <div class="h-full pt-16 px-4 pb-4 lg:pt-20 lg:p-8">
+            <div class="max-w-[900px] mx-auto">
+              <slot />
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
 
     <script>
       const sidebar = document.getElementById('sidebar');
