@@ -101,7 +101,7 @@ const links = [
           </h3>
           {section.items.map((link) => {
             console.log('Comparing:', { currentPath, linkHref: link.href });
-            const isActive = currentPath === link.href;
+            const isActive = currentPath?.startsWith(link.href);
             return (
               <a
                 href={link.href}
