@@ -93,26 +93,26 @@ const links = [
 
 <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-[250px] -translate-x-full bg-white/95 backdrop-blur-md shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 lg:bg-transparent lg:shadow-none">
   <nav class="h-full overflow-y-auto pt-20 pb-6 px-4">
-    <div class="space-y-4">
+    <div class="space-y-8">
       {links.map((section, index) => (
         <div class={`space-y-1 ${index === 1 ? 'mt-8' : ''}`}>
-          <h3 class="text-[15px] font-light text-[rgb(141,141,141)]">
+          <h3 class="text-[13px] font-medium text-[#6B7280] mb-3 uppercase tracking-wider">
             {section.header}
           </h3>
-          <div class="pl-3">
+          <div class="space-y-1">
             {section.items.map((link) => {
               const isActive = currentPath?.startsWith(link.href);
               return (
                 <a
                   href={link.href}
-                  class={`flex items-center px-2 py-2 text-[15px] rounded-lg transition-all ${
+                  class={`flex items-center px-3 py-2 text-[15px] rounded-lg transition-all ${
                     isActive
                       ? 'bg-white/60 text-indigo-600 font-medium' 
-                      : 'text-gray-600 hover:bg-white/40'
+                      : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
-                  <link.icon className={`w-5 h-5 mr-2.5 transition-colors ${
-                    isActive ? 'text-indigo-600' : 'text-gray-500'
+                  <link.icon className={`w-5 h-5 mr-3 transition-colors ${
+                    isActive ? 'text-indigo-600' : 'text-gray-400'
                   }`} />
                   <span>{link.name}</span>
                 </a>
