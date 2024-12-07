@@ -93,8 +93,8 @@ body {
 }
 
 /* Mobile menu styles */
-body.overflow-hidden {
-  @apply overflow-hidden;
+.body-no-scroll {
+  overflow: hidden;
 }
 
 #mobile-overlay {

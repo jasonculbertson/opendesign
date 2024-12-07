@@ -64,7 +64,7 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       function toggleMenu() {
         sidebar?.classList.toggle('-translate-x-full');
         overlay?.classList.toggle('hidden');
-        document.body.classList.toggle('overflow-hidden');
+        document.body.classList.toggle('body-no-scroll');
       }
 
       if (mobileMenuButton && sidebar && overlay) {
