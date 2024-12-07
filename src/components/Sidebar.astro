@@ -91,16 +91,15 @@ const links = [
   <Menu className="w-6 h-6" />
 </button>
 
-<aside id="sidebar" class="fixed top-14 left-0 z-40 w-[220px] h-[calc(100vh-3.5rem)] transition-transform -translate-x-full lg:translate-x-0 bg-transparent flex flex-col">
-  <nav class="flex-1 pl-8 pr-4 py-4 overflow-y-auto">
+<aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-[250px] -translate-x-full bg-white/95 backdrop-blur-md shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 lg:bg-transparent lg:shadow-none">
+  <nav class="h-full overflow-y-auto py-6 px-4">
     <div class="space-y-4">
       {links.map((section, index) => (
         <div class={`space-y-1 ${index === 1 ? 'mt-8' : ''}`}>
-          <h3 class="px-2 py-2 text-[15px] font-light" style="color: rgb(141,141,141)">
+          <h3 class="px-2 py-2 text-[15px] font-light text-[rgb(141,141,141)]">
             {section.header}
           </h3>
           {section.items.map((link) => {
-            console.log('Comparing:', { currentPath, linkHref: link.href });
             const isActive = currentPath?.startsWith(link.href);
             return (
               <a
@@ -123,8 +122,10 @@ const links = [
     </div>
   </nav>
 
-  <div class="sidebar-footer mt-auto w-full flex items-center justify-center pb-0" style="margin-left: 10px; margin-bottom: -2px; calc(100% + 48px);">
-    <div class="bg-white/40 rounded-lg px-3 py-1.5 mb-6 text-center text-[11px] text-gray-500 shadow-[0_2px_4px_rgba(0,0,0,0.02)] ring-1 ring-black/[0.02]">Made with ❤️ by <a href="https://linkedin.com/in/jasonculbertson" target="_blank" class="text-indigo-600 hover:text-indigo-700">Jason Culbertson</a></div>
+  <div class="absolute bottom-0 left-0 right-0 p-4">
+    <div class="bg-white/40 rounded-lg px-3 py-1.5 text-center text-[11px] text-gray-500 shadow-[0_2px_4px_rgba(0,0,0,0.02)] ring-1 ring-black/[0.02]">
+      Made with ❤️ by <a href="https://linkedin.com/in/jasonculbertson" target="_blank" class="text-indigo-600 hover:text-indigo-700">Jason Culbertson</a>
+    </div>
   </div>
 </aside>
 

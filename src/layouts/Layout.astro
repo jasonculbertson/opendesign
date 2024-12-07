@@ -22,25 +22,66 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-gradient-to-br from-[#F5F1F9] via-[#F3E7F0] via-[#F4E5E9] via-[#F9EBE5] to-[#FBE9E7]">
-    <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center bg-transparent">
-      <div class="flex items-center pl-8">
+    <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center justify-between px-4 lg:px-8 bg-white/75 backdrop-blur-sm shadow-sm">
+      <div class="flex items-center gap-2">
+        <button
+          id="mobile-menu-button"
+          class="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
         <div class="flex items-center">
-          <div class="pl-2">
-            <Layers className="w-5 h-5 text-indigo-600 mr-2.5" />
-          </div>
+          <Layers className="w-5 h-5 text-indigo-600 mr-2" />
           <span class="text-[15px] font-medium text-gray-900 leading-none">Open Design Docs</span>
         </div>
       </div>
     </header>
-    <Sidebar currentPath={Astro.url.pathname} />
-    <div class="fixed inset-0 left-[220px] pl-6">
-      <div class="bg-white/75 backdrop-blur-md shadow-sm h-screen relative ring-1 ring-white/50">
-        <div class="absolute inset-0 overflow-auto p-8">
-          <div class="relative">
+
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+    
+    <Sidebar id="sidebar" currentPath={Astro.url.pathname} />
+    
+    <main class="pt-14 lg:pl-[250px] min-h-screen">
+      <div class="h-full bg-white/75 backdrop-blur-md shadow-sm relative ring-1 ring-white/50">
+        <div class="p-4 lg:p-8">
+          <div class="max-w-[900px] mx-auto">
             <slot />
           </div>
         </div>
       </div>
-    </div>
+    </main>
+
+    <script>
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('mobile-overlay');
+
+      function toggleMenu() {
+        sidebar?.classList.toggle('-translate-x-full');
+        overlay?.classList.toggle('hidden');
+        document.body.classList.toggle('overflow-hidden');
+      }
+
+      if (mobileMenuButton && sidebar && overlay) {
+        mobileMenuButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleMenu();
+        });
+
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu on window resize if it's open
+        window.addEventListener('resize', () => {
+          if (window.innerWidth >= 1024 && !sidebar.classList.contains('-translate-x-full')) {
+            toggleMenu();
+          }
+        });
+      }
+    </script>
   </body>
 </html>
