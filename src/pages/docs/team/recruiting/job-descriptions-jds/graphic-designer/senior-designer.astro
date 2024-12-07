@@ -1,0 +1,68 @@
+---
+import Layout from '../../../../../../layouts/Layout.astro';
+
+const breadcrumbs = [
+  { text: 'Recruiting Team', href: '/docs/team/recruiting' },
+  { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' },
+  { text: 'Graphic Designer', href: '/docs/team/recruiting/job-descriptions-jds/graphic-designer' }
+];
+
+---
+
+<Layout title="Sr. Designer">
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb, index) => (
+            <li class="flex items-center">
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="prose dark:prose-invert max-w-none">
+        <h1>Sr. Designer</h1>
+
+        <h2>About [Company Name]</h2>
+        <p>Add a bit about your company here.</p>
+
+        <h2>Role Overview</h2>
+        <p>As a Senior Graphic Designer at [Company Name], you will lead the creation of visual content for major projects and campaigns. This role requires extensive design experience, strategic thinking, and the ability to mentor junior designers while collaborating with cross-functional teams.</p>
+
+        <h2>What You'll Do</h2>
+        <ul>
+          <li>Lead the design and production of visual assets for web, mobile, and other digital platforms.</li>
+          <li>Develop and implement design strategies that align with business goals.</li>
+          <li>Mentor and guide junior designers, ensuring high standards of design quality.</li>
+          <li>Collaborate with marketing managers, designers, and other stakeholders to deliver cohesive user experiences.</li>
+          <li>Present design concepts and strategies to senior stakeholders.</li>
+        </ul>
+
+        <h2>What We're Looking For</h2>
+        <ul>
+          <li>Bachelor's or Master's degree in Graphic Design, Visual Arts, or a related field, or equivalent practical experience.</li>
+          <li>5–10 years of experience in graphic design with a strong portfolio showcasing leadership in design projects.</li>
+          <li>Proficiency in design software such as Figma and Adobe Creative Suite (Photoshop, Illustrator, etc.).</li>
+          <li>Strong understanding of design principles and user experience.</li>
+          <li>Excellent communication and presentation skills.</li>
+          <li>Strong leadership skills and the ability to mentor junior designers.</li>
+        </ul>
+
+        <h2>Why Join [Company Name]</h2>
+        <ul>
+          <li>Be part of a rapidly growing company that's shaping the future of how people connect online.</li>
+          <li>Contribute to a product that impacts millions of users worldwide, driving innovation in digital experiences.</li>
+          <li>Enjoy a collaborative, inclusive, and creative work environment that values diversity and fosters professional growth.</li>
+          <li>Benefit from a competitive compensation package, flexible work arrangements, and a commitment to work-life balance.</li>
+        </ul>
+
+        <p class="text-sm text-gray-600">[Company Name] is committed to providing a competitive compensation package. Our cash compensation amount for this role is targeted at $X-$X in X area. Final offer amounts are determined by multiple factors, including candidate expertise, the scope of role and level, and may vary from the amounts listed above.</p>
+      </div>
+    </article>
+  </main>
+</Layout>

@@ -1,14 +1,13 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
-import Panel from '../../../../components/Panel.astro';
+import Card from '../../../../components/Card.astro';
 
 const entry = await getEntry('docs', 'leadership/month-1/level-competencies');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Month 1', href: '/docs/leadership/month-1' },
-  { text: 'Level Competencies' }
+  { text: 'Month 1', href: '/docs/leadership/month-1' }
 ];
 
 const productRoles = [
@@ -66,7 +65,7 @@ const managerRoles = [
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-8" aria-label="Breadcrumb">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2">
           {breadcrumbs.map((crumb, index) => (
             <li class="flex items-center">
@@ -76,7 +75,7 @@ const managerRoles = [
                   {crumb.text}
                 </a>
               ) : (
-                <span class="text-sm text-gray-900">{crumb.text}</span>
+                <span class="text-sm text-gray-600">{crumb.text}</span>
               )}
             </li>
           ))}
@@ -85,11 +84,11 @@ const managerRoles = [
 
       <div class="mb-12">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Level Competencies</h1>
-        <Panel>
-          <p class="text-[17px] leading-7 text-[#1a1f36]">
+        <div class="bg-white/60 backdrop-blur-[2px] rounded-xl p-8 my-8 ring-1 ring-white/50">
+          <p class="text-[15px] leading-7 text-[#1a1f36]">
             The level competencies framework provides clear expectations and growth paths for designers at every level.
           </p>
-        </Panel>
+        </div>
       </div>
 
       <div class="space-y-12">

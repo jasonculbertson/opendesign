@@ -2,6 +2,8 @@
 import Layout from '../../../../layouts/Layout.astro';
 import Card from '../../../../components/Card.astro';
 
+const title = "Design Team";
+
 const resources = [
   {
     title: 'Sprint Docs',
@@ -17,7 +19,6 @@ const resources = [
   }
 ];
 
-const title = "Design Team";
 ---
 
 <Layout title={title}>
@@ -26,7 +27,6 @@ const title = "Design Team";
       <div class="mb-8">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
       </div>
-      
       <div class="grid grid-cols-1 gap-4">
         {resources.map(resource => (
           <Card {...resource} />

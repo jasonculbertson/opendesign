@@ -1,107 +1,105 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
-import JobCard from '../../../../components/JobCard.astro';
+import Card from '../../../../components/Card.astro';
 
 const entry = await getEntry('docs', 'team/recruiting/job-descriptions-jds');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Recruiting', href: '/docs/team/recruiting' },
-  { text: 'Job Descriptions' }
+  { text: 'Recruiting Team', href: '/docs/team/recruiting' }
 ];
 
-const productRoles = [
+const uxRoles = [
   {
-    title: "Product Designer",
-    description: "Lead product design efforts and create intuitive user experiences.",
-    href: "/job-descriptions-jds/product-designer",
-    icon: "🎨"
+    title: 'UX Designer',
+    description: 'UX Designer job description template',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-designer',
+    image: '🎨'
   },
   {
-    title: "Content Designer",
-    description: "Craft clear, engaging copy for product interfaces and experiences.",
-    href: "/job-descriptions-jds/content-designer",
-    icon: "✍️"
+    title: 'UX Writer',
+    description: 'UX Writer job description template',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-writer',
+    image: '✍️'
   },
   {
-    title: "Product Researcher",
-    description: "Gather insights to inform product decisions and user needs.",
-    href: "/job-descriptions-jds/product-researcher",
-    icon: "🔬"
+    title: 'UX Researcher',
+    description: 'UX Researcher job description template',
+    href: '/docs/team/recruiting/job-descriptions-jds/ux-researcher',
+    image: '🔍'
   },
   {
-    title: "Design Ops",
-    description: "Enhance design workflows and manage team operations efficiently.",
-    href: "/job-descriptions-jds/design-ops",
-    icon: "⚙️"
+    title: 'Design Ops',
+    description: 'Design Operations job description template',
+    href: '/docs/team/recruiting/job-descriptions-jds/design-ops',
+    image: '⚙️'
   }
 ];
 
 const creativeRoles = [
   {
     title: "Graphic Designer",
-    description: "Design stunning visuals and branding materials.",
-    href: "/job-descriptions-jds/graphic-designer",
-    icon: "🎨"
+    description: "Graphic Designer job description template",
+    href: "/docs/team/recruiting/job-descriptions-jds/graphic-designer",
+    image: "🎨"
   },
   {
     title: "Copywriter",
-    description: "Write compelling content to captivate and engage your audience.",
-    href: "/job-descriptions-jds/copywriter",
-    icon: "✍️"
+    description: "Copywriter job description template",
+    href: "/docs/team/recruiting/job-descriptions-jds/copywriter",
+    image: "✍️"
   }
 ];
+
+const title = entry.data.title;
 ---
 
-<Layout title={entry.data.title}>
-  <main class="py-8 px-4 sm:px-6 lg:px-8">
-    <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-8" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-2">
-          {breadcrumbs.map((crumb, index) => (
-            <li class="flex items-center">
-              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-              {crumb.href ? (
-                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                  {crumb.text}
-                </a>
-              ) : (
-                <span class="text-sm text-gray-900">{crumb.text}</span>
-              )}
+<Layout title={title}>
+  <div class="py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[680px] mx-auto">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb) => (
+            <li>
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
             </li>
           ))}
         </ol>
       </nav>
 
-      <div class="mb-12">
-        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Job Description Templates</h1>
-        <div class="bg-[#f6f8fa] border border-[#e5e7eb] rounded-lg p-6 my-8">
-          <p class="text-[17px] leading-7 text-[#1a1f36]">
-            Well-crafted job descriptions are essential for attracting the right talent and setting clear expectations. These templates provide a consistent framework for creating effective JDs.
-          </p>
+      <div class="prose max-w-none prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:text-indigo-700">
+        <div class="mb-12">
+          <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Job Description Templates</h1>
+          <div class="gradient-panel">
+            <p class="text-[15px] leading-6 text-[#1a1f36]">
+              Comprehensive, ready-to-use JDs, written utilizing the <a href="/docs/leadership/month-1/level-competencies" class="text-blue-600 hover:text-blue-800">Level Competencies</a>, to streamline your hiring process and ensure you attract top design talent for your team.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-12">
+          <section>
+            <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">UX Role JDs</h2>
+            <div class="grid grid-cols-1 gap-4">
+              {uxRoles.map(role => (
+                <Card {...role} />
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Creative Role JDs</h2>
+            <div class="grid grid-cols-1 gap-4">
+              {creativeRoles.map(role => (
+                <Card {...role} />
+              ))}
+            </div>
+          </section>
         </div>
       </div>
-
-      <div class="space-y-12">
-        <section>
-          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Product Role JDs</h2>
-          <div class="grid grid-cols-1 gap-4">
-            {productRoles.map(role => (
-              <JobCard {...role} />
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Creative Role JDs</h2>
-          <div class="grid grid-cols-1 gap-4">
-            {creativeRoles.map(role => (
-              <JobCard {...role} />
-            ))}
-          </div>
-        </section>
-      </div>
-    </article>
-  </main>
+    </div>
+  </div>
 </Layout>

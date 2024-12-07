@@ -2,28 +2,28 @@
 import Layout from '../../../../layouts/Layout.astro';
 import Card from '../../../../components/Card.astro';
 
+const title = "Product Team";
+
 const resources = [
   {
+    title: 'One Pagers',
+    description: 'Learn how to write effective one pagers',
+    href: '/docs/team/product/one-pagers',
+    image: '📄'
+  },
+  {
     title: 'Product Spec',
-    description: 'Clearly outline product requirements and expectations',
+    description: 'How to write a product spec',
     href: '/docs/team/product/product-spec',
     image: '📋'
   },
   {
     title: 'Project Kickoff Meeting',
-    description: 'Ensure all stakeholders are aligned from the start',
+    description: 'How to run a project kickoff meeting',
     href: '/docs/team/product/project-kickoff-meeting',
-    image: '🎉'
-  },
-  {
-    title: 'One-Pagers',
-    description: 'Summarize project goals and progress for quick reference',
-    href: '/docs/team/product/one-pagers',
-    image: '📄'
+    image: '🚀'
   }
 ];
-
-const title = "Product Team";
 ---
 
 <Layout title={title}>
@@ -32,7 +32,6 @@ const title = "Product Team";
       <div class="mb-8">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
       </div>
-      
       <div class="grid grid-cols-1 gap-4">
         {resources.map(resource => (
           <Card {...resource} />

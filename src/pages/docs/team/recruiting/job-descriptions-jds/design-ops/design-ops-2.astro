@@ -1,0 +1,68 @@
+---
+import Layout from '../../../../../../layouts/Layout.astro';
+
+const breadcrumbs = [
+  { text: 'Recruiting Team', href: '/docs/team/recruiting' },
+  { text: 'Job Descriptions', href: '/docs/team/recruiting/job-descriptions-jds' },
+  { text: 'Design Ops', href: '/docs/team/recruiting/job-descriptions-jds/design-ops' }
+];
+
+---
+
+<Layout title="Design Ops II">
+  <main class="py-8 px-4 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto">
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb, index) => (
+            <li class="flex items-center">
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <div class="prose dark:prose-invert max-w-none">
+        <h1>Design Ops II</h1>
+
+        <h2>About [Company Name]</h2>
+        <p>Add a bit about your company here.</p>
+
+        <h2>Role Overview</h2>
+        <p>As DesignOps II at [Company Name], you will contribute to optimizing design workflows and processes, ensuring efficiency and effectiveness. You will work closely with cross-functional teams to support design operations and facilitate the smooth execution of projects.</p>
+
+        <h2>What You'll Do</h2>
+        <ul>
+          <li>Plan and manage design projects and resources.</li>
+          <li>Develop and maintain design documentation and systems.</li>
+          <li>Coordinate cross-functional meetings and ensure alignment.</li>
+          <li>Implement and manage design tools and technologies.</li>
+          <li>Analyze and improve design workflows and processes.</li>
+        </ul>
+
+        <h2>What We're Looking For</h2>
+        <ul>
+          <li>Bachelor's degree in Design, Business Administration, or a related field, or equivalent practical experience.</li>
+          <li>2–5 years of experience in design operations or project management.</li>
+          <li>Strong organizational and problem-solving skills.</li>
+          <li>Proficiency in design and project management tools.</li>
+          <li>Excellent communication and presentation skills.</li>
+          <li>Ability to work independently and manage multiple projects.</li>
+        </ul>
+
+        <h2>Why Join [Company Name]</h2>
+        <ul>
+          <li>Be part of a rapidly growing company that's shaping the future of how people connect online.</li>
+          <li>Contribute to a product that impacts millions of users worldwide, driving innovation in digital experiences.</li>
+          <li>Enjoy a collaborative, inclusive, and creative work environment that values diversity and fosters professional growth.</li>
+          <li>Benefit from a competitive compensation package, flexible work arrangements, and a commitment to work-life balance.</li>
+        </ul>
+
+        <p class="text-sm text-gray-600">[Company Name] is committed to providing a competitive compensation package. Our cash compensation amount for this role is targeted at $X-$X in X area. Final offer amounts are determined by multiple factors, including candidate expertise, the scope of role and level, and may vary from the amounts listed above.</p>
+      </div>
+    </article>
+  </main>
+</Layout>

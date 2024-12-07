@@ -6,31 +6,27 @@ const entry = await getEntry('docs', 'team/product/project-kickoff-meeting');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Product Team', href: '/docs/team/product' },
-  { text: 'Project Kickoff Meeting' }
+  { text: 'Product Team', href: '/docs/team/product' }
 ];
+
+const title = entry.data.title;
 ---
 
-<Layout title={entry.data.title}>
+<Layout title={title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-8" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-2">
-          {breadcrumbs.map((crumb, index) => (
-            <li class="flex items-center">
-              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
-              {crumb.href ? (
-                <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                  {crumb.text}
-                </a>
-              ) : (
-                <span class="text-sm text-gray-900">{crumb.text}</span>
-              )}
+      <nav class="flex mb-2" aria-label="Breadcrumb">
+        <ol class="flex items-center">
+          {breadcrumbs.map((crumb) => (
+            <li>
+              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                {crumb.text}
+              </a>
             </li>
           ))}
         </ol>
       </nav>
-      <div class="prose">
+      <div class="prose max-w-none prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:text-indigo-700 prose-a:cursor-pointer">
         <Content />
       </div>
     </article>

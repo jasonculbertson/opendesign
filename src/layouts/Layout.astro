@@ -20,25 +20,6 @@ const { title, description = "Open Design Documentation" } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <style>
-      .gradient-border {
-        position: relative;
-      }
-      .gradient-border::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 0.75rem;
-        padding: 2px;
-        background: linear-gradient(to bottom right, #D4BFE3, #E4C7D8, #E6C5D1, #E9D1CB, #EBD1CF);
-        -webkit-mask: 
-          linear-gradient(#fff 0 0) content-box, 
-          linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-      }
-    </style>
   </head>
   <body class="min-h-screen bg-gradient-to-br from-[#F5F1F9] via-[#F3E7F0] via-[#F4E5E9] via-[#F9EBE5] to-[#FBE9E7]">
     <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center bg-transparent">
@@ -50,20 +31,15 @@ const { title, description = "Open Design Documentation" } = Astro.props;
           <span class="text-[15px] font-medium text-gray-900 leading-none">Open Design Docs</span>
         </div>
       </div>
-      <div class="ml-auto pr-8">
-        <a href="/about" class="text-[15px] text-gray-600 hover:text-gray-900 leading-none">About</a>
-      </div>
     </header>
     <Sidebar currentPath={Astro.url.pathname} />
-    <div class="fixed inset-0 left-[220px] p-6 pt-14">
-      <div class="bg-white/75 backdrop-blur-md rounded-xl h-[calc(100vh-5rem)] relative gradient-border">
-        <div class="absolute inset-0 overflow-auto p-8 rounded-xl">
+    <div class="fixed inset-0 left-[220px] pl-6">
+      <div class="bg-white/75 backdrop-blur-md shadow-sm h-screen relative ring-1 ring-white/50">
+        <div class="absolute inset-0 overflow-auto p-8">
           <div class="relative">
             <slot />
           </div>
         </div>
-        <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent pointer-events-none rounded-t-xl"></div>
-        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/90 to-transparent pointer-events-none rounded-b-xl"></div>
       </div>
     </div>
   </body>
