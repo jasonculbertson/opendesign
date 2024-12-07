@@ -84,8 +84,7 @@ const links = [
 ---
 
 <button
-  id="mobile-menu-button"
-  class="lg:hidden fixed top-4 left-4 z-30 p-2 bg-white rounded-lg shadow-md"
+  class="lg:hidden fixed top-4 right-4 z-30 p-2 bg-white rounded-lg shadow-md"
   aria-label="Toggle menu"
 >
   <Menu className="w-6 h-6" />
@@ -132,23 +131,16 @@ const links = [
 </aside>
 
 <script>
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
   const sidebar = document.getElementById('sidebar');
   const body = document.body;
-
-  mobileMenuButton?.addEventListener('click', () => {
-    sidebar?.classList.toggle('open');
-    body.style.overflow = sidebar?.classList.contains('open') ? 'hidden' : '';
-  });
 
   // Close sidebar when clicking outside on mobile
   document.addEventListener('click', (e) => {
     if (window.innerWidth > 1024) return;
     
     const isClickInsideSidebar = sidebar?.contains(e.target as Node);
-    const isClickOnMenuButton = mobileMenuButton?.contains(e.target as Node);
     
-    if (!isClickInsideSidebar && !isClickOnMenuButton && sidebar?.classList.contains('open')) {
+    if (!isClickInsideSidebar && sidebar?.classList.contains('open')) {
       sidebar?.classList.remove('open');
       body.style.overflow = '';
     }
