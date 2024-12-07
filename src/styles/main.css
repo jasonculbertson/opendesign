@@ -248,7 +248,6 @@ body {
 /* Gradient panel styles */
 .gradient-panel {
   position: relative;
-  border-radius: 0.75rem;
   padding: 1px;
   background: linear-gradient(
     to bottom right,
@@ -262,7 +261,6 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 0.75rem;
   padding: 1px;
   background: linear-gradient(
     to bottom right,
@@ -280,7 +278,6 @@ body {
 
 .gradient-panel > div {
   background: white;
-  border-radius: 0.75rem;
   height: 100%;
 }
 
