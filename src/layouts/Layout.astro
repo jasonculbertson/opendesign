@@ -44,11 +44,11 @@ const { title, description = "Open Design Documentation" } = Astro.props;
 
     <div id="mobile-overlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden"></div>
     
-    <Sidebar id="sidebar" currentPath={Astro.url.pathname} />
+    <Sidebar currentPath={Astro.url.pathname} />
     
-    <main class="pt-14 lg:pl-[250px] min-h-screen">
-      <div class="h-full bg-white/75 backdrop-blur-md shadow-sm relative ring-1 ring-white/50">
-        <div class="p-4 lg:p-8">
+    <main class="min-h-screen lg:pl-[250px]">
+      <div class="min-h-screen bg-white/75 backdrop-blur-md shadow-sm relative ring-1 ring-white/50">
+        <div class="pt-20 p-4 lg:p-8">
           <div class="max-w-[900px] mx-auto">
             <slot />
           </div>
