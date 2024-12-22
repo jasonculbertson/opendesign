@@ -83,13 +83,42 @@ const managerRoles = [
       </nav>
 
       <div class="mb-12">
-        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{entry.data.title}</h1>
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Level Competencies</h1>
         <div class="bg-white/60 backdrop-blur-[2px] rounded-xl pt-8 pr-8 pb-8 my-8 ring-1 ring-white/50">
-          <p class="text-[15px] leading-7 text-[#1a1f36]">{entry.data.description}</p>
+          <p class="text-[15px] leading-7 text-[#1a1f36]">
+            The level competencies framework provides clear expectations and growth paths for designers at every level.
+          </p>
         </div>
       </div>
 
-      <Content />
+      <div class="space-y-12">
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Product Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {productRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Creative Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {creativeRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Manager Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {managerRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+      </div>
     </article>
   </main>
 </Layout>
