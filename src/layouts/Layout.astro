@@ -49,31 +49,20 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       .hamburger-top,
       .hamburger-middle,
       .hamburger-bottom {
+        transition: all 0.3s ease-in-out;
         transform-origin: center;
-        transition: all 0.3s ease;
       }
 
-      #mobile-menu-button[aria-expanded="true"] .hamburger-top {
-        transform: rotate(45deg) translate(0, 6px);
+      .menu-open .hamburger-top {
+        transform: translateY(6px) rotate(45deg);
       }
 
-      #mobile-menu-button[aria-expanded="true"] .hamburger-middle {
+      .menu-open .hamburger-middle {
         opacity: 0;
       }
 
-      #mobile-menu-button[aria-expanded="true"] .hamburger-bottom {
-        transform: rotate(-45deg) translate(0, -6px);
-      }
-
-      @media (max-width: 1024px) {
-        #sidebar {
-          transition: transform 0.3s ease-in-out;
-          will-change: transform;
-        }
-
-        #mobile-overlay {
-          transition: opacity 0.3s ease-in-out;
-        }
+      .menu-open .hamburger-bottom {
+        transform: translateY(-6px) rotate(-45deg);
       }
     </style>
 
@@ -100,76 +89,29 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       let isOpen = false;
 
       function toggleMenu() {
-        if (!sidebar || !overlay || !mobileMenuButton) return;
-        
         isOpen = !isOpen;
-        mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
         
         if (isOpen) {
-          sidebar.style.transform = 'translateX(0)';
+          sidebar.classList.add('open');
           overlay.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-          // Delay the opacity transition
-          requestAnimationFrame(() => {
-            overlay.style.opacity = '1';
-          });
+          document.body.classList.add('body-no-scroll');
+          mobileMenuButton.classList.add('menu-open');
         } else {
-          sidebar.style.transform = 'translateX(100%)';
-          overlay.style.opacity = '0';
-          document.body.style.overflow = '';
-          // Wait for the transition before hiding
-          setTimeout(() => {
-            overlay.classList.add('hidden');
-          }, 300);
+          sidebar.classList.remove('open');
+          overlay.classList.add('hidden');
+          document.body.classList.remove('body-no-scroll');
+          mobileMenuButton.classList.remove('menu-open');
         }
       }
 
-      // Set initial position based on screen size
-      function updateSidebarPosition() {
-        if (!sidebar) return;
-        if (window.innerWidth >= 1024) {
-          sidebar.style.transform = 'translateX(0)';
-          if (overlay) overlay.classList.add('hidden');
-          document.body.style.overflow = '';
-          isOpen = false;
-          if (mobileMenuButton) {
-            mobileMenuButton.setAttribute('aria-expanded', 'false');
-          }
-        } else if (!isOpen) {
-          sidebar.style.transform = 'translateX(100%)';
-        }
-      }
+      mobileMenuButton.addEventListener('click', toggleMenu);
+      overlay.addEventListener('click', toggleMenu);
 
-      // Add touch event handling
-      let touchStartX = 0;
-      let touchEndX = 0;
-
-      document.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      document.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, { passive: true });
-
-      function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchEndX - touchStartX;
-
-        if (Math.abs(diff) < swipeThreshold) return;
-
-        if (diff > 0 && !isOpen) { // Right swipe when closed
-          toggleMenu();
-        } else if (diff < 0 && isOpen) { // Left swipe when open
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) {
           toggleMenu();
         }
-      }
-
-      mobileMenuButton?.addEventListener('click', toggleMenu);
-      overlay?.addEventListener('click', toggleMenu);
-      window.addEventListener('resize', updateSidebarPosition);
-      updateSidebarPosition();
+      });
     </script>
   </body>
 </html>
