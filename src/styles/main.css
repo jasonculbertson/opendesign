@@ -297,7 +297,7 @@ body {
 
 /* Gradient card styles */
 .gradient-card {
-  @apply relative bg-white/60 backdrop-blur-[2px] rounded-xl py-6 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02] transition-all;
+  @apply relative bg-white/60 backdrop-blur-[2px] rounded-xl px-8 py-6 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02] transition-all;
   transform: translateY(0);
   transition: all 0.2s ease-in-out;
 }
