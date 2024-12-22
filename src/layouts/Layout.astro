@@ -64,12 +64,28 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       .menu-open .hamburger-bottom {
         transform: translateY(-6px) rotate(-45deg);
       }
+
+      @media (max-width: 1024px) {
+        #sidebar {
+          transition: transform 0.3s ease-in-out;
+          will-change: transform;
+          transform: translateX(-100%);
+        }
+
+        #sidebar.open {
+          transform: translateX(0);
+        }
+
+        #mobile-overlay {
+          transition: opacity 0.3s ease-in-out;
+        }
+      }
     </style>
 
     <div id="mobile-overlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden opacity-0 transition-opacity"></div>
     
     <div class="flex min-h-screen">
-      <Sidebar currentPath={Astro.url.pathname} />
+      <Sidebar id="sidebar" currentPath={Astro.url.pathname} />
       
       <main class="flex-1 lg:pl-[250px] w-full">
         <div class="gradient-panel h-full min-h-screen">
@@ -96,11 +112,19 @@ const { title, description = "Open Design Documentation" } = Astro.props;
           overlay.classList.remove('hidden');
           document.body.classList.add('body-no-scroll');
           mobileMenuButton.classList.add('menu-open');
+          // Delay the opacity transition
+          requestAnimationFrame(() => {
+            overlay.style.opacity = '1';
+          });
         } else {
           sidebar.classList.remove('open');
-          overlay.classList.add('hidden');
+          overlay.style.opacity = '0';
           document.body.classList.remove('body-no-scroll');
           mobileMenuButton.classList.remove('menu-open');
+          // Wait for the transition before hiding
+          setTimeout(() => {
+            overlay.classList.add('hidden');
+          }, 300);
         }
       }
 
