@@ -3,7 +3,7 @@ import { getEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
 import Card from '../../../../components/Card.astro';
 
-const entry = await getEntry('docs', 'leadership/month-1/level-competencies');
+const entry = await getEntry('docs/leadership/month-1', 'level-competencies');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
