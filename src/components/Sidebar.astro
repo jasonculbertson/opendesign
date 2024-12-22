@@ -17,7 +17,9 @@ import {
   User,
   Film,
   Menu,
-  Layers
+  Layers,
+  ImagePlus,
+  Mic
 } from 'lucide-react';
 
 const { currentPath } = Astro.props;
@@ -85,12 +87,12 @@ const links = [
       {
         name: 'Interviews',
         href: '/docs/videos/interviews',
-        icon: Video
+        icon: Mic
       },
       {
         name: 'Case Studies',
         href: '/docs/videos/case-studies',
-        icon: Film
+        icon: ImagePlus
       }
     ]
   }
