@@ -90,35 +90,6 @@ const managerRoles = [
       </div>
 
       <Content />
-
-      <div class="space-y-12">
-        <section>
-          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Product Role Competencies</h2>
-          <div class="grid grid-cols-1 gap-4">
-            {productRoles.map(role => (
-              <Card {...role} />
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Creative Role Competencies</h2>
-          <div class="grid grid-cols-1 gap-4">
-            {creativeRoles.map(role => (
-              <Card {...role} />
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Manager Role Competencies</h2>
-          <div class="grid grid-cols-1 gap-4">
-            {managerRoles.map(role => (
-              <Card {...role} />
-            ))}
-          </div>
-        </section>
-      </div>
     </article>
   </main>
 </Layout>
