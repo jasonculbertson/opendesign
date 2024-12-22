@@ -15,13 +15,13 @@ const { title, description = "Open Design Documentation" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-gradient-to-br from-[#F5F1F9] via-[#F3E7F0] via-[#F4E5E9] via-[#F9EBE5] to-[#FBE9E7]">
-    <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center justify-between px-4 lg:hidden bg-white/75 backdrop-blur-sm">
+    <header class="fixed top-0 left-0 right-0 h-14 z-50 flex items-center justify-between px-4 lg:hidden bg-white/75 backdrop-blur-sm border-b border-gray-200/50">
       <div class="flex items-center gap-2">
         <div class="flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -34,7 +34,7 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       </div>
       <button
         id="mobile-menu-button"
-        class="lg:hidden w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-600"
+        class="lg:hidden w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-600 -mr-2 touch-manipulation"
         aria-label="Toggle menu"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
@@ -64,16 +64,27 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       #mobile-menu-button[aria-expanded="true"] .hamburger-bottom {
         transform: rotate(-45deg) translate(0, -6px);
       }
+
+      @media (max-width: 1024px) {
+        #sidebar {
+          transition: transform 0.3s ease-in-out;
+          will-change: transform;
+        }
+
+        #mobile-overlay {
+          transition: opacity 0.3s ease-in-out;
+        }
+      }
     </style>
 
-    <div id="mobile-overlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden opacity-0 transition-opacity"></div>
     
     <div class="flex min-h-screen">
       <Sidebar currentPath={Astro.url.pathname} />
       
-      <main class="flex-1 lg:pl-[250px]">
+      <main class="flex-1 lg:pl-[250px] w-full">
         <div class="gradient-panel h-full min-h-screen">
-          <div class="h-full pt-16 px-4 pb-4 lg:pt-20 lg:p-8">
+          <div class="h-full pt-16 px-3 pb-4 sm:px-4 lg:pt-20 lg:p-8">
             <div class="max-w-[900px] mx-auto">
               <slot />
             </div>
@@ -88,40 +99,77 @@ const { title, description = "Open Design Documentation" } = Astro.props;
       const mobileMenuButton = document.getElementById('mobile-menu-button');
       let isOpen = false;
 
+      function toggleMenu() {
+        if (!sidebar || !overlay || !mobileMenuButton) return;
+        
+        isOpen = !isOpen;
+        mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
+        
+        if (isOpen) {
+          sidebar.style.transform = 'translateX(0)';
+          overlay.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+          // Delay the opacity transition
+          requestAnimationFrame(() => {
+            overlay.style.opacity = '1';
+          });
+        } else {
+          sidebar.style.transform = 'translateX(100%)';
+          overlay.style.opacity = '0';
+          document.body.style.overflow = '';
+          // Wait for the transition before hiding
+          setTimeout(() => {
+            overlay.classList.add('hidden');
+          }, 300);
+        }
+      }
+
       // Set initial position based on screen size
       function updateSidebarPosition() {
         if (!sidebar) return;
         if (window.innerWidth >= 1024) {
-          sidebar.style.right = 'auto';
           sidebar.style.transform = 'translateX(0)';
-        } else {
-          sidebar.style.right = '0';
-          sidebar.style.transform = isOpen ? 'translateX(0)' : 'translateX(100%)';
+          if (overlay) overlay.classList.add('hidden');
+          document.body.style.overflow = '';
+          isOpen = false;
+          if (mobileMenuButton) {
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+          }
+        } else if (!isOpen) {
+          sidebar.style.transform = 'translateX(100%)';
         }
       }
 
-      function toggleMenu() {
-        isOpen = !isOpen;
-        updateSidebarPosition();
-        if (overlay) {
-          overlay.classList.toggle('hidden', !isOpen);
-        }
-        document.body.classList.toggle('body-no-scroll', isOpen);
-        mobileMenuButton.setAttribute('aria-expanded', isOpen);
-      }
+      // Add touch event handling
+      let touchStartX = 0;
+      let touchEndX = 0;
 
-      // Initialize
-      updateSidebarPosition();
-      window.addEventListener('resize', updateSidebarPosition);
-      overlay?.addEventListener('click', toggleMenu);
-      mobileMenuButton?.addEventListener('click', toggleMenu);
+      document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
 
-      // Close menu on escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isOpen) {
+      document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchEndX - touchStartX;
+
+        if (Math.abs(diff) < swipeThreshold) return;
+
+        if (diff > 0 && !isOpen) { // Right swipe when closed
+          toggleMenu();
+        } else if (diff < 0 && isOpen) { // Left swipe when open
           toggleMenu();
         }
-      });
+      }
+
+      mobileMenuButton?.addEventListener('click', toggleMenu);
+      overlay?.addEventListener('click', toggleMenu);
+      window.addEventListener('resize', updateSidebarPosition);
+      updateSidebarPosition();
     </script>
   </body>
 </html>
