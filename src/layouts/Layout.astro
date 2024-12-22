@@ -106,7 +106,7 @@ const { title, description = "Open Design Documentation" } = Astro.props;
         mobileMenuButton.setAttribute('aria-expanded', isOpen.toString());
         
         if (isOpen) {
-          sidebar.style.transform = 'translateX(0)';
+          sidebar.style.transform = 'translateX(100%)';
           overlay.classList.remove('hidden');
           document.body.style.overflow = 'hidden';
           // Delay the opacity transition
