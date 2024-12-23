@@ -1,4 +1,10 @@
 {
+  "version": 2,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "astro",
+  "cleanUrls": true,
   "functions": {
     "*": {
       "runtime": "nodejs18.x"
