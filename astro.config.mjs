@@ -6,14 +6,17 @@ import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
   output: 'server',
-  adapter: vercel(),
+  adapter: vercel({
+    functionPerRoute: false,
+    maxDuration: 10
+  }),
   integrations: [
     mdx({
       components: {
-        Card: './src/components/MDXCard.tsx'
+        'img': 'astro/components/Image.astro'
       }
-    }), 
-    tailwind(), 
+    }),
+    tailwind(),
     react()
   ],
   markdown: {
