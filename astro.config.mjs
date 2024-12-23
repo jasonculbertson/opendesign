@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 import vercel from '@astrojs/vercel/edge';
 
 export default defineConfig({
-  output: 'server',
+  output: 'hybrid',
   adapter: vercel(),
   integrations: [
     mdx({

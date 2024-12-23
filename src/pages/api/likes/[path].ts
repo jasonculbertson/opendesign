@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { getLikes, incrementLikes } from '../../../utils/db';
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ params }) => {
   const pagePath = params.path;
   if (!pagePath) {
