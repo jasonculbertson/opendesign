@@ -1,6 +1,5 @@
 ---
 import Sidebar from '../components/Sidebar.astro';
-import SubstackEmbed from '../components/SubstackEmbed.astro';
 import '../styles/main.css';
 
 interface Props {
@@ -8,19 +7,15 @@ interface Props {
 }
 
 const { title, description = "Open Design Documentation" } = Astro.props;
+const path = Astro.url.pathname;
 
 // Get the current path and split it into segments
-const path = Astro.url.pathname;
 const pathSegments = path.split('/').filter(Boolean);
-
-// Explicitly check the path depth
-const showSubstack = pathSegments.length === 3;
 
 console.log('Debug info:', {
   path,
   segments: pathSegments,
-  segmentCount: pathSegments.length,
-  showSubstack
+  segmentCount: pathSegments.length
 });
 ---
 
@@ -43,11 +38,6 @@ console.log('Debug info:', {
           <div class="max-w-[900px] mx-auto">
             <slot />
           </div>
-          {showSubstack && (
-            <div class="max-w-[900px] mx-auto">
-              <SubstackEmbed />
-            </div>
-          )}
         </div>
       </main>
     </div>

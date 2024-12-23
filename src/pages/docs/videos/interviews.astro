@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import VideoCard from '../../../components/VideoCard.astro';
+import SubstackEmbed from '../../../components/SubstackEmbed.astro';
 
 const videos = [
   {
@@ -25,7 +26,6 @@ const videos = [
   }
 ];
 
-const [featuredVideo, ...otherVideos] = videos;
 const title = "Design Leadership Interviews";
 ---
 
@@ -37,17 +37,12 @@ const title = "Design Leadership Interviews";
         <p class="mt-2 text-[15px] text-[#3c4257]">Learn from experienced design leaders through in-depth interviews.</p>
       </div>
 
-      <!-- Featured Video -->
-      <div class="mb-8">
-        <VideoCard {...featuredVideo} />
-      </div>
-
-      <!-- Other Videos Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {otherVideos.map(video => (
+      <div class="grid grid-cols-1 gap-4">
+        {videos.map(video => (
           <VideoCard {...video} />
         ))}
       </div>
     </article>
+    <SubstackEmbed />
   </main>
 </Layout>
