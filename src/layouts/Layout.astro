@@ -9,6 +9,16 @@ interface Props {
 }
 
 const { title, description = "Open Design Documentation" } = Astro.props;
+
+// Get the current path and split it into segments
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+
+// Determine if we should show the Substack embed
+// Don't show on L1 pages (2 segments: 'docs' + L1)
+// Don't show on L2 pages that have L3 content
+const isL1Page = pathSegments.length === 2;
+const hasL3Content = pathSegments.length > 3;
+const showSubstack = !isL1Page && !hasL3Content;
 ---
 
 <!doctype html>
@@ -56,7 +66,7 @@ const { title, description = "Open Design Documentation" } = Astro.props;
           <div class="h-full pt-20 lg:pt-20">
             <div class="max-w-[900px] mx-auto">
               <slot />
-              <SubstackEmbed />
+              {showSubstack && <SubstackEmbed />}
             </div>
           </div>
         </div>
