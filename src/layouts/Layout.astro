@@ -11,17 +11,24 @@ interface Props {
 const { title, description = "Open Design Documentation" } = Astro.props;
 
 // Get the current path and split it into segments
-const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
-console.log('Path segments:', pathSegments);
+const path = Astro.url.pathname;
+const pathSegments = path.split('/').filter(Boolean);
 
-// Show Substack only on L2 pages without L3 content
-const isL2Page = pathSegments.length === 3; // /docs/videos/interviews = 3 segments
-const showSubstack = isL2Page;
+// Explicitly check the path depth
+let showSubstack = true; // Default to showing
 
-console.log('Path analysis:', {
-  path: Astro.url.pathname,
+// Hide on L1 pages (2 segments) and L3+ pages (4 or more segments)
+if (pathSegments.length <= 2 || pathSegments.length >= 4) {
+  showSubstack = false;
+  console.log('❌ Not showing Substack on:', path);
+} else {
+  console.log('✅ Showing Substack on:', path);
+}
+
+console.log('Debug info:', {
+  path,
   segments: pathSegments,
-  isL2Page,
+  segmentCount: pathSegments.length,
   showSubstack
 });
 ---
@@ -71,7 +78,11 @@ console.log('Path analysis:', {
           <div class="h-full pt-20 lg:pt-20">
             <div class="max-w-[900px] mx-auto">
               <slot />
-              {showSubstack && <SubstackEmbed />}
+              {showSubstack && 
+                <div class="debug-substack">
+                  <SubstackEmbed />
+                </div>
+              }
             </div>
           </div>
         </div>
