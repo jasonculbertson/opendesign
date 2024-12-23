@@ -52,16 +52,17 @@ const creativeRoles = [
   }
 ];
 
-const title = entry.data.title;
+const title = "Job Descriptions (JDs)";
 ---
 
 <Layout title={title}>
-  <div class="py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-[680px] mx-auto">
+  <main class="py-8 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto px-4 sm:px-0">
       <nav class="flex mb-2" aria-label="Breadcrumb">
         <ol class="flex items-center">
-          {breadcrumbs.map((crumb) => (
-            <li>
+          {breadcrumbs.map((crumb, index) => (
+            <li class="flex items-center">
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
               <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
                 {crumb.text}
               </a>
@@ -69,37 +70,29 @@ const title = entry.data.title;
           ))}
         </ol>
       </nav>
-
-      <div class="prose max-w-none prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:text-indigo-700">
-        <div class="mb-12">
-          <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Job Description Templates</h1>
-          <div class="gradient-panel">
-            <p class="text-[15px] leading-6 text-[#1a1f36]">
-              Comprehensive, ready-to-use JDs, written utilizing the <a href="/docs/leadership/month-1/level-competencies" class="text-blue-600 hover:text-blue-800">Level Competencies</a>, to streamline your hiring process and ensure you attract top design talent for your team.
-            </p>
-          </div>
-        </div>
-
-        <div class="space-y-12">
-          <section>
-            <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">UX Role JDs</h2>
-            <div class="grid grid-cols-1 gap-4">
-              {uxRoles.map(role => (
-                <Card {...role} />
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Creative Role JDs</h2>
-            <div class="grid grid-cols-1 gap-4">
-              {creativeRoles.map(role => (
-                <Card {...role} />
-              ))}
-            </div>
-          </section>
-        </div>
+      <div class="mb-8">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
       </div>
-    </div>
-  </div>
+
+      <div class="space-y-8">
+        <section>
+          <h2 class="text-[20px] font-semibold text-[#1a1f36] mb-4">UX Roles</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {uxRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-[20px] font-semibold text-[#1a1f36] mb-4">Creative Roles</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {creativeRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
 </Layout>
