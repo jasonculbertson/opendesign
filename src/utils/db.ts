@@ -13,12 +13,22 @@ if (!fs.existsSync(dataDir)) {
 }
 
 export async function getLikes(pagePath: string): Promise<number> {
-  const likes = await kv.get<number>(`likes:${pagePath}`);
-  return likes || 0;
+  try {
+    const likes = await kv.get<number>(`likes:${pagePath}`);
+    return likes || 0;
+  } catch (error) {
+    console.error('Error getting likes:', error);
+    return 0;
+  }
 }
 
 export async function incrementLikes(pagePath: string): Promise<number> {
-  const key = `likes:${pagePath}`;
-  const newCount = await kv.incr(key);
-  return newCount;
+  try {
+    const key = `likes:${pagePath}`;
+    const newCount = await kv.incr(key);
+    return newCount;
+  } catch (error) {
+    console.error('Error incrementing likes:', error);
+    return 0;
+  }
 }
