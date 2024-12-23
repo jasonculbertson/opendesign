@@ -99,57 +99,67 @@ const showSubstack = shouldShowSubstack(path);
     </div>
     <ViewTransitions />
 
-    <script>
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const sidebar = document.getElementById('sidebar');
-      const menuIcon = document.getElementById('menu-icon');
-      const closeIcon = document.getElementById('close-icon');
-      const body = document.body;
+    <script is:inline>
+      function setupMobileMenu() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const sidebar = document.getElementById('sidebar');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const body = document.body;
 
-      function openMenu() {
-        sidebar?.classList.remove('-translate-x-full');
-        body.style.overflow = 'hidden';
-        menuIcon?.classList.remove('opacity-100', 'rotate-0');
-        menuIcon?.classList.add('opacity-0', 'rotate-180');
-        closeIcon?.classList.remove('opacity-0', '-rotate-180');
-        closeIcon?.classList.add('opacity-100', 'rotate-0');
-      }
-
-      function closeMenu() {
-        sidebar?.classList.add('-translate-x-full');
-        body.style.overflow = '';
-        menuIcon?.classList.remove('opacity-0', 'rotate-180');
-        menuIcon?.classList.add('opacity-100', 'rotate-0');
-        closeIcon?.classList.remove('opacity-100', 'rotate-0');
-        closeIcon?.classList.add('opacity-0', '-rotate-180');
-      }
-
-      mobileMenuButton?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (sidebar?.classList.contains('-translate-x-full')) {
-          openMenu();
-        } else {
-          closeMenu();
+        function openMenu() {
+          sidebar?.classList.remove('-translate-x-full');
+          body.style.overflow = 'hidden';
+          menuIcon?.classList.remove('opacity-100', 'rotate-0');
+          menuIcon?.classList.add('opacity-0', 'rotate-180');
+          closeIcon?.classList.remove('opacity-0', '-rotate-180');
+          closeIcon?.classList.add('opacity-100', 'rotate-0');
         }
-      });
 
-      // Close sidebar when clicking outside on mobile
-      document.addEventListener('click', (e) => {
-        if (window.innerWidth > 1024) return;
-        
-        const isClickInsideSidebar = sidebar?.contains(e.target as Node);
-        const isClickOnMenuButton = mobileMenuButton?.contains(e.target as Node);
-        
-        if (!isClickInsideSidebar && !isClickOnMenuButton && !sidebar?.classList.contains('-translate-x-full')) {
-          closeMenu();
-        }
-      });
-
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 1024) {
+        function closeMenu() {
+          sidebar?.classList.add('-translate-x-full');
           body.style.overflow = '';
+          menuIcon?.classList.remove('opacity-0', 'rotate-180');
+          menuIcon?.classList.add('opacity-100', 'rotate-0');
+          closeIcon?.classList.remove('opacity-100', 'rotate-0');
+          closeIcon?.classList.add('opacity-0', '-rotate-180');
         }
+
+        mobileMenuButton?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (sidebar?.classList.contains('-translate-x-full')) {
+            openMenu();
+          } else {
+            closeMenu();
+          }
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+          if (window.innerWidth > 1024) return;
+          
+          const isClickInsideSidebar = sidebar?.contains(e.target);
+          const isClickOnMenuButton = mobileMenuButton?.contains(e.target);
+          
+          if (!isClickInsideSidebar && !isClickOnMenuButton && !sidebar?.classList.contains('-translate-x-full')) {
+            closeMenu();
+          }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 1024) {
+            body.style.overflow = '';
+          }
+        });
+      }
+
+      // Setup on initial load
+      setupMobileMenu();
+
+      // Setup again after view transitions
+      document.addEventListener('astro:page-load', () => {
+        setupMobileMenu();
       });
     </script>
   </body>
