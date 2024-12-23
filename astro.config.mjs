@@ -25,5 +25,9 @@ export default defineConfig({
       theme: 'github-light',
       wrap: true
     }
+  },
+  env: {
+    PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.PUBLIC_CLERK_PUBLISHABLE_KEY,
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
   }
 });

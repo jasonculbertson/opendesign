@@ -1,8 +1,11 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import Sidebar from '../components/Sidebar.astro';
 import SubstackEmbed from '../components/SubstackEmbed.astro';
 import LikeButton from '../components/LikeButton.astro';
 import { shouldShowSubstack } from '../utils/pageUtils';
+import ClerkProvider from '../components/ClerkProvider.astro';
+import Auth from '../components/Auth.astro';
 import '../styles/main.css';
 
 interface Props {
@@ -33,28 +36,33 @@ const debugInfo = {
     <title>{title} - Open Design Docs</title>
   </head>
   <body>
-    <div class="flex min-h-screen">
-      <Sidebar currentPath={path} />
-      
-      <main class="flex-1 lg:pl-[250px]">
-        <div class="pt-20 lg:pt-20">
-          <div class="max-w-[900px] mx-auto px-4 sm:px-0">
-            <div class="relative">
-              <div class="absolute top-0 right-0">
-                <LikeButton pagePath={Astro.url.pathname} />
-              </div>
-              <slot />
-            </div>
-            {showSubstack && (
-              <div class="mt-12">
-                <SubstackEmbed />
-              </div>
-            )}
+    <ClerkProvider>
+      <div class="flex min-h-screen">
+        <Sidebar currentPath={path} />
+        
+        <main class="flex-1 lg:pl-[250px]">
+          <div class="fixed top-4 right-4 z-50">
+            <Auth />
           </div>
-        </div>
-      </main>
-    </div>
-
+          <div class="pt-20 lg:pt-20">
+            <div class="max-w-[900px] mx-auto px-4 sm:px-0">
+              <div class="relative">
+                <div class="absolute top-0 right-0">
+                  <LikeButton pagePath={Astro.url.pathname} />
+                </div>
+                <slot />
+              </div>
+              {showSubstack && (
+                <div class="mt-12">
+                  <SubstackEmbed />
+                </div>
+              )}
+            </div>
+          </div>
+        </main>
+      </div>
+    </ClerkProvider>
+    <ViewTransitions />
     <div 
       id="mobile-overlay"
       class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 hidden lg:hidden"
