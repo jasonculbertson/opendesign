@@ -247,14 +247,7 @@ body {
 
 /* Gradient panel styles */
 .gradient-panel {
-  position: relative;
-  padding: 1px;
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 255, 255, 0.9),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.1)
-  );
+  @apply relative bg-white rounded-xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02];
 }
 
 .gradient-panel::before {
@@ -263,10 +256,10 @@ body {
   inset: 0;
   padding: 1px;
   background: linear-gradient(
-    to bottom right,
-    rgba(255, 255, 255, 0.9),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.1)
+    135deg,
+    rgba(236, 72, 153, 0.15),
+    rgba(219, 39, 119, 0.15),
+    rgba(147, 51, 234, 0.15)
   );
   border-radius: 0.75rem;
   -webkit-mask: linear-gradient(#fff 0 0) content-box,
@@ -278,9 +271,7 @@ body {
 }
 
 .gradient-panel > div {
-  background: white;
-  height: 100%;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 0.75rem;
 }
 
