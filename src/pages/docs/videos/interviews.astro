@@ -1,0 +1,41 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import VideoCard from '../../../components/VideoCard.astro';
+
+const videos = [
+  {
+    title: 'Design Leadership with Jason Culbertson',
+    timestamp: 'December 22, 2023',
+    duration: '43:21',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&h=450&q=80',
+    isDraft: true
+  },
+  {
+    title: 'Building Design Systems at Scale',
+    timestamp: 'December 15, 2023',
+    duration: '38:15',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&h=450&q=80',
+  },
+  {
+    title: 'The Future of Product Design',
+    timestamp: 'December 8, 2023',
+    duration: '45:30',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&h=450&q=80',
+  }
+];
+---
+
+<Layout title="Design Leadership Interviews">
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Design Leadership Interviews</h1>
+      <p class="text-lg text-gray-600">Learn from experienced design leaders through in-depth interviews.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {videos.map(video => (
+        <VideoCard {...video} />
+      ))}
+    </div>
+  </main>
+</Layout>
