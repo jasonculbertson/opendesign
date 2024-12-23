@@ -105,10 +105,10 @@ const links = [
 
 <aside 
   id="sidebar"
-  class="fixed top-0 left-0 bottom-0 z-50 sm:w-[350px] lg:w-[250px] bg-[#f9f9f9] backdrop-blur-md shadow-xl lg:shadow-none lg:border-r border-[#e5e5e5] overflow-y-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out"
+  class="fixed top-0 left-0 bottom-0 z-50 w-[280px] lg:w-[250px] bg-[#f9f9f9] backdrop-blur-md shadow-xl lg:shadow-none lg:border-r border-[#e5e5e5] overflow-y-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out"
 >
   <nav class="p-4 h-full flex flex-col">
-    <div class="hidden lg:flex items-center gap-2 mb-8">
+    <div class="flex lg:flex items-center gap-2 mb-8">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
         <line x1="3" y1="9" x2="21" y2="9"></line>
@@ -158,5 +158,41 @@ const links = [
   </nav>
 </aside>
 
-<style>
-</style>
+<button
+  id="mobile-menu-button"
+  class="lg:hidden fixed top-4 left-4 z-[60] p-2 bg-white rounded-lg shadow-md"
+  aria-label="Toggle menu"
+>
+  <Menu className="w-6 h-6 text-gray-700" />
+</button>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const sidebar = document.getElementById('sidebar');
+  const body = document.body;
+
+  mobileMenuButton?.addEventListener('click', () => {
+    sidebar?.classList.toggle('-translate-x-full');
+    body.style.overflow = sidebar?.classList.contains('-translate-x-full') ? '' : 'hidden';
+  });
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth > 1024) return;
+    
+    const isClickInsideSidebar = sidebar?.contains(e.target as Node);
+    const isClickOnMenuButton = mobileMenuButton?.contains(e.target as Node);
+    
+    if (!isClickInsideSidebar && !isClickOnMenuButton && !sidebar?.classList.contains('-translate-x-full')) {
+      sidebar?.classList.add('-translate-x-full');
+      body.style.overflow = '';
+    }
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      body.style.overflow = '';
+    }
+  });
+</script>
