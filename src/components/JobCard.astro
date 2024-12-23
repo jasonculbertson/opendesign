@@ -9,13 +9,17 @@ interface Props {
 const { title, description, href, icon } = Astro.props;
 ---
 
-<a href={href} class="block group">
-  <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-duration-200">
-    <div class="flex items-center p-4">
-      <div class="flex-shrink-0 text-2xl mr-4">{icon}</div>
+<a href={href} class="block group no-underline hover:no-underline">
+  <div class="gradient-card">
+    <div class="flex items-center">
+      <div class="flex-shrink-0 text-2xl mr-3 sm:mr-4 text-gray-700">
+        {image}
+      </div>
       <div>
-        <h3 class="text-sm font-medium text-gray-900 mb-1">{title}</h3>
-        <p class="text-xs text-gray-600">{description}</p>
+        <h3 class="text-[15px] font-semibold text-[#1a1f36] leading-none mb-1.5">
+          {title}
+        </h3>
+        <p class="text-[13px] text-[#3c4257] leading-none">{description}</p>
       </div>
     </div>
   </div>
