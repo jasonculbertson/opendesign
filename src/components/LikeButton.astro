@@ -1,0 +1,149 @@
+---
+interface Props {
+  pagePath: string;
+}
+
+const { pagePath } = Astro.props;
+---
+
+<div class="like-button-container">
+  <button id="likeButton" class="like-button" aria-label="Like this page">
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"
+      class="like-icon"
+    >
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+    </svg>
+    <span id="likeCount">0</span>
+  </button>
+</div>
+
+<style>
+  .like-button-container {
+    margin-top: -0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  .like-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 9999px;
+    background: white;
+    color: #64748b;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .like-button:hover {
+    border-color: #cbd5e1;
+    color: #475569;
+    transform: scale(1.05);
+  }
+
+  .like-button.liked {
+    border-color: #f43f5e;
+    color: #f43f5e;
+  }
+
+  .like-button.liked .like-icon {
+    fill: #f43f5e;
+  }
+
+  .like-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: fill 0.2s;
+  }
+
+  @media (max-width: 640px) {
+    .like-button-container {
+      margin-top: 0;
+      margin-right: 0;
+    }
+    
+    .like-button {
+      padding: 0.375rem;
+    }
+    
+    .like-icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+</style>
+
+<script define:vars={{ pagePath }}>
+  // Encode the path for use in the API URL
+  const encodedPath = encodeURIComponent(pagePath);
+  const likeButton = document.getElementById('likeButton');
+  const likeCount = document.getElementById('likeCount');
+  let isLiked = false;
+
+  // Function to fetch current likes
+  async function fetchLikes() {
+    try {
+      const response = await fetch(`/api/likes/${encodedPath}`);
+      const data = await response.json();
+      if (likeCount) {
+        likeCount.textContent = data.likes;
+      }
+    } catch (error) {
+      console.error('Error fetching likes:', error);
+    }
+  }
+
+  // Function to handle like button click
+  async function handleLike() {
+    if (isLiked) return;
+    
+    try {
+      const response = await fetch(`/api/likes/${encodedPath}`, {
+        method: 'POST',
+      });
+      const data = await response.json();
+      
+      if (likeCount) {
+        likeCount.textContent = data.likes;
+      }
+      
+      if (likeButton) {
+        likeButton.classList.add('liked');
+        isLiked = true;
+        
+        // Store the liked state
+        localStorage.setItem(`liked_${pagePath}`, 'true');
+      }
+    } catch (error) {
+      console.error('Error updating likes:', error);
+    }
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check if already liked
+    isLiked = localStorage.getItem(`liked_${pagePath}`) === 'true';
+    if (isLiked && likeButton) {
+      likeButton.classList.add('liked');
+    }
+    
+    // Fetch initial likes
+    fetchLikes();
+    
+    // Add click handler
+    if (likeButton) {
+      likeButton.addEventListener('click', handleLike);
+    }
+  });
+</script>

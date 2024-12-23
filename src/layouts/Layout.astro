@@ -1,6 +1,7 @@
 ---
 import Sidebar from '../components/Sidebar.astro';
 import SubstackEmbed from '../components/SubstackEmbed.astro';
+import LikeButton from '../components/LikeButton.astro';
 import { shouldShowSubstack } from '../utils/pageUtils';
 import '../styles/main.css';
 
@@ -38,7 +39,12 @@ const debugInfo = {
       <main class="flex-1 lg:pl-[250px]">
         <div class="pt-20 lg:pt-20">
           <div class="max-w-[900px] mx-auto px-4 sm:px-0">
-            <slot />
+            <div class="relative">
+              <div class="absolute top-0 right-0">
+                <LikeButton pagePath={Astro.url.pathname} />
+              </div>
+              <slot />
+            </div>
             {showSubstack && (
               <div class="mt-12">
                 <SubstackEmbed />
