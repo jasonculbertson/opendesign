@@ -157,27 +157,3 @@ const links = [
     </div>
   </nav>
 </aside>
-
-<script>
-  const sidebar = document.getElementById('sidebar');
-  const body = document.body;
-
-  // Close sidebar when clicking outside on mobile
-  document.addEventListener('click', (e) => {
-    if (window.innerWidth > 1024) return;
-    
-    const isClickInsideSidebar = sidebar?.contains(e.target as Node);
-    
-    if (!isClickInsideSidebar && !sidebar?.classList.contains('-translate-x-full')) {
-      sidebar?.classList.add('-translate-x-full');
-      body.style.overflow = '';
-    }
-  });
-
-  // Handle window resize
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 1024) {
-      body.style.overflow = '';
-    }
-  });
-</script>

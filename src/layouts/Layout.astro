@@ -35,7 +35,7 @@ const showSubstack = shouldShowSubstack(path);
       </div>
       <button
         id="mobile-menu-button"
-        class="ml-auto p-2 text-gray-700"
+        class="ml-auto p-2 text-gray-700 -mr-2"
         aria-label="Toggle menu"
       >
         <div class="relative w-6 h-6">
@@ -106,21 +106,30 @@ const showSubstack = shouldShowSubstack(path);
       const closeIcon = document.getElementById('close-icon');
       const body = document.body;
 
-      mobileMenuButton?.addEventListener('click', () => {
-        sidebar?.classList.toggle('-translate-x-full');
-        body.style.overflow = sidebar?.classList.contains('-translate-x-full') ? '' : 'hidden';
-        
-        // Toggle icons
+      function openMenu() {
+        sidebar?.classList.remove('-translate-x-full');
+        body.style.overflow = 'hidden';
+        menuIcon?.classList.remove('opacity-100', 'rotate-0');
+        menuIcon?.classList.add('opacity-0', 'rotate-180');
+        closeIcon?.classList.remove('opacity-0', '-rotate-180');
+        closeIcon?.classList.add('opacity-100', 'rotate-0');
+      }
+
+      function closeMenu() {
+        sidebar?.classList.add('-translate-x-full');
+        body.style.overflow = '';
+        menuIcon?.classList.remove('opacity-0', 'rotate-180');
+        menuIcon?.classList.add('opacity-100', 'rotate-0');
+        closeIcon?.classList.remove('opacity-100', 'rotate-0');
+        closeIcon?.classList.add('opacity-0', '-rotate-180');
+      }
+
+      mobileMenuButton?.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (sidebar?.classList.contains('-translate-x-full')) {
-          menuIcon?.classList.remove('opacity-0', 'rotate-180');
-          menuIcon?.classList.add('opacity-100', 'rotate-0');
-          closeIcon?.classList.remove('opacity-100', 'rotate-0');
-          closeIcon?.classList.add('opacity-0', '-rotate-180');
+          openMenu();
         } else {
-          menuIcon?.classList.remove('opacity-100', 'rotate-0');
-          menuIcon?.classList.add('opacity-0', 'rotate-180');
-          closeIcon?.classList.remove('opacity-0', '-rotate-180');
-          closeIcon?.classList.add('opacity-100', 'rotate-0');
+          closeMenu();
         }
       });
 
@@ -132,14 +141,7 @@ const showSubstack = shouldShowSubstack(path);
         const isClickOnMenuButton = mobileMenuButton?.contains(e.target as Node);
         
         if (!isClickInsideSidebar && !isClickOnMenuButton && !sidebar?.classList.contains('-translate-x-full')) {
-          sidebar?.classList.add('-translate-x-full');
-          body.style.overflow = '';
-          
-          // Reset icons
-          menuIcon?.classList.remove('opacity-0', 'rotate-180');
-          menuIcon?.classList.add('opacity-100', 'rotate-0');
-          closeIcon?.classList.remove('opacity-100', 'rotate-0');
-          closeIcon?.classList.add('opacity-0', '-rotate-180');
+          closeMenu();
         }
       });
 
@@ -147,12 +149,6 @@ const showSubstack = shouldShowSubstack(path);
       window.addEventListener('resize', () => {
         if (window.innerWidth > 1024) {
           body.style.overflow = '';
-          
-          // Reset icons
-          menuIcon?.classList.remove('opacity-0', 'rotate-180');
-          menuIcon?.classList.add('opacity-100', 'rotate-0');
-          closeIcon?.classList.remove('opacity-100', 'rotate-0');
-          closeIcon?.classList.add('opacity-0', '-rotate-180');
         }
       });
     </script>
