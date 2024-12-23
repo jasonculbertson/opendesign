@@ -15,7 +15,7 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   const decodedPath = decodeURIComponent(pagePath);
-  const likes = getLikes(decodedPath);
+  const likes = await getLikes(decodedPath);
   
   return new Response(JSON.stringify({ likes }), {
     status: 200,
@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ params }) => {
   }
 
   const decodedPath = decodeURIComponent(pagePath);
-  const newLikeCount = incrementLikes(decodedPath);
+  const newLikeCount = await incrementLikes(decodedPath);
   
   return new Response(JSON.stringify({ likes: newLikeCount }), {
     status: 200,
