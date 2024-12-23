@@ -34,15 +34,18 @@ const showSubstack = shouldShowSubstack(path);
               <slot />
             </div>
             {showSubstack && (
-              <div class="mt-8">
-                <iframe
-                  src="https://designdetails.substack.com/embed"
-                  width="100%"
-                  height="320"
-                  style="border:1px solid #EEE; background:white;"
-                  frameborder="0"
-                  scrolling="no"
-                ></iframe>
+              <div class="mt-12">
+                <div class="bg-white rounded-lg p-6 shadow-sm">
+                  <h3 class="text-lg font-semibold mb-4">Subscribe to Design Details</h3>
+                  <iframe
+                    src="https://designdetails.substack.com/embed"
+                    width="100%"
+                    height="320"
+                    style="border:1px solid #EEE; background:white;"
+                    frameborder="0"
+                    scrolling="no"
+                  ></iframe>
+                </div>
               </div>
             )}
           </div>
