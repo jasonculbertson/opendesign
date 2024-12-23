@@ -1,4 +1,7 @@
 export function shouldShowSubstack(pathname: string): boolean {
+  // Remove trailing slash for consistent comparison
+  const normalizedPath = pathname.replace(/\/$/, '');
+  
   // Explicit list of pages that should show the Substack embed
   const pagesWithSubstack = [
     '/docs/videos/interviews',
@@ -8,8 +11,9 @@ export function shouldShowSubstack(pathname: string): boolean {
   
   console.log('Substack Debug:', {
     pathname,
-    shouldShow: pagesWithSubstack.includes(pathname)
+    normalizedPath,
+    shouldShow: pagesWithSubstack.includes(normalizedPath)
   });
   
-  return pagesWithSubstack.includes(pathname);
+  return pagesWithSubstack.includes(normalizedPath);
 }
