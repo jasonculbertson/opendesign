@@ -42,11 +42,65 @@ const links = [
         name: 'Week 1-2',
         href: '/docs/leadership/week-1-2',
         icon: Users
+      },
+      {
+        name: 'Month 1',
+        href: '/docs/leadership/month-1',
+        icon: Calendar
+      },
+      {
+        name: 'Quarter 1',
+        href: '/docs/leadership/quarter-1',
+        icon: Target
+      },
+      {
+        name: 'Quarter 2',
+        href: '/docs/leadership/quarter-2',
+        icon: Rocket
+      },
+      {
+        name: 'Departure',
+        href: '/docs/leadership/departure',
+        icon: LogOut
+      }
+    ]
+  },
+  {
+    header: 'Team Docs',
+    items: [
+      {
+        name: 'Design Team',
+        href: '/docs/team/design',
+        icon: Palette
+      },
+      {
+        name: 'Product Team',
+        href: '/docs/team/product',
+        icon: Box
+      },
+      {
+        name: 'Recruiting',
+        href: '/docs/team/recruiting',
+        icon: UserPlus
+      }
+    ]
+  },
+  {
+    header: 'Videos',
+    items: [
+      {
+        name: 'Case Studies',
+        href: '/docs/videos/case-studies',
+        icon: Video
+      },
+      {
+        name: 'Interviews',
+        href: '/docs/videos/interviews',
+        icon: Film
       }
     ]
   }
 ];
-
 ---
 
 <aside 
@@ -103,3 +157,43 @@ const links = [
     </div>
   </nav>
 </aside>
+
+<button
+  id="mobile-menu-button"
+  class="lg:hidden fixed top-4 left-4 z-[60] p-2 bg-white rounded-lg shadow-md"
+  aria-label="Toggle menu"
+>
+  <Menu className="w-6 h-6" />
+</button>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const sidebar = document.getElementById('sidebar');
+  const body = document.body;
+
+  mobileMenuButton?.addEventListener('click', () => {
+    sidebar?.classList.toggle('-translate-x-full');
+    body.style.overflow = sidebar?.classList.contains('-translate-x-full') ? '' : 'hidden';
+  });
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth > 1024) return;
+    
+    const isClickInsideSidebar = sidebar?.contains(e.target as Node);
+    const isClickOnMenuButton = mobileMenuButton?.contains(e.target as Node);
+    
+    if (!isClickInsideSidebar && !isClickOnMenuButton && !sidebar?.classList.contains('-translate-x-full')) {
+      sidebar?.classList.add('-translate-x-full');
+      body.style.overflow = '';
+    }
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      sidebar?.classList.add('-translate-x-full');
+      body.style.overflow = '';
+    }
+  });
+</script>
