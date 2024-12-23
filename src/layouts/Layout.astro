@@ -14,11 +14,11 @@ const path = Astro.url.pathname;
 // Determine if we should show the Substack embed
 const showSubstack = shouldShowSubstack(path);
 
-console.log('Layout Debug:', {
-  path,
-  showSubstack,
-  segments: path.split('/').filter(Boolean)
-});
+// Debug info that will show on the page
+const debugInfo = {
+  currentPath: path,
+  shouldShowSubstack: showSubstack
+};
 ---
 
 <!doctype html>
@@ -38,6 +38,11 @@ console.log('Layout Debug:', {
       <main class="flex-1 lg:pl-[250px]">
         <div class="pt-20 lg:pt-20">
           <div class="max-w-[900px] mx-auto px-4 sm:px-0">
+            <!-- Debug info -->
+            <pre class="mb-8 p-4 bg-gray-100 rounded text-sm">
+              {JSON.stringify(debugInfo, null, 2)}
+            </pre>
+
             <slot />
             {showSubstack && (
               <div class="mt-12">
