@@ -1,0 +1,52 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import VideoCard from '../../../components/VideoCard.astro';
+
+const videos = [
+  {
+    title: 'Redesigning the Design System',
+    timestamp: 'December 20, 2023',
+    duration: '15:45',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1629752187687-3d3c7ea3a21b?auto=format&fit=crop&w=800&h=450&q=80',
+    isDraft: true
+  },
+  {
+    title: 'Mobile App Transformation',
+    timestamp: 'December 13, 2023',
+    duration: '12:30',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&h=450&q=80',
+  },
+  {
+    title: 'Enterprise UX Evolution',
+    timestamp: 'December 6, 2023',
+    duration: '18:20',
+    thumbnailUrl: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&h=450&q=80',
+  }
+];
+
+const [featuredVideo, ...otherVideos] = videos;
+const title = "Design Case Studies";
+---
+
+<Layout title={title}>
+  <main class="py-8 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto px-4 sm:px-0">
+      <div class="mb-8">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
+        <p class="mt-2 text-[15px] text-[#3c4257]">Explore real-world design projects and their outcomes through detailed case studies.</p>
+      </div>
+
+      <!-- Featured Video -->
+      <div class="mb-8">
+        <VideoCard {...featuredVideo} />
+      </div>
+
+      <!-- Other Videos Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {otherVideos.map(video => (
+          <VideoCard {...video} />
+        ))}
+      </div>
+    </article>
+  </main>
+</Layout>
