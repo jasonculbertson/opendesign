@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title} showBackButton={true}>
-  <main class="py-8 px-4 sm:px-6 lg:px-10">
+  <main class="py-8">
     <article class="max-w-[680px]">
       <div class="mb-3">
         <h1 class="text-[32px] sm:text-[40px] leading-[40px] sm:leading-[48px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{frontmatter.title}</h1>

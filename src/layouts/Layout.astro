@@ -38,11 +38,35 @@ const showSubstack = shouldShowSubstack(path);
         class="ml-auto p-2 text-gray-700"
         aria-label="Toggle menu"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+        <div class="relative w-6 h-6">
+          <!-- Close icon (X) -->
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="absolute inset-0 w-6 h-6 opacity-0 transform rotate-0 transition-all duration-300" 
+            id="close-icon"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          <!-- Menu icon (hamburger) -->
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="absolute inset-0 w-6 h-6 opacity-100 transform rotate-0 transition-all duration-300" 
+            id="menu-icon"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2"
+          >
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </div>
       </button>
     </div>
 
@@ -51,7 +75,7 @@ const showSubstack = shouldShowSubstack(path);
       
       <main class="flex-1 lg:pl-[250px]">
         <div class="pt-20 lg:pt-20">
-          <div class="max-w-[900px] mx-auto px-2 sm:px-0">
+          <div class="max-w-[900px] mx-auto px-4 lg:px-0">
             <div class="relative max-w-[680px]">
               <slot />
             </div>
@@ -78,11 +102,26 @@ const showSubstack = shouldShowSubstack(path);
     <script>
       const mobileMenuButton = document.getElementById('mobile-menu-button');
       const sidebar = document.getElementById('sidebar');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
       const body = document.body;
 
       mobileMenuButton?.addEventListener('click', () => {
         sidebar?.classList.toggle('-translate-x-full');
         body.style.overflow = sidebar?.classList.contains('-translate-x-full') ? '' : 'hidden';
+        
+        // Toggle icons
+        if (sidebar?.classList.contains('-translate-x-full')) {
+          menuIcon?.classList.remove('opacity-0', 'rotate-180');
+          menuIcon?.classList.add('opacity-100', 'rotate-0');
+          closeIcon?.classList.remove('opacity-100', 'rotate-0');
+          closeIcon?.classList.add('opacity-0', '-rotate-180');
+        } else {
+          menuIcon?.classList.remove('opacity-100', 'rotate-0');
+          menuIcon?.classList.add('opacity-0', 'rotate-180');
+          closeIcon?.classList.remove('opacity-0', '-rotate-180');
+          closeIcon?.classList.add('opacity-100', 'rotate-0');
+        }
       });
 
       // Close sidebar when clicking outside on mobile
@@ -95,6 +134,12 @@ const showSubstack = shouldShowSubstack(path);
         if (!isClickInsideSidebar && !isClickOnMenuButton && !sidebar?.classList.contains('-translate-x-full')) {
           sidebar?.classList.add('-translate-x-full');
           body.style.overflow = '';
+          
+          // Reset icons
+          menuIcon?.classList.remove('opacity-0', 'rotate-180');
+          menuIcon?.classList.add('opacity-100', 'rotate-0');
+          closeIcon?.classList.remove('opacity-100', 'rotate-0');
+          closeIcon?.classList.add('opacity-0', '-rotate-180');
         }
       });
 
@@ -102,6 +147,12 @@ const showSubstack = shouldShowSubstack(path);
       window.addEventListener('resize', () => {
         if (window.innerWidth > 1024) {
           body.style.overflow = '';
+          
+          // Reset icons
+          menuIcon?.classList.remove('opacity-0', 'rotate-180');
+          menuIcon?.classList.add('opacity-100', 'rotate-0');
+          closeIcon?.classList.remove('opacity-100', 'rotate-0');
+          closeIcon?.classList.add('opacity-0', '-rotate-180');
         }
       });
     </script>
