@@ -23,8 +23,11 @@ import {
   FileVideo
 } from 'lucide-react';
 
-const { currentPath } = Astro.props;
-console.log('Current Path in Sidebar:', currentPath);
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
 
 const links = [
   {
@@ -122,7 +125,7 @@ const links = [
           </h2>
           <ul class="space-y-[2px]">
             {section.items.map(item => {
-              const isActive = currentPath.startsWith(item.href);
+              const isActive = currentPath?.startsWith(item.href) ?? false;
               return (
                 <li>
                   <a

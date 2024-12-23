@@ -10,7 +10,8 @@ interface Props {
 }
 
 const { title } = Astro.props;
-const showSubstack = shouldShowSubstack(Astro.url.pathname);
+const path = Astro.url.pathname;
+const showSubstack = shouldShowSubstack(path);
 ---
 
 <!doctype html>
@@ -25,7 +26,7 @@ const showSubstack = shouldShowSubstack(Astro.url.pathname);
   </head>
   <body>
     <div class="flex min-h-screen">
-      <Sidebar />
+      <Sidebar currentPath={path} />
       
       <main class="flex-1 lg:pl-[250px]">
         <div class="pt-20 lg:pt-20">
