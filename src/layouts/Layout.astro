@@ -1,5 +1,7 @@
 ---
 import Sidebar from '../components/Sidebar.astro';
+import SubstackEmbed from '../components/SubstackEmbed.astro';
+import { shouldShowSubstack } from '../utils/pageUtils';
 import '../styles/main.css';
 
 interface Props {
@@ -9,13 +11,12 @@ interface Props {
 const { title, description = "Open Design Documentation" } = Astro.props;
 const path = Astro.url.pathname;
 
-// Get the current path and split it into segments
-const pathSegments = path.split('/').filter(Boolean);
+// Determine if we should show the Substack embed
+const showSubstack = shouldShowSubstack(path);
 
 console.log('Debug info:', {
   path,
-  segments: pathSegments,
-  segmentCount: pathSegments.length
+  showSubstack
 });
 ---
 
@@ -37,6 +38,7 @@ console.log('Debug info:', {
         <div class="pt-20 lg:pt-20">
           <div class="max-w-[900px] mx-auto">
             <slot />
+            {showSubstack && <SubstackEmbed />}
           </div>
         </div>
       </main>
