@@ -1,9 +1,0 @@
----
-import { ClerkProvider } from '@clerk/astro';
-
-const publishableKey = import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY;
----
-
-<ClerkProvider publishableKey={publishableKey}>
-  <slot />
-</ClerkProvider>
