@@ -23,19 +23,23 @@ const videos = [
     thumbnailUrl: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=800&h=450&q=80',
   }
 ];
+
+const title = "Design Leadership Interviews";
 ---
 
-<Layout title="Design Leadership Interviews">
-  <main class="max-w-6xl mx-auto px-4 py-8">
-    <div class="mb-8">
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">Design Leadership Interviews</h1>
-      <p class="text-lg text-gray-600">Learn from experienced design leaders through in-depth interviews.</p>
-    </div>
+<Layout title={title}>
+  <main class="py-8 sm:px-6 lg:px-8">
+    <article class="max-w-[680px] mx-auto px-4 sm:px-0">
+      <div class="mb-8">
+        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
+        <p class="mt-2 text-[15px] text-[#3c4257]">Learn from experienced design leaders through in-depth interviews.</p>
+      </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {videos.map(video => (
-        <VideoCard {...video} />
-      ))}
-    </div>
+      <div class="grid grid-cols-1 gap-4">
+        {videos.map(video => (
+          <VideoCard {...video} />
+        ))}
+      </div>
+    </article>
   </main>
 </Layout>
