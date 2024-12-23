@@ -33,21 +33,21 @@ const showSubstack = shouldShowSubstack(path);
             <div class="relative">
               <slot />
             </div>
-            {showSubstack && (
-              <div class="pb-12">
-                <div class="bg-white p-6">
-                  <iframe
-                    src="https://opendesigndocs.substack.com/embed"
-                    width="100%"
-                    height="150"
-                    style="border:2px solid #EFF4FA; background:#EFF4FA; border-radius:8px;"
-                    frameborder="0"
-                    scrolling="no"
-                  ></iframe>
-                </div>
-              </div>
-            )}
           </div>
+          {showSubstack && (
+            <div class="max-w-[900px] mx-auto px-4 sm:px-0 pb-12">
+              <div class="bg-white p-6">
+                <iframe
+                  src="https://opendesigndocs.substack.com/embed"
+                  width="100%"
+                  height="150"
+                  style="border:2px solid #EFF4FA; background:#EFF4FA; border-radius:8px;"
+                  frameborder="0"
+                  scrolling="no"
+                ></iframe>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </div>
