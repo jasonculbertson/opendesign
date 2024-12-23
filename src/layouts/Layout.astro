@@ -14,9 +14,10 @@ const path = Astro.url.pathname;
 // Determine if we should show the Substack embed
 const showSubstack = shouldShowSubstack(path);
 
-console.log('Debug info:', {
+console.log('Layout Debug:', {
   path,
-  showSubstack
+  showSubstack,
+  segments: path.split('/').filter(Boolean)
 });
 ---
 
@@ -38,7 +39,11 @@ console.log('Debug info:', {
         <div class="pt-20 lg:pt-20">
           <div class="max-w-[900px] mx-auto">
             <slot />
-            {showSubstack && <SubstackEmbed />}
+            {showSubstack && (
+              <div class="mt-12">
+                <SubstackEmbed />
+              </div>
+            )}
           </div>
         </div>
       </main>

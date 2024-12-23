@@ -2,14 +2,29 @@ export function shouldShowSubstack(pathname: string): boolean {
   // Split path into segments and remove empty strings
   const segments = pathname.split('/').filter(Boolean);
   
+  console.log('Page Debug:', {
+    pathname,
+    segments,
+    segmentCount: segments.length
+  });
+
   // Don't show on root or L1 pages (e.g., /docs/leadership)
-  if (segments.length <= 2) return false;
+  if (segments.length <= 2) {
+    console.log(' Not showing: L1 page');
+    return false;
+  }
   
   // Don't show on pages that have L3 content (e.g., /docs/team/recruiting/job-descriptions-jds)
-  if (segments.length > 3) return false;
+  if (segments.length > 3) {
+    console.log(' Not showing: L3+ page');
+    return false;
+  }
 
   // Don't show on index pages
-  if (segments[segments.length - 1] === 'index') return false;
+  if (segments[segments.length - 1] === 'index') {
+    console.log(' Not showing: Index page');
+    return false;
+  }
 
   // Don't show on pages that are known to have L3 content
   const pagesWithL3Content = [
@@ -25,5 +40,12 @@ export function shouldShowSubstack(pathname: string): boolean {
     '/docs/leadership/departure'   // Has sub-pages
   ];
   
-  return !pagesWithL3Content.includes(pathname);
+  const isExcluded = pagesWithL3Content.includes(pathname);
+  if (isExcluded) {
+    console.log(' Not showing: Has L3 content');
+    return false;
+  }
+
+  console.log(' Showing: L2 page without L3 content');
+  return true;
 }
