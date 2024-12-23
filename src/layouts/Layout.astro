@@ -14,17 +14,14 @@ const { title, description = "Open Design Documentation" } = Astro.props;
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
 console.log('Path segments:', pathSegments);
 
-// Determine if we should show the Substack embed
-// Show on L2 and L3 pages, but not on L1 pages
-const isL1Page = pathSegments.length <= 2;
-const hasL3Content = pathSegments.length > 3;
-const showSubstack = !isL1Page && !hasL3Content;
+// Show Substack only on L2 pages without L3 content
+const isL2Page = pathSegments.length === 3; // /docs/videos/interviews = 3 segments
+const showSubstack = isL2Page;
 
 console.log('Path analysis:', {
   path: Astro.url.pathname,
   segments: pathSegments,
-  isL1Page,
-  hasL3Content,
+  isL2Page,
   showSubstack
 });
 ---
