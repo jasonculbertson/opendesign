@@ -65,7 +65,7 @@ const managerRoles = [
 <Layout title={entry.data.title}>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-2" aria-label="Breadcrumb">
+      <nav class="flex" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2">
           {breadcrumbs.map((crumb, index) => (
             <li class="flex items-center">
@@ -81,15 +81,6 @@ const managerRoles = [
           ))}
         </ol>
       </nav>
-
-      <div class="mb-12">
-        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">Level Competencies</h1>
-        <div class="bg-white/60 backdrop-blur-[2px] rounded-xl pt-8 pr-8 pb-8 my-8 ring-1 ring-white/50">
-          <p class="text-[15px] leading-7 text-[#1a1f36]">
-            The level competencies framework provides clear expectations and growth paths for designers at every level.
-          </p>
-        </div>
-      </div>
 
       <div class="space-y-12">
         <section>

@@ -327,6 +327,16 @@ body {
   .prose h2 {
     @apply text-[18px];
   }
+
+  nav[aria-label="Breadcrumb"] {
+    @apply mb-0;
+  }
+}
+
+@media (min-width: 769px) {
+  nav[aria-label="Breadcrumb"] {
+    @apply mb-2;
+  }
 }
 
 .grid {
