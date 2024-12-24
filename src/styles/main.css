@@ -247,7 +247,7 @@ body {
 
 /* Gradient panel styles */
 .gradient-panel {
-  @apply relative bg-white rounded-xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] border border-gray-200 px-8 py-4;
+  @apply relative bg-white rounded-xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] border border-gray-200 px-8 py-2;
 }
 
 .gradient-panel > div {
