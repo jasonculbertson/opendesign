@@ -317,7 +317,7 @@ body {
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .prose {
-    @apply px-4;
+    @apply py-4;
   }
   
   .prose h1 {
