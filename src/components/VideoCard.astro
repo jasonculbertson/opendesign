@@ -9,16 +9,37 @@ interface Props {
 }
 
 const { title, timestamp, duration, thumbnailUrl, isDraft = false, href } = Astro.props;
+
+function getYouTubeVideoId(url: string | undefined) {
+  if (!url) return null;
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
+}
+
+const videoId = getYouTubeVideoId(href);
 ---
 
-<div class={`group relative rounded-xl overflow-hidden bg-white border border-[#e5e7eb] hover:border-[#d1d5db] transition-colors ${href ? 'cursor-pointer' : ''}`}>
-  <a href={href} target={href?.startsWith('http') ? '_blank' : undefined} rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}>
-    <div class="aspect-video relative overflow-hidden">
+<div class={`group relative rounded-xl overflow-hidden bg-white border border-[#e5e7eb] hover:border-[#d1d5db] transition-colors`}>
+  <div class="aspect-video relative overflow-hidden">
+    <div id={`thumbnail-${videoId}`} class="relative cursor-pointer">
       <img 
         src={thumbnailUrl} 
         alt={title}
         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
       />
+      {videoId && (
+        <button 
+          class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors"
+          onclick={`loadYouTubeVideo('${videoId}')`}
+        >
+          <div class="w-16 h-16 flex items-center justify-center rounded-full bg-white/90 group-hover:bg-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </button>
+      )}
       <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 rounded text-white text-[13px] font-medium">
         {duration}
       </div>
@@ -28,9 +49,37 @@ const { title, timestamp, duration, thumbnailUrl, isDraft = false, href } = Astr
         </div>
       )}
     </div>
-    <div class="p-4">
-      <h3 class="text-[15px] font-semibold text-[#1a1f36] mb-1">{title}</h3>
-      <p class="text-[13px] text-[#3c4257]">{timestamp}</p>
+    <div id={`player-${videoId}`} class="hidden absolute inset-0">
+      <!-- YouTube player will be loaded here -->
     </div>
-  </a>
+  </div>
+  <div class="p-4">
+    <h3 class="text-[15px] font-semibold text-[#1a1f36] mb-1">{title}</h3>
+    <p class="text-[13px] text-[#3c4257]">{timestamp}</p>
+  </div>
 </div>
+
+<script is:inline>
+  function loadYouTubeVideo(videoId) {
+    const thumbnailEl = document.getElementById(`thumbnail-${videoId}`);
+    const playerEl = document.getElementById(`player-${videoId}`);
+    
+    if (thumbnailEl && playerEl) {
+      thumbnailEl.style.display = 'none';
+      playerEl.style.display = 'block';
+      
+      const iframe = document.createElement('iframe');
+      iframe.width = '100%';
+      iframe.height = '100%';
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      iframe.title = 'YouTube video player';
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.position = 'absolute';
+      iframe.style.inset = '0';
+      
+      playerEl.appendChild(iframe);
+    }
+  }
+</script>
