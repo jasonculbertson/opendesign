@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ProtectedRoute } from '../components/Auth/ProtectedRoute';
+
+const title = 'Profile - Open Design Docs';
+---
+
+<Layout title={title}>
+  <ProtectedRoute client:load>
+    <div class="max-w-3xl mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-8">Profile</h1>
+      <div class="bg-white shadow rounded-lg p-6">
+        <div id="profile-info" class="space-y-6">
+          <!-- Profile information will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      import { supabase } from '../lib/supabase';
+
+      async function loadProfile() {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
+
+        const profileInfo = document.getElementById('profile-info');
+        if (!profileInfo) return;
+
+        const { email, user_metadata } = user;
+        
+        profileInfo.innerHTML = `
+          <div>
+            <div class="flex items-center space-x-4">
+              ${user_metadata?.avatar_url ? `
+                <img src="${user_metadata.avatar_url}" alt="Profile" class="h-20 w-20 rounded-full">
+              ` : `
+                <div class="h-20 w-20 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xl font-medium">
+                  ${(user_metadata?.full_name || email || 'U')[0].toUpperCase()}
+                </div>
+              `}
+              <div>
+                <h2 class="text-xl font-semibold text-gray-900">
+                  ${user_metadata?.full_name || 'User'}
+                </h2>
+                <p class="text-gray-500">${email}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-gray-200 pt-6">
+            <dl class="divide-y divide-gray-200">
+              <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-medium text-gray-500">Full name</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  ${user_metadata?.full_name || 'Not set'}
+                </dd>
+              </div>
+              <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-medium text-gray-500">Email address</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">${email}</dd>
+              </div>
+              <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-medium text-gray-500">Provider</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  ${user.app_metadata.provider || 'Email'}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        `;
+      }
+
+      // Load profile when the page loads
+      loadProfile();
+    </script>
+  </ProtectedRoute>
+</Layout>

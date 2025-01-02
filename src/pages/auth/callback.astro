@@ -1,0 +1,14 @@
+---
+import { supabase } from '../../lib/supabase'
+
+if (Astro.request.url) {
+  const url = new URL(Astro.request.url)
+  const code = url.searchParams.get('code')
+  
+  if (code) {
+    await supabase.auth.exchangeCodeForSession(code)
+  }
+}
+
+return Astro.redirect('/')
+---

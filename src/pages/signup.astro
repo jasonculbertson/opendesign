@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SignUpForm } from '../components/Auth/SignUpForm';
+---
+
+<Layout title="Sign Up - Open Design Docs">
+  <div class="min-h-[calc(100vh-8rem)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+      <div>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Create your account
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+          Join Open Design Docs today
+        </p>
+      </div>
+      <SignUpForm client:load />
+    </div>
+  </div>
+</Layout>
