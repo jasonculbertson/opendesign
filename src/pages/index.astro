@@ -1,11 +1,18 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { TestAuth } from '../components/Auth/TestAuth';
 export const prerender = false;
 
 const redirectUrl = '/docs/leadership/day-1';
 ---
 
-<meta http-equiv="refresh" content={`0;url=${redirectUrl}`}>
+<Layout title="Open Design Docs">
+  <div class="max-w-4xl mx-auto p-4">
+    <TestAuth client:load />
+    <meta http-equiv="refresh" content={`0;url=${redirectUrl}`}>
 
-<script define:vars={{ redirectUrl }}>
-  window.location.href = redirectUrl;
-</script>
+    <script define:vars={{ redirectUrl }}>
+      window.location.href = redirectUrl;
+    </script>
+  </div>
+</Layout>
