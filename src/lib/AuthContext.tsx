@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { User, Provider } from '@supabase/supabase-js'
+import type { User } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 
 type AuthContextType = {
   user: User | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<void>
-  signInWithProvider: (provider: Provider) => Promise<void>
+  signInWithProvider: (provider: 'google') => Promise<void>
   signUp: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
 }
@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (error) throw error
   }
 
-  const signInWithProvider = async (provider: Provider) => {
+  const signInWithProvider = async (provider: 'google') => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
