@@ -1,0 +1,77 @@
+---
+import AuthLayout from '../layouts/AuthLayout.astro';
+---
+
+<AuthLayout title="Check your inbox - Open Design Docs">
+  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-88px)]">
+    <div class="w-full max-w-[420px] px-4 text-center">
+      <h1 class="text-[32px] font-semibold text-gray-900 mb-4">
+        Check your inbox
+      </h1>
+      
+      <p class="text-[15px] text-gray-600 mb-6">
+        We've emailed a link to <span id="userEmail" class="font-medium text-gray-900"></span>
+      </p>
+
+      <div class="text-center space-y-3">
+        <p class="text-[15px] text-gray-500">
+          Not received the link?
+        </p>
+        <button
+          id="resendButton"
+          class="text-[15px] text-gray-900 hover:text-gray-700 underline underline-offset-4"
+        >
+          Resend email
+        </button>
+      </div>
+    </div>
+  </div>
+</AuthLayout>
+
+<script>
+  import { supabase } from '../lib/supabase'
+
+  // Get the email from URL parameters
+  const urlParams = new URLSearchParams(window.location.search)
+  const email = urlParams.get('email')
+  
+  // Display the email
+  const userEmailElement = document.getElementById('userEmail')
+  if (userEmailElement && email) {
+    userEmailElement.textContent = email
+  }
+
+  // Handle resend button
+  const resendButton = document.getElementById('resendButton')
+  if (resendButton && email) {
+    resendButton.addEventListener('click', async () => {
+      try {
+        resendButton.textContent = 'Sending...'
+        resendButton.disabled = true
+
+        const { error } = await supabase.auth.resend({
+          type: 'signup',
+          email,
+          options: {
+            emailRedirectTo: `${window.location.origin}/welcome`,
+          },
+        })
+
+        if (error) throw error
+
+        resendButton.textContent = 'Email sent!'
+        setTimeout(() => {
+          resendButton.textContent = 'Resend email'
+          resendButton.disabled = false
+        }, 3000)
+      } catch (error) {
+        console.error('Error:', error)
+        resendButton.textContent = 'Error sending email'
+        setTimeout(() => {
+          resendButton.textContent = 'Resend email'
+          resendButton.disabled = false
+        }, 3000)
+      }
+    })
+  }
+</script>

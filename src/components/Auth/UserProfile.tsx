@@ -1,96 +1,75 @@
-import { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../../lib/AuthContext'
+import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 
 export function UserProfile() {
   const { user, signOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  if (!user) return null
-
-  const getInitials = (name: string) => {
-    return name
-      .split(' ')
-      .map(part => part[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2)
-  }
-
-  const getAvatarContent = () => {
-    if (user.user_metadata?.avatar_url) {
-      return (
-        <img
-          src={user.user_metadata.avatar_url}
-          alt={user.user_metadata.full_name || user.email}
-          className="h-full w-full rounded-full object-cover"
-        />
-      )
-    }
-
-    const initials = user.user_metadata?.full_name
-      ? getInitials(user.user_metadata.full_name)
-      : getInitials(user.email?.split('@')[0] || 'U')
-
+  if (user) {
     return (
-      <div className="h-full w-full flex items-center justify-center bg-indigo-600 rounded-full text-white text-sm font-medium">
-        {initials}
-      </div>
-    )
-  }
+      <div className="relative">
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-2 focus:outline-none"
+        >
+          <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-100">
+            {user.user_metadata?.avatar_url ? (
+              <img 
+                src={user.user_metadata.avatar_url} 
+                alt="Profile" 
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <svg className="w-full h-full text-gray-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+            )}
+          </div>
+          <ChevronDown 
+            className={`w-4 h-4 text-gray-600 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          />
+        </button>
 
-  const handleSignOut = async () => {
-    try {
-      await signOut()
-      window.location.href = '/'
-    } catch (error) {
-      console.error('Error signing out:', error)
-    }
-  }
-
-  return (
-    <div className="relative" ref={menuRef}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="h-8 w-8 rounded-full overflow-hidden ring-2 ring-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-      >
-        {getAvatarContent()}
-      </button>
-
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          <div className="py-1" role="menu" aria-orientation="vertical">
-            <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-200">
-              {user.user_metadata?.full_name || user.email}
+        {isOpen && (
+          <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 border border-gray-200">
+            <div className="px-4 py-2 border-b border-gray-100">
+              <div className="text-sm font-medium text-gray-900 truncate">
+                {user.email}
+              </div>
             </div>
             <a
               href="/profile"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              role="menuitem"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             >
-              Profile
+              Profile Settings
             </a>
             <button
-              onClick={handleSignOut}
-              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              role="menuitem"
+              onClick={() => signOut()}
+              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             >
               Sign out
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <a
+        href="/login"
+        className="px-4 py-2 text-[15px] font-medium text-gray-700 hover:text-gray-900"
+      >
+        Log in
+      </a>
+      <a
+        href="/signup"
+        className="px-4 py-2 text-[15px] font-medium text-white bg-gray-900 hover:bg-black rounded-lg shadow-sm transition-colors"
+      >
+        Sign up
+      </a>
     </div>
   )
 }

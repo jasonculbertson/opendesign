@@ -1,0 +1,423 @@
+---
+---
+
+<div class="space-y-6">
+  <button
+    id="googleSignUp"
+    class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+  >
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M23.766 12.2764C23.766 11.4607 23.6999 10.6406 23.5588 9.83807H12.24V14.4591H18.7217C18.4528 15.9494 17.5885 17.2678 16.323 18.1056V21.1039H20.19C22.4608 19.0139 23.766 15.9274 23.766 12.2764Z" fill="#4285F4"/>
+      <path d="M12.24 24.0008C15.4764 24.0008 18.2058 22.9382 20.1944 21.1039L16.3274 18.1055C15.2516 18.8375 13.8626 19.252 12.24 19.252C9.0362 19.252 6.3106 17.1399 5.3646 14.3003H1.3916V17.3912C3.37 21.4434 7.4854 24.0008 12.24 24.0008Z" fill="#34A853"/>
+      <path d="M5.36451 14.3003C5.14451 13.5593 5.02051 12.7733 5.02051 11.9666C5.02051 11.1599 5.14451 10.3739 5.36451 9.63293V6.54202H1.39151C0.507514 8.20283 0 10.0297 0 11.9666C0 13.9035 0.507514 15.7304 1.39151 17.3912L5.36451 14.3003Z" fill="#FBBC05"/>
+      <path d="M12.24 4.68186C14.0291 4.68186 15.6265 5.32607 16.8574 6.49357L20.2695 3.0814C18.2001 1.1742 15.4764 0 12.24 0C7.4854 0 3.37 2.55742 1.3916 6.54202L5.3646 9.63293C6.3106 6.79326 9.0362 4.68186 12.24 4.68186Z" fill="#EA4335"/>
+    </svg>
+    Sign up with Google
+  </button>
+
+  <div class="relative">
+    <div class="absolute inset-0 flex items-center">
+      <div class="w-full border-t border-gray-200"></div>
+    </div>
+    <div class="relative flex justify-center text-sm">
+      <span class="px-2 bg-white text-gray-500">Or</span>
+    </div>
+  </div>
+
+  <form id="signupForm" class="space-y-4">
+    <div id="error" class="hidden bg-red-50 text-red-500 p-3 rounded-lg text-[15px]"></div>
+    
+    <div class="space-y-4">
+      <div class="space-y-1">
+        <div class="relative">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address..."
+            class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-[15px] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            required
+          />
+        </div>
+        <div id="emailValidation" class="hidden text-[13px] bg-gray-50 p-3 rounded-lg">
+          <div id="emailError" class="text-red-600 hidden">Please enter a valid email address</div>
+          <div id="emailSuggestion" class="text-blue-600 hidden">
+            Did you mean to type <button type="button" class="font-medium underline"></button>?
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <div class="relative">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a password..."
+            class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-[15px] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+            required
+            minlength="8"
+          />
+          <button
+            type="button"
+            class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700 opacity-0 transition-opacity"
+            aria-label="Toggle password visibility"
+            data-password-toggle
+          >
+            <svg class="w-5 h-5 eye-open" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="w-5 h-5 eye-closed hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.88235 9.88235C9.32548 10.4392 9 11.1873 9 12C9 13.6569 10.3431 15 12 15C12.8127 15 13.5608 14.6745 14.1176 14.1176M21 21L3 3M3.34851 8.98582C2.48366 9.99582 2 11 2 12C2 12 5 19 12 19C13.2454 19 14.3503 18.7509 15.3145 18.3205M19.4815 15.1401C20.7683 13.8392 21.7141 12.4959 22 12C22 12 19 5 12 5C11.1086 5 10.2737 5.11437 9.5 5.31849" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div id="passwordRequirements" class="hidden text-[13px] bg-gray-50 p-3 rounded-lg space-y-2">
+          <div class="font-medium text-gray-700">Password requirements:</div>
+          <ul class="space-y-1">
+            <li id="lengthReq" class="flex items-center gap-2 text-red-600">
+              <svg class="w-4 h-4 warning-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg class="w-4 h-4 check-icon hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              At least 8 characters
+            </li>
+            <li id="uppercaseReq" class="flex items-center gap-2 text-red-600">
+              <svg class="w-4 h-4 warning-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg class="w-4 h-4 check-icon hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              One uppercase letter
+            </li>
+            <li id="specialReq" class="flex items-center gap-2 text-red-600">
+              <svg class="w-4 h-4 warning-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <svg class="w-4 h-4 check-icon hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              One special character (!@#$%^&*)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <div class="relative">
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm your password..."
+            class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-[15px] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+            required
+          />
+          <button
+            type="button"
+            class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700 opacity-0 transition-opacity"
+            aria-label="Toggle password visibility"
+            data-password-toggle
+          >
+            <svg class="w-5 h-5 eye-open" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="w-5 h-5 eye-closed hidden" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.88235 9.88235C9.32548 10.4392 9 11.1873 9 12C9 13.6569 10.3431 15 12 15C12.8127 15 13.5608 14.6745 14.1176 14.1176M21 21L3 3M3.34851 8.98582C2.48366 9.99582 2 11 2 12C2 12 5 19 12 19C13.2454 19 14.3503 18.7509 15.3145 18.3205M19.4815 15.1401C20.7683 13.8392 21.7141 12.4959 22 12C22 12 19 5 12 5C11.1086 5 10.2737 5.11437 9.5 5.31849" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div id="confirmPasswordError" class="hidden text-[13px] text-red-600 mt-1">
+          Passwords do not match
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full flex justify-center py-2.5 px-4 rounded-lg text-[15px] font-medium text-white bg-gray-900 hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+      >
+        Create account
+      </button>
+    </div>
+
+    <div class="text-center text-[13px] text-gray-500">
+      By continuing with Google or Email, I am agreeing to
+      Open Design Docs' <a href="/terms" class="underline">Terms of Service</a> and{' '}
+      <a href="/privacy" class="underline">Privacy Policy</a>
+    </div>
+  </form>
+
+  <script>
+    import { supabase } from '../../lib/supabase'
+
+    const form = document.getElementById('signupForm') as HTMLFormElement
+    const emailInput = document.getElementById('email') as HTMLInputElement
+    const emailError = document.getElementById('emailError')
+    const emailSuggestion = document.getElementById('emailSuggestion')
+    const passwordInput = document.getElementById('password') as HTMLInputElement
+    const confirmPasswordInput = document.getElementById('confirmPassword') as HTMLInputElement
+    const errorDiv = document.getElementById('error')
+    const googleButton = document.getElementById('googleSignUp')
+    const passwordRequirements = document.getElementById('passwordRequirements')
+    const confirmPasswordError = document.getElementById('confirmPasswordError')
+    const toggleButtons = document.querySelectorAll('[data-password-toggle]')
+    const emailValidation = document.getElementById('emailValidation')
+
+    // Get requirement elements
+    const lengthReq = document.getElementById('lengthReq')
+    const uppercaseReq = document.getElementById('uppercaseReq')
+    const specialReq = document.getElementById('specialReq')
+
+    function updateRequirement(element: HTMLElement, isValid: boolean) {
+      if (isValid) {
+        element.classList.remove('text-red-600')
+        element.classList.add('text-green-600')
+        element.querySelector('.warning-icon')?.classList.add('hidden')
+        element.querySelector('.check-icon')?.classList.remove('hidden')
+      } else {
+        element.classList.remove('text-green-600')
+        element.classList.add('text-red-600')
+        element.querySelector('.warning-icon')?.classList.remove('hidden')
+        element.querySelector('.check-icon')?.classList.add('hidden')
+      }
+    }
+
+    function validatePassword(password: string) {
+      const hasLength = password.length >= 8
+      const hasUppercase = /[A-Z]/.test(password)
+      const hasSpecial = /[!@#$%^&*]/.test(password)
+
+      if (lengthReq) updateRequirement(lengthReq, hasLength)
+      if (uppercaseReq) updateRequirement(uppercaseReq, hasUppercase)
+      if (specialReq) updateRequirement(specialReq, hasSpecial)
+
+      return hasLength && hasUppercase && hasSpecial
+    }
+
+    // Email validation
+    if (emailInput && emailError && emailSuggestion && emailValidation) {
+      const validateEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return emailRegex.test(email)
+      }
+
+      const checkForConSuggestion = (email: string) => {
+        const parts = email.split('@')
+        if (parts.length === 2) {
+          const domain = parts[1]
+          if (domain.endsWith('.con')) {
+            const suggestedEmail = email.replace('.con', '.com')
+            return suggestedEmail
+          }
+        }
+        return null
+      }
+
+      const updateValidation = (email: string) => {
+        // Reset styles
+        emailError.style.display = 'none'
+        emailSuggestion.style.display = 'none'
+        emailInput.classList.remove('border-red-300', 'focus:ring-red-500', 'border-gray-200', 'focus:ring-blue-500')
+        
+        if (email) {
+          emailValidation?.classList.remove('hidden')
+          
+          // Check for .con suggestion
+          const suggestion = checkForConSuggestion(email)
+          if (suggestion) {
+            emailSuggestion.style.display = 'block'
+            const suggestionButton = emailSuggestion.querySelector('button')
+            if (suggestionButton) {
+              suggestionButton.textContent = suggestion
+              suggestionButton.onclick = () => {
+                emailInput.value = suggestion
+                emailValidation?.classList.add('hidden')
+                emailInput.classList.remove('border-red-300', 'focus:ring-red-500')
+                emailInput.classList.add('border-gray-200', 'focus:ring-blue-500')
+              }
+            }
+          } else if (!validateEmail(email)) {
+            // Only show error if there's no suggestion
+            emailError.style.display = 'block'
+            emailInput.classList.add('border-red-300', 'focus:ring-red-500')
+            emailInput.classList.remove('border-gray-200', 'focus:ring-blue-500')
+          } else {
+            emailValidation?.classList.add('hidden')
+            emailInput.classList.add('border-gray-200', 'focus:ring-blue-500')
+            emailInput.classList.remove('border-red-300', 'focus:ring-red-500')
+          }
+        } else {
+          emailValidation?.classList.add('hidden')
+        }
+      }
+
+      emailInput.addEventListener('focus', () => {
+        const email = emailInput.value.trim()
+        if (email) {
+          updateValidation(email)
+        }
+      })
+
+      emailInput.addEventListener('blur', () => {
+        const email = emailInput.value.trim()
+        if (!email || validateEmail(email)) {
+          emailValidation?.classList.add('hidden')
+        }
+      })
+
+      emailInput.addEventListener('input', (e) => {
+        const email = emailInput.value.trim()
+        updateValidation(email)
+      })
+    }
+
+    if (form && emailInput && passwordInput && confirmPasswordInput && errorDiv && googleButton && passwordRequirements && confirmPasswordError) {
+      let passwordValid = false
+
+      // Show/hide password requirements
+      passwordInput.addEventListener('focus', () => {
+        if (!passwordValid) {
+          passwordRequirements.classList.remove('hidden')
+        }
+      })
+
+      // Validate password as user types
+      passwordInput.addEventListener('input', () => {
+        const password = passwordInput.value
+        passwordValid = validatePassword(password)
+        
+        if (password && !passwordValid) {
+          passwordInput.classList.add('border-red-300')
+          passwordInput.classList.remove('border-gray-200')
+        } else {
+          passwordInput.classList.remove('border-red-300')
+          passwordInput.classList.add('border-gray-200')
+        }
+
+        // Check confirm password match if it has a value
+        if (confirmPasswordInput.value) {
+          if (password === confirmPasswordInput.value) {
+            confirmPasswordError.classList.add('hidden')
+            confirmPasswordInput.classList.remove('border-red-300')
+            confirmPasswordInput.classList.add('border-gray-200')
+          } else {
+            confirmPasswordError.classList.remove('hidden')
+            confirmPasswordInput.classList.add('border-red-300')
+            confirmPasswordInput.classList.remove('border-gray-200')
+          }
+        }
+      })
+
+      // Handle confirm password field
+      confirmPasswordInput.addEventListener('focus', () => {
+        if (passwordValid) {
+          passwordRequirements.classList.add('hidden')
+        }
+      })
+
+      confirmPasswordInput.addEventListener('input', () => {
+        if (passwordValid) {
+          const confirmValue = confirmPasswordInput.value
+          if (confirmValue === passwordInput.value) {
+            confirmPasswordError.classList.add('hidden')
+            confirmPasswordInput.classList.remove('border-red-300')
+            confirmPasswordInput.classList.add('border-gray-200')
+          } else {
+            confirmPasswordError.classList.remove('hidden')
+            confirmPasswordInput.classList.add('border-red-300')
+            confirmPasswordInput.classList.remove('border-gray-200')
+          }
+        }
+      })
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        
+        const email = emailInput.value
+        const password = passwordInput.value
+        
+        if (!validatePassword(password)) {
+          errorDiv.textContent = 'Password does not meet the requirements'
+          errorDiv.style.display = 'block'
+          return
+        }
+
+        if (passwordInput.value !== confirmPasswordInput.value) {
+          confirmPasswordError.classList.remove('hidden')
+          confirmPasswordInput.classList.add('border-red-300')
+          confirmPasswordInput.classList.remove('border-gray-200')
+          return
+        }
+
+        try {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              emailRedirectTo: `${window.location.origin}/welcome`,
+            }
+          })
+
+          if (error) throw error
+
+          if (data?.user?.identities?.length === 0) {
+            errorDiv.textContent = 'This email is already registered. Please log in instead.'
+            errorDiv.style.display = 'block'
+            return
+          }
+
+          // Always redirect to verify-email page for new signups
+          window.location.href = `/verify-email?email=${encodeURIComponent(email)}`
+        } catch (error) {
+          errorDiv.textContent = error instanceof Error ? error.message : 'An error occurred'
+          errorDiv.style.display = 'block'
+        }
+      })
+
+      googleButton.addEventListener('click', async () => {
+        try {
+          const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+              redirectTo: `${window.location.origin}/welcome`,
+            }
+          })
+
+          if (error) throw error
+        } catch (error) {
+          errorDiv.textContent = error instanceof Error ? error.message : 'An error occurred'
+          errorDiv.style.display = 'block'
+        }
+      })
+
+      // Handle password visibility toggles
+      toggleButtons.forEach(button => {
+        const input = button.previousElementSibling as HTMLInputElement
+        
+        // Show/hide toggle button based on input
+        input.addEventListener('input', () => {
+          button.style.opacity = input.value ? '1' : '0'
+        })
+
+        button.addEventListener('click', () => {
+          const eyeOpen = button.querySelector('.eye-open')
+          const eyeClosed = button.querySelector('.eye-closed')
+          
+          if (input.type === 'password') {
+            input.type = 'text'
+            eyeOpen?.classList.add('hidden')
+            eyeClosed?.classList.remove('hidden')
+          } else {
+            input.type = 'password'
+            eyeOpen?.classList.remove('hidden')
+            eyeClosed?.classList.add('hidden')
+          }
+        })
+      })
+    }
+  </script>

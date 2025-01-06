@@ -4,6 +4,46 @@
 @import '@fontsource/inter/600.css';
 @import '@fontsource/inter/700.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Base styles */
+  html {
+    @apply antialiased;
+  }
+
+  /* Form elements */
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea,
+  select {
+    @apply w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+  }
+
+  [type='checkbox'],
+  [type='radio'] {
+    @apply rounded border-gray-300 text-indigo-600 focus:ring-indigo-500;
+  }
+
+  [type='submit'],
+  [type='button'] {
+    @apply inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}
+
 /* Layout */
 body {
   @apply bg-white text-[#425466] antialiased;
@@ -369,3 +409,6 @@ body {
   margin-bottom: 0.5rem;
   display: block;
 }
+
+/* Import auth styles */
+@import './auth.css';

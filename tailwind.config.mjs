@@ -49,93 +49,93 @@ export default {
               fontWeight: '600',
               fontSize: '16px',
               lineHeight: '24px',
-              letterSpacing: '-0.1px',
+              letterSpacing: '-0.2px',
               marginTop: '32px',
+              marginBottom: '12px',
+            },
+            h4: {
+              color: '#1a1f36',
+              fontWeight: '600',
+              fontSize: '16px',
+              lineHeight: '24px',
+              letterSpacing: '-0.2px',
+              marginTop: '24px',
               marginBottom: '8px',
             },
-            ul: {
-              marginTop: '16px',
-              marginBottom: '16px',
-              li: {
-                marginTop: '8px',
-                marginBottom: '8px',
-                paddingLeft: '20px',
-                fontSize: '15px',
-                lineHeight: '24px',
-                '&::before': {
-                  backgroundColor: '#425466',
-                  width: '5px',
-                  height: '5px',
-                  borderRadius: '50%',
-                  marginTop: '10px',
-                }
-              }
-            },
-            a: {
-              color: '#635bff',
-              textDecoration: 'none',
-              fontWeight: '400',
-              '&:hover': {
-                textDecoration: 'underline',
-              }
+            img: {
+              marginTop: '24px',
+              marginBottom: '24px',
             },
             code: {
               color: '#1a1f36',
               backgroundColor: '#f7fafc',
-              padding: '2px 6px',
               borderRadius: '4px',
+              padding: '2px 4px',
               fontSize: '14px',
-              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+              fontWeight: '500',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
             },
             pre: {
               backgroundColor: '#f7fafc',
-              color: '#1a1f36',
-              padding: '16px',
               borderRadius: '8px',
+              padding: '16px',
               marginTop: '24px',
               marginBottom: '24px',
               code: {
                 backgroundColor: 'transparent',
                 padding: '0',
-                color: 'inherit',
                 fontSize: '14px',
-                lineHeight: '20px',
-              }
+                lineHeight: '24px',
+              },
+            },
+            ol: {
+              marginTop: '16px',
+              marginBottom: '16px',
+              paddingLeft: '20px',
+              li: {
+                marginTop: '8px',
+                marginBottom: '8px',
+                paddingLeft: '8px',
+              },
+            },
+            ul: {
+              marginTop: '16px',
+              marginBottom: '16px',
+              paddingLeft: '20px',
+              li: {
+                marginTop: '8px',
+                marginBottom: '8px',
+                paddingLeft: '8px',
+              },
+            },
+            a: {
+              color: '#6366f1',
+              textDecoration: 'none',
+              '&:hover': {
+                textDecoration: 'underline',
+              },
             },
             blockquote: {
-              borderLeftColor: '#e5e5e5',
-              borderLeftWidth: '4px',
-              paddingLeft: '16px',
+              fontStyle: 'normal',
               marginTop: '24px',
               marginBottom: '24px',
+              paddingLeft: '20px',
+              borderLeftWidth: '4px',
+              borderLeftColor: '#e2e8f0',
               color: '#425466',
             },
-            table: {
-              width: '100%',
-              borderCollapse: 'collapse',
-              margin: '0',
-              'thead th': {
-                borderBottom: '2px solid #e5e5e5',
-                padding: '12px 16px',
-                textAlign: 'left',
-                fontWeight: '600',
-                color: '#1a1f36',
-              },
-              'tbody td': {
-                borderBottom: '1px solid #e5e5e5',
-                padding: '12px 16px',
-                verticalAlign: 'top',
-              },
-              'tbody tr:last-child td': {
-                borderBottom: 'none',
-              }
-            }
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   },
   plugins: [
-    require('@tailwindcss/typography')
-  ]
-};
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms')
+  ],
+}

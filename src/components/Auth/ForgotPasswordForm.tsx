@@ -25,42 +25,39 @@ export function ForgotPasswordForm() {
     <div className="space-y-6">
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm">
+          <div className="bg-red-50 text-red-500 p-3 rounded-lg text-[15px]">
             {error}
           </div>
         )}
         {successMessage && (
-          <div className="bg-green-50 text-green-500 p-3 rounded-md text-sm">
+          <div className="bg-blue-50 text-blue-600 p-3 rounded-lg text-[15px]">
             {successMessage}
           </div>
         )}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email address
-          </label>
           <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            placeholder="Enter your email address..."
+            className="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-[15px] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             required
           />
         </div>
         <button
           type="submit"
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full flex justify-center py-2.5 px-4 rounded-lg text-[15px] font-medium text-white bg-gray-900 hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
         >
-          Send Reset Link
+          Send reset link
         </button>
       </form>
 
-      <p className="text-center text-sm text-gray-600">
-        Remember your password?{' '}
-        <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
-          Sign in
+      <div className="text-center">
+        <a href="/login" className="text-[15px] text-blue-600 hover:text-blue-700">
+          Back to login
         </a>
-      </p>
+      </div>
     </div>
   )
 }
