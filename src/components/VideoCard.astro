@@ -6,9 +6,18 @@ interface Props {
   thumbnailUrl: string;
   isDraft?: boolean;
   href?: string;
+  description?: string;
 }
 
-const { title, timestamp, duration, thumbnailUrl, isDraft = false, href } = Astro.props;
+const { 
+  title, 
+  timestamp, 
+  duration, 
+  thumbnailUrl, 
+  isDraft = false, 
+  href,
+  description = '' 
+} = Astro.props;
 
 function getYouTubeVideoId(url: string | undefined) {
   if (!url) return null;
@@ -20,31 +29,50 @@ function getYouTubeVideoId(url: string | undefined) {
 const videoId = getYouTubeVideoId(href);
 ---
 
-<div class={`group relative rounded-xl overflow-hidden bg-white border border-[#e5e7eb] hover:border-[#d1d5db] transition-colors`}>
+<article 
+  class="group relative rounded-xl overflow-hidden bg-white border border-[#e5e7eb] hover:border-[#d1d5db] transition-colors"
+  itemscope 
+  itemtype="http://schema.org/VideoObject"
+>
+  <meta itemprop="uploadDate" content={timestamp} />
+  <meta itemprop="duration" content={duration} />
+  <meta itemprop="thumbnailUrl" content={thumbnailUrl} />
+  <meta itemprop="description" content={description} />
+  {href && <meta itemprop="embedUrl" content={`https://www.youtube.com/embed/${videoId}`} />}
+
   <div class="aspect-video relative overflow-hidden">
     <div id={`thumbnail-${videoId}`} class="relative cursor-pointer">
       <img 
         src={thumbnailUrl} 
-        alt={title}
+        alt={`Thumbnail for ${title}`}
         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        itemprop="thumbnail"
+        loading="lazy"
       />
       {videoId && (
         <button 
           class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors"
           onclick={`loadYouTubeVideo('${videoId}')`}
+          aria-label={`Play video: ${title}`}
         >
           <div class="w-16 h-16 flex items-center justify-center rounded-full bg-white/90 group-hover:bg-white transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black" viewBox="0 0 24 24" fill="currentColor">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class="w-8 h-8 text-black" 
+              viewBox="0 0 24 24" 
+              fill="currentColor"
+              aria-hidden="true"
+            >
               <path d="M8 5v14l11-7z"/>
             </svg>
           </div>
         </button>
       )}
-      <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 rounded text-white text-[13px] font-medium">
+      <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 rounded text-white text-[13px] font-medium" aria-label="Video duration">
         {duration}
       </div>
       {isDraft && (
-        <div class="absolute top-3 right-3 px-3 py-1 bg-[#f97316] rounded-lg text-white text-[13px] font-medium">
+        <div class="absolute top-3 right-3 px-3 py-1 bg-[#f97316] rounded-lg text-white text-[13px] font-medium" aria-label="New content">
           New
         </div>
       )}
@@ -53,11 +81,22 @@ const videoId = getYouTubeVideoId(href);
       <!-- YouTube player will be loaded here -->
     </div>
   </div>
+
   <div class="p-4">
-    <h3 class="text-[15px] font-semibold text-[#1a1f36] mb-1">{title}</h3>
-    <p class="text-[13px] text-[#3c4257]">{timestamp}</p>
+    <h3 class="font-medium text-[15px] leading-snug text-[#1a1f36]" itemprop="name">
+      {href ? (
+        <a href={href} class="hover:underline" target="_blank" rel="noopener noreferrer">
+          {title}
+        </a>
+      ) : (
+        title
+      )}
+    </h3>
+    <p class="mt-1 text-[13px] text-[#3c4257]">
+      <time datetime={new Date(timestamp).toISOString()}>{timestamp}</time>
+    </p>
   </div>
-</div>
+</article>
 
 <script is:inline>
   function loadYouTubeVideo(videoId) {
