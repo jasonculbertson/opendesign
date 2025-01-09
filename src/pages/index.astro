@@ -1,11 +1,99 @@
 ---
-export const prerender = false;
+import HomeLayout from '../layouts/HomeLayout.astro';
+import heroImage from '../images/hero-graphic.png';
 
-const redirectUrl = '/docs/leadership/day-1';
+const title = "Open Design Docs";
+
+const featuredResources = [
+  {
+    title: 'Leadership Blueprint',
+    description: 'Essential frameworks and tools for new design leaders',
+    href: '/docs/leadership/day-1/leadership-blueprint',
+    section: 'Manager Docs'
+  },
+  {
+    title: 'Design Sprint Guide',
+    description: 'A comprehensive guide for running effective design sprints with your team',
+    href: '/docs/team/design/design-sprint',
+    section: 'Team Resources'
+  },
+  {
+    title: 'Design Leader Interviews',
+    description: 'Learn from experienced design leaders about building and scaling design teams',
+    href: '/docs/videos/interviews',
+    section: 'Interviews'
+  }
+];
 ---
 
-<meta http-equiv="refresh" content={`0;url=${redirectUrl}`}>
+<HomeLayout title={title}>
+  <div class="min-h-screen bg-[#FAFAFA]">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
+      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <a href="/" class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>
+              <span class="text-[15px] font-medium text-gray-900 leading-none">Open Design Docs</span>
+            </a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a href="/docs/leadership/day-1" class="text-sm text-gray-600 hover:text-gray-900">Documentation</a>
+            <a href="/docs/videos/interviews" class="text-sm text-gray-600 hover:text-gray-900">Interviews</a>
+            <a href="/docs/videos/case-studies" class="text-sm text-gray-600 hover:text-gray-900">Case Studies</a>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-<script define:vars={{ redirectUrl }}>
-  window.location.href = redirectUrl;
-</script>
+    <!-- Hero Section -->
+    <div class="pt-32 pb-8 sm:pt-40 sm:pb-12 lg:pt-48 lg:pb-16">
+      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl relative">
+          <div class="flex items-start justify-between">
+            <div class="flex-1 pr-8">
+              <h1 class="text-5xl sm:text-6xl lg:text-7xl font-['Fraunces'] text-gray-900 mb-6">Design resources for building great products.</h1>
+              <p class="text-lg sm:text-xl font-semibold text-gray-600 mb-8 pt-4">Access comprehensive guides, templates, and insights to help you build and scale effective design organizations.</p>
+              <div class="mt-10">
+                <a
+                  href="/docs/leadership/day-1"
+                  class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-[rgb(79,70,229)] hover:bg-[rgb(67,56,202)] rounded-lg transition-colors"
+                >
+                  Browse all resources
+                </a>
+              </div>
+            </div>
+            <div class="hidden lg:block w-64 flex-shrink-0">
+              <img src={heroImage} alt="Design illustration" class="w-full h-auto" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Resources -->
+    <div class="pt-8 pb-8 sm:pt-8 sm:pb-12">
+      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Featured Resources</h2>
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredResources.map(resource => (
+            <a href={resource.href} class="group block">
+              <div class="relative bg-white rounded-2xl border border-gray-200 p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+                <div class="text-sm font-medium text-gray-500 mb-3">{resource.section}</div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                  {resource.title}
+                </h3>
+                <p class="text-gray-600 text-base">{resource.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</HomeLayout>
