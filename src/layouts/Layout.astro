@@ -21,7 +21,8 @@ const {
 
 const path = Astro.url.pathname;
 const showSubstack = shouldShowSubstack(path);
-const canonicalURL = new URL(path, Astro.site);
+const siteUrl = 'https://opendesigndocs.com';
+const canonicalURL = new URL(path, siteUrl).toString();
 ---
 
 <!doctype html>
@@ -42,14 +43,14 @@ const canonicalURL = new URL(path, Astro.site);
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | Open Design Docs`} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
+    <meta property="og:image" content={new URL(image, siteUrl).toString()} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={`${title} | Open Design Docs`} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
+    <meta property="twitter:image" content={new URL(image, siteUrl).toString()} />
 
     <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
