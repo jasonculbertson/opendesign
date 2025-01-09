@@ -41,7 +41,7 @@ const featuredResources = [
               <span class="text-[15px] font-medium text-gray-900 leading-none">Open Design Docs</span>
             </a>
           </div>
-          <div class="flex items-center space-x-4">
+          <div class="hidden lg:flex items-center space-x-4">
             <a href="/docs/leadership/day-1" class="text-sm text-gray-600 hover:text-gray-900">Documentation</a>
             <a href="/docs/videos/interviews" class="text-sm text-gray-600 hover:text-gray-900">Interviews</a>
             <a href="/docs/videos/case-studies" class="text-sm text-gray-600 hover:text-gray-900">Case Studies</a>
@@ -51,17 +51,17 @@ const featuredResources = [
     </nav>
 
     <!-- Hero Section -->
-    <div class="pt-32 pb-8 sm:pt-40 sm:pb-12 lg:pt-48 lg:pb-16">
+    <div class="pt-24 pb-8 sm:pt-40 sm:pb-12 lg:pt-48 lg:pb-16">
       <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl relative">
           <div class="flex items-start justify-between">
             <div class="flex-1">
-              <h1 class="text-5xl sm:text-6xl lg:text-7xl font-['Fraunces'] text-gray-900 mb-6">Design resources for building great products.</h1>
-              <p class="text-lg sm:text-xl font-semibold text-gray-600 mb-8 pt-4">Access comprehensive guides, templates, and insights to help you build and scale effective design organizations.</p>
-              <div class="mt-10">
+              <h1 class="text-4xl sm:text-6xl lg:text-7xl font-['Fraunces'] text-gray-900 mb-4 sm:mb-6">Design resources for building great products.</h1>
+              <p class="text-base sm:text-lg lg:text-xl font-semibold text-gray-600 mb-6 sm:mb-8 pt-2 sm:pt-4">Access comprehensive guides, templates, and insights to help you build and scale effective design organizations.</p>
+              <div class="mt-6 sm:mt-10">
                 <a
                   href="/docs/leadership/day-1"
-                  class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-[rgb(79,70,229)] hover:bg-[rgb(67,56,202)] rounded-lg transition-colors"
+                  class="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-[rgb(79,70,229)] hover:bg-[rgb(67,56,202)] rounded-lg transition-colors"
                 >
                   Browse all resources
                 </a>
@@ -75,8 +75,8 @@ const featuredResources = [
     <!-- Featured Resources -->
     <div class="pt-8 pb-8 sm:pt-8 sm:pb-12">
       <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-xl font-semibold text-gray-900 mb-4">Featured Resources</h2>
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Featured Resources</h2>
+        <div class="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {featuredResources.map(resource => (
             <a href={resource.href} class="group block">
               <div class="relative bg-white rounded-2xl border border-gray-200 p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
