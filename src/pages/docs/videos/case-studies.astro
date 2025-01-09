@@ -14,9 +14,33 @@ const videos = [
 
 const [featuredVideo, ...otherVideos] = videos;
 const title = "Design Case Studies";
+const description = "Watch in-depth design case studies from experienced product designers. Learn from real-world projects, design decisions, and outcomes that shape successful products.";
+
+// Prepare structured data for videos
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": videos.map((video, index) => ({
+    "@type": "VideoObject",
+    "position": index + 1,
+    "name": video.title,
+    "description": description,
+    "thumbnailUrl": video.thumbnailUrl,
+    "uploadDate": video.timestamp,
+    "duration": video.duration,
+    "url": video.href
+  }))
+};
 ---
 
-<Layout title={title}>
+<Layout 
+  title={title}
+  description={description}
+  type="video"
+  image={videos[0].thumbnailUrl}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  
   <main class="py-8 sm:px-6 lg:px-8">
     <article class="max-w-[680px] mx-auto px-4 sm:px-0">
       <div class="mb-8">

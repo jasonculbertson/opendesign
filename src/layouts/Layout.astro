@@ -7,22 +7,51 @@ import '../styles/main.css';
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
+  type?: string;
 }
 
-const { title } = Astro.props;
+const { 
+  title,
+  description = "Open Design Docs - A comprehensive resource for design leadership and management",
+  image = "/og-image.jpg",
+  type = "website"
+} = Astro.props;
+
 const path = Astro.url.pathname;
 const showSubstack = shouldShowSubstack(path);
+const canonicalURL = new URL(path, Astro.site);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Open Design Docs" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title} | Open Design Docs</title>
+    <meta name="title" content={`${title} | Open Design Docs`} />
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Open Design Docs`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | Open Design Docs`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
     <ViewTransitions />
   </head>
   <body>
