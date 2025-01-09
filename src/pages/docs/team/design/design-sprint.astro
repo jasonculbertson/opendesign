@@ -10,22 +10,34 @@ const breadcrumbs = [
 ];
 
 const title = entry.data.title;
+const description = "A comprehensive guide to running effective design sprints. Learn step-by-step processes, best practices, and proven methodologies to solve complex design challenges through collaborative workshops.";
 ---
 
-<Layout title={title}>
+<Layout 
+  title={title}
+  description={description}
+  type="article"
+>
   <main class="py-8 px-4 sm:px-6 lg:px-8">
-    <article class="max-w-[680px] mx-auto">
+    <article class="max-w-[680px] mx-auto prose prose-slate">
       <nav class="flex mb-2" aria-label="Breadcrumb">
-        <ol class="flex items-center">
-          {breadcrumbs.map((crumb) => (
-            <li>
-              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+        <ol class="flex items-center space-x-2">
+          {breadcrumbs.map((crumb, index) => (
+            <li class="flex items-center">
+              {index > 0 && <span class="mx-2 text-gray-400">/</span>}
+              <a href={crumb.href} class="text-[13px] text-[#3c4257] hover:text-[#1a1f36]">
                 {crumb.text}
               </a>
             </li>
           ))}
+          <li class="flex items-center">
+            <span class="mx-2 text-gray-400">/</span>
+            <span class="text-[13px] text-[#1a1f36]">{title}</span>
+          </li>
         </ol>
       </nav>
+
+      <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px] mb-4">{title}</h1>
       <div class="prose max-w-none">
         <Content />
       </div>
