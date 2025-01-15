@@ -8,7 +8,10 @@ export async function POST({ request }) {
     const body = await request.json();
     const { email } = body;
 
+    console.log('API received request:', { email });
+
     if (!email) {
+      console.log('No email provided');
       return new Response(
         JSON.stringify({ error: 'Email is required' }), {
           status: 400,
@@ -75,6 +78,8 @@ export async function POST({ request }) {
           }
         );
       }
+
+      console.log('Successfully added to Supabase:', data);
 
       return new Response(
         JSON.stringify({ 

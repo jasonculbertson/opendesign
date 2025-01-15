@@ -24,7 +24,7 @@ export default function ContentGate({ children }: ContentGateProps) {
     try {
       setError(null);
       setIsSuccess(false);
-      console.log('Submitting email:', email);
+      console.log('Starting email submission:', email);
       
       const response = await fetch('/api/subscribe', {
         method: 'POST',
@@ -34,25 +34,43 @@ export default function ContentGate({ children }: ContentGateProps) {
         body: JSON.stringify({ email })
       });
 
+      console.log('Response received:', {
+        status: response.status,
+        ok: response.ok
+      });
+
       const data = await response.json();
+      console.log('Response data:', data);
       
       if (!response.ok) {
         throw new Error(data.error || 'Failed to subscribe');
       }
 
-      // Set success state
+      console.log('Setting success state');
       setIsSuccess(true);
       setHasSubmittedEmail(true);
       localStorage.setItem('emailSubmitted', 'true');
       
-      // Wait for success animation to complete
+      console.log('Waiting for animation');
       await new Promise(resolve => setTimeout(resolve, 2500));
+      
+      console.log('Hiding overlay');
       setShowOverlay(false);
     } catch (error) {
       console.error('Error subscribing:', error);
       setError(error instanceof Error ? error.message : 'Failed to subscribe');
+      setIsSuccess(false);
     }
   };
+
+  useEffect(() => {
+    console.log('State changed:', {
+      showOverlay,
+      hasSubmittedEmail,
+      error,
+      isSuccess
+    });
+  }, [showOverlay, hasSubmittedEmail, error, isSuccess]);
 
   const resetOverlay = () => {
     localStorage.removeItem('emailSubmitted');

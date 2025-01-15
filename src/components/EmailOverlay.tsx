@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { validateEmail } from '../lib/emailValidation';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
@@ -13,6 +13,14 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
   const [validationError, setValidationError] = useState<string | null>(null);
   const [suggestedEmail, setSuggestedEmail] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    console.log('EmailOverlay props changed:', {
+      error,
+      isSuccess,
+      isSubmitting
+    });
+  }, [error, isSuccess, isSubmitting]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
