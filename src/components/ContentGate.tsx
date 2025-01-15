@@ -10,14 +10,18 @@ export default function ContentGate({ children }: ContentGateProps) {
   const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [initialized, setInitialized] = useState(false);
 
+  // Only run this effect once on mount
   useEffect(() => {
     const emailSubmitted = localStorage.getItem('emailSubmitted');
-    if (!emailSubmitted) {
-      setShowOverlay(true);
-    } else {
+    if (emailSubmitted) {
       setHasSubmittedEmail(true);
+      setShowOverlay(false);
+    } else {
+      setShowOverlay(true);
     }
+    setInitialized(true);
   }, []);
 
   const handleEmailSubmit = async (email: string) => {
@@ -76,13 +80,15 @@ export default function ContentGate({ children }: ContentGateProps) {
   };
 
   useEffect(() => {
-    console.log('ContentGate state changed:', {
-      showOverlay,
-      hasSubmittedEmail,
-      error,
-      isSuccess
-    });
-  }, [showOverlay, hasSubmittedEmail, error, isSuccess]);
+    if (initialized) {
+      console.log('ContentGate state changed:', {
+        showOverlay,
+        hasSubmittedEmail,
+        error,
+        isSuccess
+      });
+    }
+  }, [showOverlay, hasSubmittedEmail, error, isSuccess, initialized]);
 
   const resetOverlay = () => {
     localStorage.removeItem('emailSubmitted');
@@ -91,6 +97,10 @@ export default function ContentGate({ children }: ContentGateProps) {
     setError(null);
     setIsSuccess(false);
   };
+
+  if (!initialized) {
+    return null;
+  }
 
   return (
     <div className="relative">
@@ -118,7 +128,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       </div>
 
       {/* Overlay section */}
-      {(showOverlay || isSuccess) && !hasSubmittedEmail && (
+      {(showOverlay || isSuccess) && !hasSubmittedEmail && initialized && (
         <div className="relative px-4 sm:px-6 lg:px-8" style={{ mask: 'none', WebkitMask: 'none' }}>
           <div className="max-w-[680px] mx-auto bg-white pt-4">
             <EmailOverlay 
