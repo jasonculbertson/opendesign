@@ -6,23 +6,14 @@ interface ContentGateProps {
 }
 
 export default function ContentGate({ children }: ContentGateProps) {
-  const [showOverlay, setShowOverlay] = useState(false);
-  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
+  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('emailSubmitted') === 'true';
+    }
+    return false;
+  });
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [initialized, setInitialized] = useState(false);
-
-  // Only run this effect once on mount
-  useEffect(() => {
-    const emailSubmitted = localStorage.getItem('emailSubmitted');
-    if (emailSubmitted) {
-      setHasSubmittedEmail(true);
-      setShowOverlay(false);
-    } else {
-      setShowOverlay(true);
-    }
-    setInitialized(true);
-  }, []);
 
   const handleEmailSubmit = async (email: string) => {
     try {
@@ -67,11 +58,8 @@ export default function ContentGate({ children }: ContentGateProps) {
       await new Promise(resolve => setTimeout(resolve, 2500));
       
       console.log('Setting submitted state');
-      setHasSubmittedEmail(true);
       localStorage.setItem('emailSubmitted', 'true');
-      
-      console.log('Hiding overlay');
-      setShowOverlay(false);
+      setHasSubmittedEmail(true);
     } catch (error) {
       console.error('Error subscribing:', error);
       setError(error instanceof Error ? error.message : 'Failed to subscribe');
@@ -79,28 +67,12 @@ export default function ContentGate({ children }: ContentGateProps) {
     }
   };
 
-  useEffect(() => {
-    if (initialized) {
-      console.log('ContentGate state changed:', {
-        showOverlay,
-        hasSubmittedEmail,
-        error,
-        isSuccess
-      });
-    }
-  }, [showOverlay, hasSubmittedEmail, error, isSuccess, initialized]);
-
   const resetOverlay = () => {
     localStorage.removeItem('emailSubmitted');
     setHasSubmittedEmail(false);
-    setShowOverlay(true);
     setError(null);
     setIsSuccess(false);
   };
-
-  if (!initialized) {
-    return null;
-  }
 
   return (
     <div className="relative">
@@ -128,7 +100,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       </div>
 
       {/* Overlay section */}
-      {(showOverlay || isSuccess) && !hasSubmittedEmail && initialized && (
+      {(!hasSubmittedEmail || isSuccess) && (
         <div className="relative px-4 sm:px-6 lg:px-8" style={{ mask: 'none', WebkitMask: 'none' }}>
           <div className="max-w-[680px] mx-auto bg-white pt-4">
             <EmailOverlay 
