@@ -9,6 +9,7 @@ export default function ContentGate({ children }: ContentGateProps) {
   const [showOverlay, setShowOverlay] = useState(false);
   const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     const emailSubmitted = localStorage.getItem('emailSubmitted');
@@ -22,6 +23,7 @@ export default function ContentGate({ children }: ContentGateProps) {
   const handleEmailSubmit = async (email: string) => {
     try {
       setError(null);
+      setIsSuccess(false);
       const payload = { email };
       console.log('Submitting request:', payload);
       
@@ -59,8 +61,13 @@ export default function ContentGate({ children }: ContentGateProps) {
         throw new Error(data.error || 'Test failed');
       }
 
+      // Show success state
+      setIsSuccess(true);
       setHasSubmittedEmail(true);
       localStorage.setItem('emailSubmitted', 'true');
+      
+      // Wait 2 seconds before hiding the overlay
+      await new Promise(resolve => setTimeout(resolve, 2000));
       setShowOverlay(false);
     } catch (error) {
       console.error('Error in handleEmailSubmit:', {
@@ -107,7 +114,11 @@ export default function ContentGate({ children }: ContentGateProps) {
       {showOverlay && !hasSubmittedEmail && (
         <div className="relative px-4 sm:px-6 lg:px-8" style={{ mask: 'none', WebkitMask: 'none' }}>
           <div className="max-w-[680px] mx-auto bg-white pt-4">
-            <EmailOverlay onEmailSubmit={handleEmailSubmit} error={error} />
+            <EmailOverlay 
+              onEmailSubmit={handleEmailSubmit} 
+              error={error}
+              isSuccess={isSuccess}
+            />
           </div>
         </div>
       )}

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { validateEmail } from '../lib/emailValidation';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
 interface EmailOverlayProps {
   onEmailSubmit: (email: string) => Promise<void>;
   error: string | null;
+  isSuccess: boolean;
 }
 
-export default function EmailOverlay({ onEmailSubmit, error }: EmailOverlayProps) {
+export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailOverlayProps) {
   const [email, setEmail] = useState('');
   const [validationError, setValidationError] = useState<string | null>(null);
   const [suggestedEmail, setSuggestedEmail] = useState<string | null>(null);
@@ -58,13 +60,24 @@ export default function EmailOverlay({ onEmailSubmit, error }: EmailOverlayProps
 
   return (
     <div className="text-center">
-      <h2 className="text-[32px] font-bold mb-2 font-['Fraunces'] text-gray-900">Get unlimited access</h2>
-      <p className="text-lg text-gray-600 mb-6">
-        Read the full guide and unlock our entire library of essential design leadership resources.
-      </p>
+      <h2 className="text-[32px] font-bold mb-2 font-['Fraunces'] text-gray-900">
+        {isSuccess ? 'Thank you!' : 'Get unlimited access'}
+      </h2>
+      {!isSuccess && (
+        <p className="text-lg text-gray-600 mb-6">
+          Read the full guide and unlock our entire library of essential design leadership resources.
+        </p>
+      )}
 
       <div className="max-w-md mx-auto">
-        {!isSubmitting ? (
+        {isSuccess ? (
+          <div className="text-center">
+            <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4 animate-bounce" />
+            <p className="text-lg text-gray-700">
+              You're all set! The content will be visible in a moment.
+            </p>
+          </div>
+        ) : (
           <form onSubmit={handleSubmit} className="space-y-3">
             <input
               type="email"
@@ -119,25 +132,6 @@ export default function EmailOverlay({ onEmailSubmit, error }: EmailOverlayProps
               {isSubmitting ? 'Subscribing...' : 'Continue reading'}
             </button>
           </form>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-4 animate-fade-in">
-            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-4">
-              <svg 
-                className="w-8 h-8 text-green-500 animate-check" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={3} 
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <p className="text-green-600 font-medium">Email saved!</p>
-          </div>
         )}
 
         <div className="mt-6 space-y-2 text-[15px] text-gray-500">
