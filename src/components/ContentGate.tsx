@@ -40,12 +40,13 @@ export default function ContentGate({ children }: ContentGateProps) {
         throw new Error(data.error || 'Failed to subscribe');
       }
 
+      // Set success state
       setIsSuccess(true);
       setHasSubmittedEmail(true);
       localStorage.setItem('emailSubmitted', 'true');
       
-      // Wait 2 seconds before hiding the overlay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Wait for success animation to complete
+      await new Promise(resolve => setTimeout(resolve, 2500));
       setShowOverlay(false);
     } catch (error) {
       console.error('Error subscribing:', error);

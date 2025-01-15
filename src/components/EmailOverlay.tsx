@@ -35,8 +35,6 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
     setIsSubmitting(true);
     try {
       await onEmailSubmit(validation.correctedEmail || email);
-      // Wait for animation
-      await new Promise(resolve => setTimeout(resolve, 1000));
     } finally {
       setIsSubmitting(false);
     }
@@ -50,8 +48,6 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
       setIsSubmitting(true);
       try {
         await onEmailSubmit(suggestedEmail);
-        // Wait for animation
-        await new Promise(resolve => setTimeout(resolve, 1000));
       } finally {
         setIsSubmitting(false);
       }
