@@ -62,81 +62,95 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
     }
   };
 
+  // Force re-render when isSuccess changes
+  useEffect(() => {
+    if (isSuccess) {
+      console.log('Success state detected in EmailOverlay');
+    }
+  }, [isSuccess]);
+
+  console.log('EmailOverlay rendering with isSuccess:', isSuccess);
+
+  if (isSuccess) {
+    return (
+      <div className="text-center py-8">
+        <h2 className="text-[32px] font-bold mb-4 font-['Fraunces'] text-gray-900">
+          Thank you!
+        </h2>
+        <div className="text-center">
+          <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4 animate-bounce" />
+          <p className="text-lg text-gray-700">
+            You're all set! The content will be visible in a moment.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="text-center">
       <h2 className="text-[32px] font-bold mb-2 font-['Fraunces'] text-gray-900">
-        {isSuccess ? 'Thank you!' : 'Get unlimited access'}
+        Get unlimited access
       </h2>
-      {!isSuccess && (
-        <p className="text-lg text-gray-600 mb-6">
-          Read the full guide and unlock our entire library of essential design leadership resources.
-        </p>
-      )}
+      <p className="text-lg text-gray-600 mb-6">
+        Read the full guide and unlock our entire library of essential design leadership resources.
+      </p>
 
       <div className="max-w-md mx-auto">
-        {isSuccess ? (
-          <div className="text-center">
-            <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4 animate-bounce" />
-            <p className="text-lg text-gray-700">
-              You're all set! The content will be visible in a moment.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setValidationError(null);
-                setSuggestedEmail(null);
-              }}
-              required
-              placeholder="Your email"
-              className="w-full max-w-sm mx-auto px-6 py-3 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-800 block"
-            />
-            
-            {validationError && (
-              <div className="text-red-500 text-sm mt-2">{validationError}</div>
-            )}
-            
-            {error && !validationError && (
-              <div className="text-sm mt-2">
-                {error.includes('already subscribed') ? (
-                  <div className="text-green-600">
-                    <p>{error}</p>
-                    <a 
-                      href="mailto:support@opendesign.com" 
-                      className="text-blue-500 hover:underline mt-1 inline-block"
-                    >
-                      Contact Support
-                    </a>
-                  </div>
-                ) : (
-                  <div className="text-red-500">{error}</div>
-                )}
-              </div>
-            )}
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setValidationError(null);
+              setSuggestedEmail(null);
+            }}
+            required
+            placeholder="Your email"
+            className="w-full max-w-sm mx-auto px-6 py-3 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-800 block"
+          />
+          
+          {validationError && (
+            <div className="text-red-500 text-sm mt-2">{validationError}</div>
+          )}
+          
+          {error && !validationError && (
+            <div className="text-sm mt-2">
+              {error.includes('already subscribed') ? (
+                <div className="text-green-600">
+                  <p>{error}</p>
+                  <a 
+                    href="mailto:support@opendesign.com" 
+                    className="text-blue-500 hover:underline mt-1 inline-block"
+                  >
+                    Contact Support
+                  </a>
+                </div>
+              ) : (
+                <div className="text-red-500">{error}</div>
+              )}
+            </div>
+          )}
 
-            {suggestedEmail && (
-              <button
-                type="button"
-                onClick={handleSuggestedEmailClick}
-                className="mt-2 text-blue-500 text-sm hover:underline"
-              >
-                Use {suggestedEmail} instead?
-              </button>
-            )}
-
+          {suggestedEmail && (
             <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full max-w-sm mx-auto bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 transition-colors text-lg font-medium block disabled:opacity-50 disabled:cursor-not-allowed"
+              type="button"
+              onClick={handleSuggestedEmailClick}
+              className="mt-2 text-blue-500 text-sm hover:underline"
             >
-              {isSubmitting ? 'Subscribing...' : 'Continue reading'}
+              Use {suggestedEmail} instead?
             </button>
-          </form>
-        )}
+          )}
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full max-w-sm mx-auto bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 transition-colors text-lg font-medium block disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? 'Subscribing...' : 'Continue reading'}
+          </button>
+        </form>
 
         <div className="mt-6 space-y-2 text-[15px] text-gray-500">
           <div className="flex items-center justify-center space-x-2">

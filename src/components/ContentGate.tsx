@@ -73,7 +73,7 @@ export default function ContentGate({ children }: ContentGateProps) {
   };
 
   useEffect(() => {
-    console.log('State changed:', {
+    console.log('ContentGate state changed:', {
       showOverlay,
       hasSubmittedEmail,
       error,
@@ -86,6 +86,7 @@ export default function ContentGate({ children }: ContentGateProps) {
     setHasSubmittedEmail(false);
     setShowOverlay(true);
     setError(null);
+    setIsSuccess(false);
   };
 
   return (
@@ -102,8 +103,8 @@ export default function ContentGate({ children }: ContentGateProps) {
 
       {/* Content section with mask */}
       <div 
-        className={showOverlay && !hasSubmittedEmail ? 'relative' : ''}
-        style={showOverlay && !hasSubmittedEmail ? {
+        className={!hasSubmittedEmail ? 'relative' : ''}
+        style={!hasSubmittedEmail ? {
           maxHeight: '1000px',
           overflow: 'hidden',
           mask: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 900px, rgba(0,0,0,0) 1000px)',
