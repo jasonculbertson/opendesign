@@ -33,8 +33,17 @@ export default function ContentGate({ children }: ContentGateProps) {
         body: JSON.stringify({ email })
       });
 
-      const data = await response.json();
-      console.log('API Response:', data);
+      let data;
+      try {
+        data = await response.json();
+        console.log('API Response:', {
+          status: response.status,
+          data
+        });
+      } catch (parseError) {
+        console.error('Failed to parse API response:', parseError);
+        throw new Error('Server returned an invalid response');
+      }
 
       if (!response.ok) {
         throw new Error(data.error || 'Failed to subscribe');
@@ -44,7 +53,10 @@ export default function ContentGate({ children }: ContentGateProps) {
       localStorage.setItem('emailSubmitted', 'true');
       setShowOverlay(false);
     } catch (error) {
-      console.error('Error subscribing:', error);
+      console.error('Error subscribing:', {
+        error,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
       setError(error instanceof Error ? error.message : 'Failed to subscribe');
     }
   };
