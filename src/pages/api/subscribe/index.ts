@@ -5,124 +5,81 @@ export const prerender = false;
 
 export async function POST({ request }) {
   try {
-    // Log the incoming request
-    console.log('[API] Request received:', {
-      method: request.method,
-      headers: Object.fromEntries(request.headers.entries())
-    });
-
-    let body;
-    try {
-      body = await request.json();
-      console.log('[API] Request body:', body);
-    } catch (e) {
-      console.error('[API] Failed to parse request body:', e);
-      return new Response(JSON.stringify({
-        error: 'Invalid request body',
-        details: e instanceof Error ? e.message : 'Unknown error'
-      }), {
-        status: 400,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    }
-
+    const body = await request.json();
     const { email } = body;
-    console.log('[API] Processing email:', email);
 
     if (!email) {
-      console.error('[API] No email provided');
-      return new Response(JSON.stringify({ 
-        error: 'Email is required',
-        received: body 
-      }), {
-        status: 400,
-        headers: {
-          'Content-Type': 'application/json'
+      return new Response(
+        JSON.stringify({ error: 'Email is required' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' }
         }
-      });
+      );
     }
 
-    console.log('[API] Attempting Supabase insert for email:', email);
-    
-    try {
-      const { data: insertData, error } = await supabaseAdmin
-        .from('subscribers')
-        .insert([{ 
-          email, 
-          subscribed_at: new Date().toISOString() 
-        }])
-        .select()
-        .single();
+    console.log('Submitting to Supabase:', { email });
 
-      console.log('[API] Supabase response:', { data: insertData, error });
+    const { data, error } = await supabaseAdmin
+      .from('subscribers')
+      .insert([{ email, subscribed_at: new Date().toISOString() }])
+      .select()
+      .single();
 
-      if (error) {
-        console.error('[API] Supabase error:', error);
-        
-        // Check if the error is due to unique constraint violation (email already exists)
-        if (error.code === '23505') {
-          return new Response(JSON.stringify({
-            error: 'You\'re already subscribed! You can manage your subscription preferences through the links in our emails, or contact support if you need help.',
-            code: 'ALREADY_SUBSCRIBED'
+    if (error) {
+      console.error('Supabase error:', error);
+      
+      // If the error is about the table not existing, we'll return a specific message
+      if (error.message?.includes('does not exist')) {
+        return new Response(
+          JSON.stringify({ 
+            error: 'Database table not set up. Please create the subscribers table.' 
           }), {
-            status: 409,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
-        }
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+      }
 
-        return new Response(JSON.stringify({
-          error: 'Failed to subscribe to newsletter',
-          details: error
+      // If it's a unique constraint violation, the email already exists
+      if (error.code === '23505') {
+        return new Response(
+          JSON.stringify({ 
+            error: 'This email is already subscribed.' 
+          }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ 
+          error: error.message || 'Failed to subscribe' 
         }), {
           status: 500,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-      }
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+    }
 
-      console.log('[API] Successfully subscribed to newsletter');
-      return new Response(JSON.stringify({
-        success: true,
-        data: insertData
+    return new Response(
+      JSON.stringify({ 
+        success: true, 
+        data 
       }), {
         status: 200,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    } catch (dbError) {
-      console.error('[API] Database operation error:', dbError);
-      return new Response(JSON.stringify({
-        error: 'Database operation failed',
-        details: dbError instanceof Error ? dbError.message : 'Unknown database error'
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+  } catch (error) {
+    console.error('API Error:', error);
+    return new Response(
+      JSON.stringify({ 
+        error: error instanceof Error ? error.message : 'Internal server error' 
       }), {
         status: 500,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    }
-  } catch (error) {
-    // Log the full error object for debugging
-    console.error('[API] Unhandled error in subscribe endpoint:', {
-      error,
-      message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined
-    });
-    
-    return new Response(JSON.stringify({
-      error: 'An unexpected error occurred',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }), {
-      status: 500,
-      headers: {
-        'Content-Type': 'application/json'
+        headers: { 'Content-Type': 'application/json' }
       }
-    });
+    );
   }
 }
