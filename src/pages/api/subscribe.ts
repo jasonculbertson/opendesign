@@ -3,7 +3,7 @@ import { supabaseAdmin } from '../../lib/supabase';
 
 export const prerender = false;
 
-export async function POST({ request }) {
+export const post: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     const { email } = body;
@@ -36,8 +36,9 @@ export async function POST({ request }) {
           }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
-        }
-      );
+          }
+        );
+      }
 
       // If it's a unique constraint violation, the email already exists
       if (error.code === '23505') {
@@ -83,7 +84,7 @@ export async function POST({ request }) {
   }
 }
 
-export async function GET({ request }) {
+export const get: APIRoute = async ({ request }) => {
   try {
     return new Response(
       JSON.stringify({ 
