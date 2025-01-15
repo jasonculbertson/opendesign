@@ -13,7 +13,7 @@ export async function POST({ request }) {
     if (!email) {
       console.log('No email provided');
       return new Response(
-        JSON.stringify({ error: 'Email is required' }), {
+        JSON.stringify({ success: false, error: 'Email is required' }), {
           status: 400,
           headers: { 'Content-Type': 'application/json' }
         }
@@ -38,6 +38,7 @@ export async function POST({ request }) {
         if (error.message?.includes('does not exist')) {
           return new Response(
             JSON.stringify({ 
+              success: false,
               error: 'Database table not set up. Please create the subscribers table.' 
             }), {
               status: 500,
@@ -49,6 +50,7 @@ export async function POST({ request }) {
         if (error.code === '23505') {
           return new Response(
             JSON.stringify({ 
+              success: false,
               error: 'This email is already subscribed.' 
             }), {
               status: 400,
@@ -60,6 +62,7 @@ export async function POST({ request }) {
         if (error.code === '42501') {
           return new Response(
             JSON.stringify({ 
+              success: false,
               error: 'Permission denied. Please check Supabase configuration.' 
             }), {
               status: 500,
@@ -70,6 +73,7 @@ export async function POST({ request }) {
 
         return new Response(
           JSON.stringify({ 
+            success: false,
             error: error.message || 'Failed to subscribe',
             code: error.code 
           }), {
@@ -83,7 +87,8 @@ export async function POST({ request }) {
 
       return new Response(
         JSON.stringify({ 
-          success: true, 
+          success: true,
+          message: 'Successfully subscribed',
           data 
         }), {
           status: 200,
@@ -94,6 +99,7 @@ export async function POST({ request }) {
       console.error('Database error:', dbError);
       return new Response(
         JSON.stringify({ 
+          success: false,
           error: 'Database operation failed',
           details: dbError instanceof Error ? dbError.message : 'Unknown error'
         }), {
@@ -106,6 +112,7 @@ export async function POST({ request }) {
     console.error('API Error:', error);
     return new Response(
       JSON.stringify({ 
+        success: false,
         error: error instanceof Error ? error.message : 'Internal server error' 
       }), {
         status: 500,

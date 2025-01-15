@@ -34,13 +34,22 @@ export default function ContentGate({ children }: ContentGateProps) {
         body: JSON.stringify({ email })
       });
 
-      console.log('Response received:', {
-        status: response.status,
-        ok: response.ok
-      });
+      const text = await response.text();
+      console.log('Raw response:', text);
 
-      const data = await response.json();
-      console.log('Response data:', data);
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error('Failed to parse response:', e);
+        throw new Error('Invalid response from server');
+      }
+
+      console.log('Parsed response:', {
+        status: response.status,
+        ok: response.ok,
+        data
+      });
       
       if (!response.ok) {
         throw new Error(data.error || 'Failed to subscribe');
