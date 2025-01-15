@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import EmailOverlay from './EmailOverlay';
 
 interface ContentGateProps {
@@ -6,23 +6,33 @@ interface ContentGateProps {
 }
 
 export default function ContentGate({ children }: ContentGateProps) {
-  // Initialize states with localStorage check
-  const [initialized] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return true;
-  });
-
-  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return localStorage.getItem('emailSubmitted') === 'true';
-  });
-
+  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submissionComplete, setSubmissionComplete] = useState(false);
+
+  // Initialize from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem('emailSubmitted') === 'true';
+    console.log('Initializing from localStorage:', stored);
+    if (stored) {
+      setHasSubmittedEmail(true);
+    }
+  }, []);
+
+  // Handle successful submission
+  useEffect(() => {
+    if (submissionComplete && isSuccess) {
+      console.log('Handling successful submission');
+      localStorage.setItem('emailSubmitted', 'true');
+      setHasSubmittedEmail(true);
+    }
+  }, [submissionComplete, isSuccess]);
 
   const handleEmailSubmit = async (email: string) => {
     try {
       setError(null);
+      setSubmissionComplete(false);
       console.log('Starting email submission:', email);
       
       const response = await fetch('/api/subscribe', {
@@ -40,39 +50,25 @@ export default function ContentGate({ children }: ContentGateProps) {
         throw new Error(data.error || 'Failed to subscribe');
       }
 
-      // Update state and localStorage
-      console.log('Setting success state and updating localStorage');
-      localStorage.setItem('emailSubmitted', 'true');
+      console.log('Setting success state');
       setIsSuccess(true);
-      setHasSubmittedEmail(true);
+      setSubmissionComplete(true);
       
     } catch (error) {
       console.error('Error subscribing:', error);
       setError(error instanceof Error ? error.message : 'Failed to subscribe');
       setIsSuccess(false);
+      setSubmissionComplete(true);
     }
   };
-
-  // Debug state changes
-  useEffect(() => {
-    console.log('State changed:', {
-      hasSubmittedEmail,
-      isSuccess,
-      error,
-      localStorage: localStorage.getItem('emailSubmitted')
-    });
-  }, [hasSubmittedEmail, isSuccess, error]);
 
   const resetOverlay = () => {
     localStorage.removeItem('emailSubmitted');
     setHasSubmittedEmail(false);
     setError(null);
     setIsSuccess(false);
+    setSubmissionComplete(false);
   };
-
-  if (!initialized) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="relative">

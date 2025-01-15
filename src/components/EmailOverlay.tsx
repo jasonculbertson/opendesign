@@ -24,6 +24,8 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted, current state:', { email, isSubmitting, isSuccess });
+    
     setValidationError(null);
     setSuggestedEmail(null);
 
@@ -42,7 +44,9 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
 
     setIsSubmitting(true);
     try {
+      console.log('Calling onEmailSubmit with:', validation.correctedEmail || email);
       await onEmailSubmit(validation.correctedEmail || email);
+      console.log('onEmailSubmit completed successfully');
     } finally {
       setIsSubmitting(false);
     }
