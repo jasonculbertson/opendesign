@@ -6,20 +6,19 @@ interface ContentGateProps {
 }
 
 export default function ContentGate({ children }: ContentGateProps) {
-  const [showOverlay, setShowOverlay] = useState(true);
-  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
+  // Initialize states with localStorage check
+  const [initialized] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return true;
+  });
+
+  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('emailSubmitted') === 'true';
+  });
+
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-
-  // Check localStorage on mount
-  useEffect(() => {
-    const emailSubmitted = localStorage.getItem('emailSubmitted') === 'true';
-    console.log('Initial localStorage check:', { emailSubmitted });
-    if (emailSubmitted) {
-      setShowOverlay(false);
-      setHasSubmittedEmail(true);
-    }
-  }, []);
 
   const handleEmailSubmit = async (email: string) => {
     try {
@@ -41,15 +40,11 @@ export default function ContentGate({ children }: ContentGateProps) {
         throw new Error(data.error || 'Failed to subscribe');
       }
 
-      // Show success state
-      console.log('Setting success state');
-      setIsSuccess(true);
-      
-      // Update state immediately
-      console.log('Updating final state');
+      // Update state and localStorage
+      console.log('Setting success state and updating localStorage');
       localStorage.setItem('emailSubmitted', 'true');
+      setIsSuccess(true);
       setHasSubmittedEmail(true);
-      setShowOverlay(false);
       
     } catch (error) {
       console.error('Error subscribing:', error);
@@ -61,21 +56,23 @@ export default function ContentGate({ children }: ContentGateProps) {
   // Debug state changes
   useEffect(() => {
     console.log('State changed:', {
-      showOverlay,
       hasSubmittedEmail,
       isSuccess,
       error,
       localStorage: localStorage.getItem('emailSubmitted')
     });
-  }, [showOverlay, hasSubmittedEmail, isSuccess, error]);
+  }, [hasSubmittedEmail, isSuccess, error]);
 
   const resetOverlay = () => {
     localStorage.removeItem('emailSubmitted');
-    setShowOverlay(true);
     setHasSubmittedEmail(false);
     setError(null);
     setIsSuccess(false);
   };
+
+  if (!initialized) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="relative">
@@ -103,7 +100,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       </div>
 
       {/* Overlay section */}
-      {showOverlay && (
+      {!hasSubmittedEmail && (
         <div className="relative px-4 sm:px-6 lg:px-8" style={{ mask: 'none', WebkitMask: 'none' }}>
           <div className="max-w-[680px] mx-auto bg-white pt-4">
             <EmailOverlay 
