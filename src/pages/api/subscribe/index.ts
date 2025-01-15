@@ -1,7 +1,9 @@
 import type { APIRoute } from 'astro';
 import { supabaseAdmin } from '../../../lib/supabase';
 
-export const post: APIRoute = async ({ request }) => {
+export const prerender = false;
+
+export async function POST({ request }) {
   try {
     const data = await request.json();
     const { email } = data;
@@ -19,7 +21,7 @@ export const post: APIRoute = async ({ request }) => {
 
     const { data: insertData, error } = await supabaseAdmin
       .from('subscribers')
-      .insert([{ email }])
+      .insert([{ email, subscribed_at: new Date().toISOString() }])
       .select()
       .single();
 
