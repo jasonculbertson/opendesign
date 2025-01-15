@@ -45,11 +45,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       console.log('Setting success state');
       setIsSuccess(true);
       
-      // Wait for success animation
-      console.log('Waiting for animation');
-      await new Promise(resolve => setTimeout(resolve, 2500));
-      
-      // Hide overlay and update state
+      // Update state immediately
       console.log('Updating final state');
       localStorage.setItem('emailSubmitted', 'true');
       setHasSubmittedEmail(true);
