@@ -22,7 +22,8 @@ export default function ContentGate({ children }: ContentGateProps) {
   const handleEmailSubmit = async (email: string) => {
     try {
       setError(null);
-      console.log('Testing endpoint with email:', email);
+      const payload = { email };
+      console.log('Submitting request:', payload);
       
       const response = await fetch('/api/test.json', {
         method: 'POST',
@@ -30,23 +31,27 @@ export default function ContentGate({ children }: ContentGateProps) {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({ email })
+        body: JSON.stringify(payload)
       });
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      console.log('Response received:', {
+        status: response.status,
+        statusText: response.statusText,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+
+      const text = await response.text();
+      console.log('Raw response text:', text);
 
       let data;
       try {
-        const text = await response.text();
-        console.log('Raw response:', text);
         data = JSON.parse(text);
-        console.log('API Test Response:', {
-          status: response.status,
-          data
-        });
+        console.log('Parsed response:', data);
       } catch (parseError) {
-        console.error('Failed to parse API test response:', parseError);
+        console.error('Failed to parse response:', {
+          error: parseError,
+          text: text.slice(0, 200) + '...' // Show first 200 chars
+        });
         throw new Error('Server returned an invalid response');
       }
 
@@ -58,7 +63,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       localStorage.setItem('emailSubmitted', 'true');
       setShowOverlay(false);
     } catch (error) {
-      console.error('Error testing endpoint:', {
+      console.error('Error in handleEmailSubmit:', {
         error,
         message: error instanceof Error ? error.message : 'Unknown error'
       });
