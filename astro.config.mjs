@@ -4,13 +4,10 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel/serverless';
 
+// https://astro.build/config
 export default defineConfig({
-  output: 'hybrid',
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
+  output: 'server',
+  adapter: vercel(),
   integrations: [
     mdx({
       components: {
@@ -20,14 +17,7 @@ export default defineConfig({
     tailwind(),
     react()
   ],
-  markdown: {
-    shikiConfig: {
-      theme: 'github-light',
-      wrap: true
-    }
-  },
-  env: {
-    PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.PUBLIC_CLERK_PUBLISHABLE_KEY,
-    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+  vite: {
+    envPrefix: 'SUPABASE_'
   }
 });

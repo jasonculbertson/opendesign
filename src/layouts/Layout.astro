@@ -1,7 +1,8 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import Sidebar from '../components/Sidebar.astro';
-import { shouldShowSubstack } from '../utils/pageUtils';
+import { shouldShowSubstack, shouldShowContentGate } from '../utils/pageUtils';
+import ContentGate from '../components/ContentGate';
 import Analytics from '@vercel/analytics/astro';
 import '../styles/main.css';
 
@@ -21,6 +22,7 @@ const {
 
 const path = Astro.url.pathname;
 const showSubstack = shouldShowSubstack(path);
+const showContentGate = shouldShowContentGate(path);
 const siteUrl = 'https://opendesigndocs.com';
 const canonicalURL = new URL(path, siteUrl).toString();
 ---
@@ -109,27 +111,14 @@ const canonicalURL = new URL(path, siteUrl).toString();
         <div class="pt-20 lg:pt-8">
           <div class="max-w-[900px] mx-auto px-4 lg:px-0">
             <div class="relative max-w-[680px] mx-auto">
-              <slot />
+              {showContentGate ? (
+                <ContentGate client:load>
+                  <slot />
+                </ContentGate>
+              ) : (
+                <slot />
+              )}
             </div>
-            {showSubstack && (
-              <div class="pb-12 max-w-[680px] mx-auto">
-                <div class="bg-white p-4 sm:p-8 rounded-xl">
-                  <div style="border:2px solid #EFF4FA; border-radius:0.75rem;">
-                    <div class="bg-white pt-4 px-4 rounded-t-xl">
-                      <h3 class="text-base font-semibold text-gray-900 text-center">Subscribe to Open Design Docs</h3>
-                    </div>
-                    <iframe
-                      src="https://opendesigndocs.substack.com/embed"
-                      width="100%"
-                      height="150"
-                      style="border:none; background:#EFF4FA; border-radius:0.75rem;"
-                      frameborder="0"
-                      scrolling="no"
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </main>

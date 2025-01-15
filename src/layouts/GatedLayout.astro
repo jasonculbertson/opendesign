@@ -1,0 +1,12 @@
+---
+import Layout from './Layout.astro';
+import ContentGate from '../components/ContentGate';
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <ContentGate client:load>
+    <slot />
+  </ContentGate>
+</Layout>

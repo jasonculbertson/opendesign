@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import VideoCard from '../../../components/VideoCard.astro';
+import ContentGate from '../../../components/ContentGate';
 
 const videos = [
   {
@@ -42,23 +43,25 @@ const structuredData = {
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   
   <main class="py-8 sm:px-6 lg:px-8">
-    <article class="max-w-[680px] mx-auto px-4 sm:px-0">
-      <div class="mb-8">
-        <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
-        <p class="mt-2 text-[15px] text-[#3c4257]">Explore real-world design projects and their outcomes through detailed case studies.</p>
-      </div>
+    <ContentGate client:load threshold={40}>
+      <article class="max-w-[680px] mx-auto px-4 sm:px-0">
+        <div class="mb-8">
+          <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
+          <p class="mt-2 text-[15px] text-[#3c4257]">Explore real-world design projects and their outcomes through detailed case studies.</p>
+        </div>
 
-      <!-- Featured Video -->
-      <div class="mb-8">
-        <VideoCard {...featuredVideo} />
-      </div>
+        <!-- Featured Video -->
+        <div class="mb-8">
+          <VideoCard {...featuredVideo} />
+        </div>
 
-      <!-- Other Videos Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {otherVideos.map(video => (
-          <VideoCard {...video} />
-        ))}
-      </div>
-    </article>
+        <!-- Other Videos Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {otherVideos.map(video => (
+            <VideoCard {...video} />
+          ))}
+        </div>
+      </article>
+    </ContentGate>
   </main>
 </Layout>

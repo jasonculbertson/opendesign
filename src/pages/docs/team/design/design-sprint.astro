@@ -1,34 +1,39 @@
 ---
 import { getEntry } from 'astro:content';
 import Layout from '../../../../layouts/Layout.astro';
+import ContentGate from '../../../../components/ContentGate';
 
 const entry = await getEntry('docs', 'team/design/design-sprint');
 const { Content } = await entry.render();
 
 const breadcrumbs = [
-  { text: 'Design Team', href: '/docs/team/design' }
+  { text: 'Design', href: '/docs/team/design' }
 ];
 
-const title = entry.data.title;
 ---
 
-<Layout title={title}>
-  <main class="py-8 px-4 sm:px-6 lg:px-8">
-    <article class="max-w-[680px] mx-auto">
-      <nav class="flex mb-2" aria-label="Breadcrumb">
-        <ol class="flex items-center">
-          {breadcrumbs.map((crumb) => (
-            <li>
-              <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
-                {crumb.text}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
-      <div class="prose max-w-none">
-        <Content />
+<Layout title={entry.data.title}>
+  <ContentGate client:load>
+    <main class="relative min-h-screen">
+      <div class="py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[680px] mx-auto">
+          <nav class="flex mb-2" aria-label="Breadcrumb">
+            <ol class="flex items-center">
+              {breadcrumbs.map((crumb) => (
+                <li>
+                  <a href={crumb.href} class="text-sm text-gray-600 hover:text-gray-900">
+                    {crumb.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+          
+          <div class="prose max-w-none prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:text-indigo-700">
+            <Content />
+          </div>
+        </div>
       </div>
-    </article>
-  </main>
+    </main>
+  </ContentGate>
 </Layout>

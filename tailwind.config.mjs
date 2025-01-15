@@ -85,7 +85,7 @@ export default {
               padding: '2px 6px',
               borderRadius: '4px',
               fontSize: '14px',
-              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Liberation Mono, Courier New, monospace',
             },
             pre: {
               backgroundColor: '#f7fafc',
@@ -132,10 +132,30 @@ export default {
             }
           }
         }
+      },
+      keyframes: {
+        check: {
+          '0%': { 
+            opacity: '0',
+            transform: 'scale(0.8)',
+          },
+          '100%': { 
+            opacity: '1',
+            transform: 'scale(1)',
+          }
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        }
+      },
+      animation: {
+        check: 'check 0.3s ease-out forwards',
+        'fade-in': 'fade-in 0.3s ease-out'
       }
-    }
+    },
   },
   plugins: [
-    require('@tailwindcss/typography')
-  ]
+    require('@tailwindcss/typography'),
+  ],
 };
