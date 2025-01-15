@@ -6,19 +6,24 @@ interface ContentGateProps {
 }
 
 export default function ContentGate({ children }: ContentGateProps) {
-  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('emailSubmitted') === 'true';
-    }
-    return false;
-  });
+  const [showOverlay, setShowOverlay] = useState(true);
+  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // Check localStorage on mount
+  useEffect(() => {
+    const emailSubmitted = localStorage.getItem('emailSubmitted') === 'true';
+    console.log('Initial localStorage check:', { emailSubmitted });
+    if (emailSubmitted) {
+      setShowOverlay(false);
+      setHasSubmittedEmail(true);
+    }
+  }, []);
 
   const handleEmailSubmit = async (email: string) => {
     try {
       setError(null);
-      setIsSuccess(false);
       console.log('Starting email submission:', email);
       
       const response = await fetch('/api/subscribe', {
@@ -29,37 +34,27 @@ export default function ContentGate({ children }: ContentGateProps) {
         body: JSON.stringify({ email })
       });
 
-      const text = await response.text();
-      console.log('Raw response:', text);
-
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (e) {
-        console.error('Failed to parse response:', e);
-        throw new Error('Invalid response from server');
-      }
-
-      console.log('Parsed response:', {
-        status: response.status,
-        ok: response.ok,
-        data
-      });
+      const data = await response.json();
+      console.log('Response:', data);
       
       if (!response.ok) {
         throw new Error(data.error || 'Failed to subscribe');
       }
 
+      // Show success state
       console.log('Setting success state');
       setIsSuccess(true);
       
       // Wait for success animation
-      console.log('Waiting for success animation');
+      console.log('Waiting for animation');
       await new Promise(resolve => setTimeout(resolve, 2500));
       
-      console.log('Setting submitted state');
+      // Hide overlay and update state
+      console.log('Updating final state');
       localStorage.setItem('emailSubmitted', 'true');
       setHasSubmittedEmail(true);
+      setShowOverlay(false);
+      
     } catch (error) {
       console.error('Error subscribing:', error);
       setError(error instanceof Error ? error.message : 'Failed to subscribe');
@@ -67,8 +62,20 @@ export default function ContentGate({ children }: ContentGateProps) {
     }
   };
 
+  // Debug state changes
+  useEffect(() => {
+    console.log('State changed:', {
+      showOverlay,
+      hasSubmittedEmail,
+      isSuccess,
+      error,
+      localStorage: localStorage.getItem('emailSubmitted')
+    });
+  }, [showOverlay, hasSubmittedEmail, isSuccess, error]);
+
   const resetOverlay = () => {
     localStorage.removeItem('emailSubmitted');
+    setShowOverlay(true);
     setHasSubmittedEmail(false);
     setError(null);
     setIsSuccess(false);
@@ -100,7 +107,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       </div>
 
       {/* Overlay section */}
-      {(!hasSubmittedEmail || isSuccess) && (
+      {showOverlay && (
         <div className="relative px-4 sm:px-6 lg:px-8" style={{ mask: 'none', WebkitMask: 'none' }}>
           <div className="max-w-[680px] mx-auto bg-white pt-4">
             <EmailOverlay 
