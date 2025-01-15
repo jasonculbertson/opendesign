@@ -24,7 +24,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       setError(null);
       console.log('Testing endpoint with email:', email);
       
-      const response = await fetch('/api/test', {
+      const response = await fetch('/api/test.json', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,9 +33,14 @@ export default function ContentGate({ children }: ContentGateProps) {
         body: JSON.stringify({ email })
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
       let data;
       try {
-        data = await response.json();
+        const text = await response.text();
+        console.log('Raw response:', text);
+        data = JSON.parse(text);
         console.log('API Test Response:', {
           status: response.status,
           data
