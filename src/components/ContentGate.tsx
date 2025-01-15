@@ -24,44 +24,22 @@ export default function ContentGate({ children }: ContentGateProps) {
     try {
       setError(null);
       setIsSuccess(false);
-      const payload = { email };
-      console.log('Submitting email:', payload);
+      console.log('Submitting email:', email);
       
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ email })
       });
 
-      console.log('Response received:', {
-        status: response.status,
-        statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries())
-      });
-
-      const text = await response.text();
-      console.log('Raw response text:', text);
-
-      let data;
-      try {
-        data = JSON.parse(text);
-        console.log('Parsed response:', data);
-      } catch (parseError) {
-        console.error('Failed to parse response:', {
-          error: parseError,
-          text: text.slice(0, 200) + '...' // Show first 200 chars
-        });
-        throw new Error('Server returned an invalid response');
-      }
-
+      const data = await response.json();
+      
       if (!response.ok) {
         throw new Error(data.error || 'Failed to subscribe');
       }
 
-      // Show success state
       setIsSuccess(true);
       setHasSubmittedEmail(true);
       localStorage.setItem('emailSubmitted', 'true');
@@ -70,10 +48,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       await new Promise(resolve => setTimeout(resolve, 2000));
       setShowOverlay(false);
     } catch (error) {
-      console.error('Error in handleEmailSubmit:', {
-        error,
-        message: error instanceof Error ? error.message : 'Unknown error'
-      });
+      console.error('Error subscribing:', error);
       setError(error instanceof Error ? error.message : 'Failed to subscribe');
     }
   };
