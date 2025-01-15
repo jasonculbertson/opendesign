@@ -57,11 +57,14 @@ export default function ContentGate({ children }: ContentGateProps) {
 
       console.log('Setting success state');
       setIsSuccess(true);
+      
+      // Wait for success animation
+      console.log('Waiting for success animation');
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      
+      console.log('Setting submitted state');
       setHasSubmittedEmail(true);
       localStorage.setItem('emailSubmitted', 'true');
-      
-      console.log('Waiting for animation');
-      await new Promise(resolve => setTimeout(resolve, 2500));
       
       console.log('Hiding overlay');
       setShowOverlay(false);
@@ -115,7 +118,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       </div>
 
       {/* Overlay section */}
-      {showOverlay && !hasSubmittedEmail && (
+      {(showOverlay || isSuccess) && !hasSubmittedEmail && (
         <div className="relative px-4 sm:px-6 lg:px-8" style={{ mask: 'none', WebkitMask: 'none' }}>
           <div className="max-w-[680px] mx-auto bg-white pt-4">
             <EmailOverlay 
