@@ -24,7 +24,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       setError(null);
       console.log('Submitting email:', email);
       
-      const response = await fetch('/api/newsletter', {
+      const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
