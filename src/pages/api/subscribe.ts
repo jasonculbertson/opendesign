@@ -83,27 +83,3 @@ export const post: APIRoute = async ({ request }) => {
     );
   }
 }
-
-export const get: APIRoute = async ({ request }) => {
-  try {
-    return new Response(
-      JSON.stringify({ 
-        success: true,
-        message: 'Test endpoint working'
-      }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
-  } catch (error) {
-    console.error('API Error:', error);
-    return new Response(
-      JSON.stringify({ 
-        error: 'Test error response'
-      }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
-  }
-}

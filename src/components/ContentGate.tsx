@@ -25,9 +25,9 @@ export default function ContentGate({ children }: ContentGateProps) {
       setError(null);
       setIsSuccess(false);
       const payload = { email };
-      console.log('Submitting request:', payload);
+      console.log('Submitting email:', payload);
       
-      const response = await fetch('/api/test.json', {
+      const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default function ContentGate({ children }: ContentGateProps) {
       }
 
       if (!response.ok) {
-        throw new Error(data.error || 'Test failed');
+        throw new Error(data.error || 'Failed to subscribe');
       }
 
       // Show success state
@@ -74,7 +74,7 @@ export default function ContentGate({ children }: ContentGateProps) {
         error,
         message: error instanceof Error ? error.message : 'Unknown error'
       });
-      setError(error instanceof Error ? error.message : 'Test failed');
+      setError(error instanceof Error ? error.message : 'Failed to subscribe');
     }
   };
 
