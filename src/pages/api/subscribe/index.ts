@@ -1,14 +1,5 @@
 import type { APIRoute } from 'astro';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_ANON_KEY;
-
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase environment variables');
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { supabaseAdmin } from '../../lib/supabase';
 
 export const post: APIRoute = async ({ request }) => {
   try {
@@ -26,7 +17,7 @@ export const post: APIRoute = async ({ request }) => {
       });
     }
 
-    const { data: insertData, error } = await supabase
+    const { data: insertData, error } = await supabaseAdmin
       .from('subscribers')
       .insert([{ email }])
       .select()
