@@ -36,9 +36,8 @@ export async function POST({ request }) {
           }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
-          }
-        );
-      }
+        }
+      );
 
       // If it's a unique constraint violation, the email already exists
       if (error.code === '23505') {
@@ -76,6 +75,30 @@ export async function POST({ request }) {
     return new Response(
       JSON.stringify({ 
         error: error instanceof Error ? error.message : 'Internal server error' 
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+  }
+}
+
+export async function GET({ request }) {
+  try {
+    return new Response(
+      JSON.stringify({ 
+        success: true,
+        message: 'Test endpoint working'
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+  } catch (error) {
+    console.error('API Error:', error);
+    return new Response(
+      JSON.stringify({ 
+        error: 'Test error response'
       }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }

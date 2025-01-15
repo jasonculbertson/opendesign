@@ -22,9 +22,9 @@ export default function ContentGate({ children }: ContentGateProps) {
   const handleEmailSubmit = async (email: string) => {
     try {
       setError(null);
-      console.log('Submitting email:', email);
+      console.log('Testing endpoint with email:', email);
       
-      const response = await fetch('/api/subscribe', {
+      const response = await fetch('/api/test', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,28 +36,28 @@ export default function ContentGate({ children }: ContentGateProps) {
       let data;
       try {
         data = await response.json();
-        console.log('API Response:', {
+        console.log('API Test Response:', {
           status: response.status,
           data
         });
       } catch (parseError) {
-        console.error('Failed to parse API response:', parseError);
+        console.error('Failed to parse API test response:', parseError);
         throw new Error('Server returned an invalid response');
       }
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to subscribe');
+        throw new Error(data.error || 'Test failed');
       }
 
       setHasSubmittedEmail(true);
       localStorage.setItem('emailSubmitted', 'true');
       setShowOverlay(false);
     } catch (error) {
-      console.error('Error subscribing:', {
+      console.error('Error testing endpoint:', {
         error,
         message: error instanceof Error ? error.message : 'Unknown error'
       });
-      setError(error instanceof Error ? error.message : 'Failed to subscribe');
+      setError(error instanceof Error ? error.message : 'Test failed');
     }
   };
 
