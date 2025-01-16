@@ -71,7 +71,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
         Get unlimited access
       </h2>
       <p className="text-lg text-gray-600 mb-6">
-        Read the full guide and unlock our entire library of essential design leadership resources.
+        Access to all leadership guides
       </p>
 
       <div className="max-w-md mx-auto">
