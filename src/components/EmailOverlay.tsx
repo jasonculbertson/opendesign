@@ -71,7 +71,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
         Get unlimited access
       </h2>
       <p className="text-lg text-gray-600 mb-6">
-        Access to all leadership guides
+        Access to all leadership guides & templates
       </p>
 
       <div className="max-w-md mx-auto">
@@ -116,7 +116,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
             <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
-            <span>Access to all leadership guides and templates</span>
+            <span>Leadership guides and templates</span>
           </div>
           <div className="flex items-center justify-center space-x-2">
             <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
