@@ -1,78 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { validateEmail } from '../lib/emailValidation';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
 interface EmailOverlayProps {
-  onEmailSubmit: (email: string) => Promise<void>;
-  error: string | null;
-  isSuccess: boolean;
+  onSubmit: (email: string) => Promise<string | null>;
 }
 
-export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailOverlayProps) {
+export default function EmailOverlay({ onSubmit }: EmailOverlayProps) {
   const [email, setEmail] = useState('');
-  const [validationError, setValidationError] = useState<string | null>(null);
-  const [suggestedEmail, setSuggestedEmail] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    console.log('EmailOverlay props changed:', {
-      error,
-      isSuccess,
-      isSubmitting
-    });
-  }, [error, isSuccess, isSubmitting]);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted, current state:', { email, isSubmitting, isSuccess });
     
-    setValidationError(null);
-    setSuggestedEmail(null);
-
+    // Reset states
+    setError(null);
+    
+    // Validate email
     const validation = validateEmail(email);
-
     if (!validation.isValid) {
-      setValidationError(validation.error || 'Invalid email');
+      setError(validation.error || 'Invalid email');
       return;
     }
 
-    if (validation.correctedEmail) {
-      setSuggestedEmail(validation.correctedEmail);
-      setValidationError(validation.error || null);
-      return;
-    }
-
+    // Submit email
     setIsSubmitting(true);
-    try {
-      console.log('Calling onEmailSubmit with:', validation.correctedEmail || email);
-      await onEmailSubmit(validation.correctedEmail || email);
-      console.log('onEmailSubmit completed successfully');
-    } finally {
-      setIsSubmitting(false);
+    const error = await onSubmit(email);
+    setIsSubmitting(false);
+
+    if (error) {
+      setError(error);
+    } else {
+      setIsSuccess(true);
     }
   };
-
-  const handleSuggestedEmailClick = async () => {
-    if (suggestedEmail) {
-      setEmail(suggestedEmail);
-      setSuggestedEmail(null);
-      setValidationError(null);
-      setIsSubmitting(true);
-      try {
-        await onEmailSubmit(suggestedEmail);
-      } finally {
-        setIsSubmitting(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      console.log('Success state detected in EmailOverlay');
-    }
-  }, [isSuccess]);
-
-  console.log('EmailOverlay rendering with isSuccess:', isSuccess);
 
   return (
     <div className="text-center">
@@ -80,55 +43,30 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
         {isSuccess ? 'Thank you!' : 'Get unlimited access'}
       </h2>
       <p className="text-lg text-gray-600 mb-6">
-        {isSuccess ? 'You\'re all set! The content will be visible in a moment.' : 'Read the full guide and unlock our entire library of essential design leadership resources.'}
+        {isSuccess 
+          ? 'You\'re all set! The content will be visible in a moment.'
+          : 'Read the full guide and unlock our entire library of essential design leadership resources.'
+        }
       </p>
 
       <div className="max-w-md mx-auto">
-        {!isSuccess && (
+        {!isSuccess ? (
           <form onSubmit={handleSubmit} className="space-y-3">
             <input
               type="email"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
-                setValidationError(null);
-                setSuggestedEmail(null);
+                setError(null);
               }}
+              disabled={isSubmitting}
               required
               placeholder="Your email"
               className="w-full max-w-sm mx-auto px-6 py-3 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-800 block"
             />
             
-            {validationError && (
-              <div className="text-red-500 text-sm mt-2">{validationError}</div>
-            )}
-            
-            {error && !validationError && (
-              <div className="text-sm mt-2">
-                {error.includes('already subscribed') ? (
-                  <div className="text-green-600">
-                    <p>{error}</p>
-                    <a 
-                      href="mailto:support@opendesign.com" 
-                      className="text-blue-500 hover:underline mt-1 inline-block"
-                    >
-                      Contact Support
-                    </a>
-                  </div>
-                ) : (
-                  <div className="text-red-500">{error}</div>
-                )}
-              </div>
-            )}
-
-            {suggestedEmail && (
-              <button
-                type="button"
-                onClick={handleSuggestedEmailClick}
-                className="mt-2 text-blue-500 text-sm hover:underline"
-              >
-                Use {suggestedEmail} instead?
-              </button>
+            {error && (
+              <div className="text-red-500 text-sm mt-2">{error}</div>
             )}
 
             <button
@@ -139,9 +77,7 @@ export default function EmailOverlay({ onEmailSubmit, error, isSuccess }: EmailO
               {isSubmitting ? 'Subscribing...' : 'Continue reading'}
             </button>
           </form>
-        )}
-
-        {isSuccess && (
+        ) : (
           <div className="text-center mb-6">
             <CheckCircleIcon className="h-16 w-16 text-green-500 mx-auto mb-4 animate-bounce" />
           </div>
