@@ -10,7 +10,7 @@ const breadcrumbs = [
 
 const resources = [
   {
-    title: "Product Designer Competencies",
+    title: "Product Designer",
     description: "Skills and expectations for product designers at each level",
     href: "/docs/leadership/month-1/level-competencies/product-designer",
     image: '🎨'
@@ -19,19 +19,13 @@ const resources = [
     title: 'Content Designer',
     description: 'Level competencies for content designers',
     href: "/docs/leadership/month-1/level-competencies/content-designer",
-    image: '📝'
+    image: '✍️'
   },
   {
     title: 'Graphic Designer',
     description: 'Level competencies for graphic designers',
     href: '/docs/leadership/month-1/level-competencies/graphic-designer',
     image: '🎨'
-  },
-  {
-    title: 'Product Designer',
-    description: 'Level competencies for product designers',
-    href: '/docs/leadership/month-1/level-competencies/product-designer',
-    image: '💡'
   },
   {
     title: 'Design Ops',
@@ -64,6 +58,60 @@ const resources = [
     image: '✍️'
   }
 ];
+const productRoles = [
+  {
+    title: "Product Designer",
+    description: "Skills and expectations for product designers at each level",
+    href: "/docs/leadership/month-1/level-competencies/product-designer",
+    image: "🎨"
+  },
+  {
+    title: "Content Designer",
+    description: "Skills and expectations for content designers at each level",
+    href: "/docs/leadership/month-1/level-competencies/content-designer",
+    image: "✍️"
+  },
+  {
+    title: "UX Researcher",
+    description: "Skills and expectations for researchers at each level",
+    href: "/docs/leadership/month-1/level-competencies/researcher",
+    image: "🔍"
+  },
+  {
+    title: "Design Ops",
+    description: "Skills and expectations for design operations at each level",
+    href: "/docs/leadership/month-1/level-competencies/design-ops",
+    image: "⚙️"
+  }
+];
+const creativeRoles = [
+  {
+    title: "Graphic Designer",
+    description: "Skills and expectations for graphic designers at each level",
+    href: "/docs/leadership/month-1/level-competencies/graphic-designer",
+    image: "🎨"
+  },
+  {
+    title: "Copywriter",
+    description: "Skills and expectations for copywriters at each level",
+    href: "/docs/leadership/month-1/level-competencies/copywriter",
+    image: "✍️"
+  }
+  {
+    title: 'Photographer',
+    description: 'Level competencies for photographers',
+    href: '/docs/leadership/month-1/level-competencies/photographer',
+    image: '📸'
+  },
+];
+const managerRoles = [
+  {
+    title: "Design Manager",
+    description: "Skills and expectations for design managers at each level",
+    href: "/docs/leadership/month-1/level-competencies/manager",
+    image: "👥"
+  }
+];
 ---
 
 <Layout title={title}>
@@ -83,10 +131,32 @@ const resources = [
       <div class="mb-8">
         <h1 class="text-[32px] font-semibold text-[#1a1f36] tracking-[-0.4px]">{title}</h1>
       </div>
-      <div class="grid grid-cols-1 gap-4">
-        {resources.map(resource => (
-          <Card {...resource} />
-        ))}
+      <div class="space-y-12">
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Product Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {productRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Creative Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {creativeRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2 class="text-xl font-semibold text-[#1a1f36] mb-6">Manager Role Competencies</h2>
+          <div class="grid grid-cols-1 gap-4">
+            {managerRoles.map(role => (
+              <Card {...role} />
+            ))}
+          </div>
+        </section>
       </div>
     </article>
   </main>
