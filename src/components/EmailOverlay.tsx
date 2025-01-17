@@ -68,7 +68,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
   return (
     <div className="text-center">
       <h2 className="text-[32px] font-bold mb-2 font-['Fraunces'] text-gray-900">
-        Get unlimited access
+        Get unlimited free access
       </h2>
       <p className="text-lg text-gray-600 mb-6">
         Essential resources for design leaders
