@@ -11,6 +11,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, marketingOptIn })
       });
 
       const data = await response.json();
@@ -87,6 +88,19 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
             placeholder="Your email"
             className="w-full max-w-sm mx-auto px-6 py-3 text-lg border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-800 block disabled:opacity-50 disabled:cursor-not-allowed"
           />
+          
+          <div className="flex items-center justify-center space-x-2 mt-3">
+            <input
+              type="checkbox"
+              id="marketingOptIn"
+              checked={marketingOptIn}
+              onChange={(e) => setMarketingOptIn(e.target.checked)}
+              className="h-4 w-4 text-black border-gray-300 rounded focus:ring-gray-800"
+            />
+            <label htmlFor="marketingOptIn" className="text-sm text-gray-600">
+              I agree to receive marketing messages and updates
+            </label>
+          </div>
           
           {error && (
             <div className="text-red-500 text-sm mt-2">{error}</div>

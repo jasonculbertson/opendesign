@@ -6,9 +6,9 @@ export const prerender = false;
 export async function POST({ request }) {
   try {
     const body = await request.json();
-    const { email } = body;
+    const { email, marketingOptIn } = body;
 
-    console.log('API received request:', { email });
+    console.log('API received request:', { email, marketingOptIn });
 
     if (!email) {
       console.log('No email provided');
@@ -20,14 +20,15 @@ export async function POST({ request }) {
       );
     }
 
-    console.log('Submitting to Supabase:', { email });
+    console.log('Submitting to Supabase:', { email, marketingOptIn });
 
     try {
       const { data, error } = await supabaseAdmin
         .from('subscribers')
         .insert([{ 
           email, 
-          subscribed_at: new Date().toISOString() 
+          subscribed_at: new Date().toISOString(),
+          marketing_opt_in: marketingOptIn || false
         }])
         .select()
         .single();
