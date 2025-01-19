@@ -11,7 +11,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [marketingOptIn, setMarketingOptIn] = useState(false);
+  const [marketingOptIn, setMarketingOptIn] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -95,7 +95,7 @@ export default function EmailOverlay({ onSuccess }: EmailOverlayProps) {
               id="marketingOptIn"
               checked={marketingOptIn}
               onChange={(e) => setMarketingOptIn(e.target.checked)}
-              className="h-4 w-4 text-black border-gray-300 rounded focus:ring-gray-800"
+              className="h-4 w-4 text-black border-gray-300 rounded focus:ring-black accent-black"
             />
             <label htmlFor="marketingOptIn" className="text-sm text-gray-600">
               I agree to receive marketing messages and updates
